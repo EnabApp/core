@@ -68,16 +68,16 @@ const user = useUser()
 const notifications = useNotifications()
 notifications.join()
 
-onMounted(() => {
-  notifications.sendNotification({
-    user_id: user.value.id,
-    app_id: 1,
-    datas: null,
-    message: "Hello world",
-    title: 'I am here',
-    dates: new Date(+new Date() + 60000*1)
-  })
-})
+// onMounted(() => {
+//   notifications.sendNotification({
+//     user_id: user.value.id,
+//     app_id: 1,
+//     datas: null,
+//     message: "Hello world",
+//     title: 'I am here',
+//     dates: new Date(+new Date() + 60000*1)
+//   })
+// })
 
 </script>
 
@@ -102,6 +102,4 @@ onMounted(() => {
     transform: scale(1);
   }
 }
-
-
 </style>
