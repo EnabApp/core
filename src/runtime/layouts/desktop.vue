@@ -2,12 +2,6 @@
   <div class="bg-default" position="relative" h="screen" flex="~ col" w="screen">
     <!-- class="backdrop-blur-2xl" -->
     <div flex="grow">
-
-      <!-- logout button -->
-      <div class="absolute top-0 right-0 p-4">
-        <button class="btn btn-ghost btn-sm" @click="logout">Logout</button>
-      </div>
-
       <slot />
     </div>
 
