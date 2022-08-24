@@ -14,7 +14,7 @@ export const useUserProfile = defineStore("user-profile", {
     },
 
     actions: {
-        async fetch(){
+        async fetch() {
             const supabase = useSupabaseClient()
             const user = useUser()
             const { data, error } = await supabase.from('profiles').select('*').eq('id', user.value.id).single()
@@ -24,7 +24,7 @@ export const useUserProfile = defineStore("user-profile", {
                 return;
             }
 
-            if (data){
+            if (data) {
                 this.data = data
             }
         },
@@ -35,7 +35,7 @@ export const useUserProfile = defineStore("user-profile", {
 
             const { data, error } = await supabase.from('profiles').update({
                 username: username
-            }).match({ id: user.value.id})
+            }).match({ id: user.value.id })
 
             if (error) {
                 const { $toast } = useNuxtApp()
@@ -48,7 +48,7 @@ export const useUserProfile = defineStore("user-profile", {
             const supabase = useSupabaseClient()
             const user = useUser()
 
-            const { data, error } = await supabase.from('profiles').update(properties).match({ id: user.value.id})
+            const { data, error } = await supabase.from('profiles').update(properties).match({ id: user.value.id })
 
             if (error) {
                 const { $toast } = useNuxtApp()
@@ -56,9 +56,18 @@ export const useUserProfile = defineStore("user-profile", {
                 return;
             }
         },
-        async logout(){
+        async logout() {
             const supabase = useSupabaseClient()
             const { error } = await supabase.auth.signOut()
+            if (error) {
+                const { $toast } = useNuxtApp()
+                $toast.error('حدث خطأ اثناء تسجيل الخروج')
+                return;
+            }
+            //go to login page
+            const { $router } = useNuxtApp()
+            $router.push('/login')
+
         }
     },
 });
