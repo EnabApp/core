@@ -5,9 +5,9 @@ export default defineNuxtPlugin((nuxtApp) => {
     const appStore = useAppManager()
     // Settings App
     appStore.addApp({
-        "name": "SettingsApp",
-        "title": "الإعدادات",
+        "name": "SystemManagerApp",
+        "title": "مدير النظام",
         "icon": "i-ci-settings-filled",
-        "size": "min-w-2xl min-h-2xl max-w-2xl max-h-2xl",
+        "size": "min-w-xl min-h-xl max-w-xl max-h-xl",
     })
 })
