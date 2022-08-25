@@ -1,12 +1,12 @@
 <template>
   <!-- Application -->
   <Transition>
-    <UiDesktopWindow v-if="app.running" v-show="!app.minimized" :app="app">
+    <UiDesktopWindow ref="windowRef" v-if="app.running" v-show="!app.minimized" :app="app">
       <div flex="~ col grow gap-2" w="full">
           <UiTabGroup p="4" :col="true" :tabs="['المعلومات الأساسية', 'تفاصيل اخرى']">
             <template #tab-1>
-              <UiInput v-model="username" placeholder="أسم المستخدم" />
-              <UiButton @click="userProfile.updateUsername(username)" title="تغيير" />
+              <!-- <UiInput v-model="username" placeholder="أسم المستخدم" /> -->
+              <!-- <UiButton @click="userProfile.updateUsername(username)" label="تغيير" /> -->
             </template>
             <template #tab-2>
               <h1>About</h1>
@@ -33,4 +33,5 @@ const props = defineProps({
 const userProfile = useUserProfile()
 
 const username = ref(userProfile.data?.username)
+
 </script>
