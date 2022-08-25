@@ -2,7 +2,7 @@
   <NuxtLayout name="desktop">
     <div @click="appManager.setFocus('')" flex="~" w="full" h="full" items="start" justify="between">
       <!-- Desktop Applications & Icons -->
-      <div min-w="1/4" grid="~ cols-2 md:cols-4 auto-rows-min" m="70px">
+      <div min-w="1/4" grid="~ cols-3 md:cols-4 auto-rows-min" m="70px">
           <div v-if="appManager.getOwned.length <= 0" h="64px" w="64px" class="i-line-md-loading-twotone-loop"></div>
           <div v-for="component in appManager.getOwned" :key="'app-' + component.id">
             <UiDesktopIcon :app="component" />

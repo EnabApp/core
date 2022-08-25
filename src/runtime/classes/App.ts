@@ -63,8 +63,8 @@ export default class App {
     }
     
     open(){
+        if (!this.running) this.booting = true
         this.running = true
-        this.booting = true
         this.minimized = false
     }
     
