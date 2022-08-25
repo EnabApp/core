@@ -65,7 +65,7 @@ export const useUserProfile = defineStore("user-profile", {
                 $toast.error('حدث خطأ اثناء تسجيل الخروج')
                 return;
             }
-            router.push('/login')
+            router.push('/auth')
         }
     },
 });
