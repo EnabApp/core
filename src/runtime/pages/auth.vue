@@ -1,17 +1,17 @@
 <template>
     <div class="bg-default" h="screen" w="screen" flex="~ col" items="center" justify="center">
-        <div w="1016px" h="600px" border="rounded-t-10px" bg="primary dark:primaryOp" flex="~ col" items="center">
-            <UiIconsEnab m="t-50px" w="128px" h="128px" />
+        <div w="xs md:2xl lg:3xl" h="lg md:lg lg:md" border="rounded-t-10px" bg="primary dark:primaryOp" flex="~ col" items="center">
+            <UiIconsEnab m="t-50px" w="128px sm:64px md:96px" h="128px sm:64px md:96px" />
             
             <AuthLogin />
 
         </div>
-        <div flex="~ gap-10px" justify="center" items="center" w="1016px" h="109px" border="rounded-b-10px" bg="primary opacity-90 dark:primaryOp dark:opacity-90">
-            <div w="24px" h="24px" un-text="warning" class="i-material-symbols-tips-and-updates-rounded"></div>
-            <span un-text="xl primaryOp dark:primary">تستطيع مشاركة الملفات والتقارير والصور من خلال تطبيق ملفاتي</span>
+        <div flex="~ gap-10px" justify="center" items="center" w="xs md:2xl lg:3xl" p="y-5" border="rounded-b-10px" bg="primary opacity-90 dark:primaryOp dark:opacity-90">
+            <div w="24px" pr="10 md:0" h="24px" un-text="warning" class="i-material-symbols-tips-and-updates-rounded"></div>
+            <span pl="2 md:0" un-text="xs md:sm lg:sm xl:md primaryOp dark:primary">تستطيع مشاركة الملفات والتقارير والصور من خلال تطبيق ملفاتي</span>
         </div>
 
-        <div flex="~ gap-50px" h="48px" w="1016px" border="rounded-10px" m="t-65px" justify="center" items="center" bg="primary dark:primaryOp opacity-50 dark:opacity-50" un-text="primaryOp dark:primary">
+        <div flex="~ gap-50px" h="48px" w="xs md:2xl lg:3xl" border="rounded-10px" m="10" justify="center" items="center" bg="primary dark:primaryOp opacity-50 dark:opacity-50" un-text="primaryOp dark:primary xs md:sm lg:sm xl:md">
             <span cursor="pointer">هل تحتاج المساعدة؟</span>
             <span cursor="pointer">نسيت كلمة المرور؟</span>
         </div>

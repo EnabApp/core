@@ -12,6 +12,7 @@ export default class App {
     maximizable: boolean;
     resizeable: boolean;
     running: boolean;
+    booting: boolean;
     locked: boolean;
     owned: boolean;
     size: string;
@@ -62,6 +63,7 @@ export default class App {
     }
     
     open(){
+        if (!this.running) this.booting = true
         this.running = true
         this.minimized = false
     }
