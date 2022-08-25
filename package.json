@@ -1,7 +1,7 @@
 {
   "name": "@enab/core",
   "type": "module",
-  "version": "1.6.93",
+  "version": "1.6.94",
   "license": "MIT",
   "exports": {
     ".": {
