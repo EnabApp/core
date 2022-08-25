@@ -1,7 +1,7 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
 import App from "../classes/App"
 import Widget from "../classes/Widget"
-import { useSupabaseClient, useNuxtApp, useUser } from '#imports'
+import { useSupabaseClient, useNuxtApp, useUser, useRouter } from '#imports'
 
 export const useUserProfile = defineStore("user-profile", {
     state: () => ({
@@ -57,17 +57,15 @@ export const useUserProfile = defineStore("user-profile", {
             }
         },
         async logout() {
-            const supabase = useSupabaseClient()
+            const supabase = useSupabaseClient();
+            const router = useRouter();
             const { error } = await supabase.auth.signOut()
             if (error) {
                 const { $toast } = useNuxtApp()
                 $toast.error('حدث خطأ اثناء تسجيل الخروج')
                 return;
             }
-            //go to login page
-            const { $router } = useNuxtApp()
-            $router.push('/login')
-
+            router.push('/login')
         }
     },
 });
