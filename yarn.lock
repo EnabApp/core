@@ -491,10 +491,10 @@
     unbuild "^0.7.6"
     vue-toastification "^2.0.0-rc.5"
 
-"@enab/core@^1.6.95":
-  version "1.6.95"
-  resolved "https://registry.yarnpkg.com/@enab/core/-/core-1.6.95.tgz#b0cd84d9304a8992c88423642e73c8709294deea"
-  integrity sha512-hX/tWTApyEikuJZbhdNJ6sKayT2vZCqF3mYLcJcdxhzdzXCcnJsa38EuRaN3uM6BIWxPpWwO7YpuWEm9vtB7fg==
+"@enab/core@^1.6.98":
+  version "1.7.11"
+  resolved "https://registry.yarnpkg.com/@enab/core/-/core-1.7.11.tgz#463784e8665dd49cf3f15103528ae73666bf3161"
+  integrity sha512-Mu5K16GTsCrAdzDt4gmSXztKl0BzN5Za6zOxKkgNpgNw7Oh/nHjMdbWqpg1fyHTEOE/6BqRmcEUYKb0mymTmoA==
   dependencies:
     "@enab/appstore" "^1.0.6"
     "@enab/core" "^1.6.6"
@@ -664,6 +664,65 @@
     mathjs "^11.0.1"
     nuxt-lodash "^2.2.0"
     pinia "^2.0.16"
+    vue-toastification "^2.0.0-rc.5"
+
+"@enab/ui@^1.4.93":
+  version "1.4.93"
+  resolved "https://registry.yarnpkg.com/@enab/ui/-/ui-1.4.93.tgz#fd757d09fdec04e1e75215c575bc480ff155366d"
+  integrity sha512-KoZL+ZOM0oMDnwypFnomDX0cDRLsqE1g5MAzTvQALtIDlIqsIjoj8/dqNbBXavHRjSuhnIrD8HbKMrfQU9I2qw==
+  dependencies:
+    "@enab/core" "^1.6.98"
+    "@iconify/json" "^2.1.77"
+    "@nuxt/kit" "^3.0.0-rc.8"
+    "@nuxt/schema" "^3.0.0-rc.8"
+    "@nuxtjs/color-mode" "^3.1.4"
+    "@nuxtjs/composition-api" "^0.33.0"
+    "@nuxtjs/supabase" "0.1.23"
+    "@pinia/nuxt" "^0.3.0"
+    "@tauri-apps/api" "^1.0.2"
+    "@unocss/inspector" "^0.44.2"
+    "@unocss/nuxt" "^0.44.0"
+    "@unocss/preset-attributify" "^0.44.1"
+    "@unocss/preset-icons" "^0.44.1"
+    "@unocss/preset-typography" "^0.44.1"
+    "@unocss/preset-web-fonts" "^0.44.1"
+    "@vueuse/core" "^9.0.2"
+    "@vueuse/motion" "^2.0.0-beta.18"
+    "@vueuse/nuxt" "^9.0.2"
+    mathjs "^11.0.1"
+    nuxt-lodash "^2.2.0"
+    pinia "^2.0.16"
+    vue-toastification "^2.0.0-rc.5"
+
+"@enab/utilities@^1.0.12":
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/@enab/utilities/-/utilities-1.0.12.tgz#85cc320e1ce742a3e3df4433b00d7cebd8ba5124"
+  integrity sha512-s3anBf/m5JyuxoS5hvT+B/EOBlhHMpUVnLCnu7QjDhQLgyAZ/LkIoOpFst4n5+s9Zhi1+GnJYgbO3B4qlpujlQ==
+  dependencies:
+    "@enab/core" "^1.6.98"
+    "@enab/ui" "^1.4.8"
+    "@iconify/json" "^2.1.77"
+    "@nuxt/kit" "^3.0.0-rc.8"
+    "@nuxt/schema" "^3.0.0-rc.8"
+    "@nuxtjs/color-mode" "^3.1.4"
+    "@nuxtjs/composition-api" "^0.33.0"
+    "@nuxtjs/supabase" "^0.1.19"
+    "@pinia/nuxt" "^0.3.0"
+    "@tauri-apps/api" "^1.0.2"
+    "@unocss/inspector" "^0.44.2"
+    "@unocss/nuxt" "^0.44.0"
+    "@unocss/preset-attributify" "^0.44.1"
+    "@unocss/preset-icons" "^0.44.1"
+    "@unocss/preset-typography" "^0.44.1"
+    "@unocss/preset-web-fonts" "^0.44.1"
+    "@vueuse/core" "^9.0.2"
+    "@vueuse/motion" "^2.0.0-beta.18"
+    "@vueuse/nuxt" "^9.0.2"
+    mathjs "^11.0.1"
+    moment "^2.29.4"
+    nuxt-lodash "^2.2.0"
+    pinia "^2.0.16"
+    vue-loading-skeleton "^2.0.0-beta.1"
     vue-toastification "^2.0.0-rc.5"
 
 "@esbuild/linux-loong64@0.14.54":
@@ -1670,6 +1729,11 @@
     html-tags "^3.1.0"
     svg-tags "^1.0.0"
 
+"@vue/compat@^3.1.0":
+  version "3.2.37"
+  resolved "https://registry.yarnpkg.com/@vue/compat/-/compat-3.2.37.tgz#bd2062a2be88d06046311d5c058aefb17a1d438a"
+  integrity sha512-MIYkFAz3Fur1mtZBqrNMYTymlohCQ0ol6vtNb58cqExLSCt63xZaXyiZZYPvS6WaMXfbNBDPXMvU9tO922eFCA==
+
 "@vue/compiler-core@3.2.37":
   version "3.2.37"
   resolved "https://registry.yarnpkg.com/@vue/compiler-core/-/compiler-core-3.2.37.tgz#b3c42e04c0e0f2c496ff1784e543fbefe91e215a"
@@ -2431,6 +2495,11 @@ cookie-es@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/cookie-es/-/cookie-es-0.5.0.tgz#a6ad89923e68c542fc9e760b07aefa5ab020d719"
   integrity sha512-RyZrFi6PNpBFbIaQjXDlFIhFVqV42QeKSZX1yQIl6ihImq6vcHNGMtqQ/QzY3RMPuYSkvsRwtnt5M9NeYxKt0g==
+
+core-js@2:
+  version "2.6.12"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.12.tgz#d9333dfa7b065e347cc5682219d6f690859cc2ec"
+  integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
 
 core-util-is@~1.0.0:
   version "1.0.3"
@@ -7004,6 +7073,15 @@ vue-eslint-parser@^8.0.1:
     lodash "^4.17.21"
     semver "^7.3.5"
 
+vue-loading-skeleton@^2.0.0-beta.1:
+  version "2.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/vue-loading-skeleton/-/vue-loading-skeleton-2.0.0-beta.1.tgz#922cb991465afbf16db5a1ef70d1cd497ae8fbb9"
+  integrity sha512-cBrc47qB20zINd4v8rGM56bSvhSkcZx6IT+gFIMR0ezoKa6RE108bewDcocJW11JmencbQ2mljjAD0U9dKCNNg==
+  dependencies:
+    "@vue/compat" "^3.1.0"
+    core-js "2"
+    vue "^3.1.0"
+
 vue-router@^4.1.2:
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-4.1.3.tgz#f8dc7931a2253cc5aa9b740f8b98969d08ca283c"
@@ -7016,7 +7094,7 @@ vue-toastification@^2.0.0-rc.5:
   resolved "https://registry.yarnpkg.com/vue-toastification/-/vue-toastification-2.0.0-rc.5.tgz#92798604d806ae473cfb76ed776fae294280f8f8"
   integrity sha512-q73e5jy6gucEO/U+P48hqX+/qyXDozAGmaGgLFm5tXX4wJBcVsnGp4e/iJqlm9xzHETYOilUuwOUje2Qg1JdwA==
 
-vue@^3.2.37:
+vue@^3.1.0, vue@^3.2.37:
   version "3.2.37"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.37.tgz#da220ccb618d78579d25b06c7c21498ca4e5452e"
   integrity sha512-bOKEZxrm8Eh+fveCqS1/NkG/n6aMidsI6hahas7pa0w/l7jkbssJVsRhVDs07IdDq7h9KHswZOgItnwJAgtVtQ==

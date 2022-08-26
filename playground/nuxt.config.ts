@@ -6,12 +6,12 @@ export default defineNuxtConfig({
     ssr: false,
 
     autoImports: {
-        global: true
+        global: false
     },
 
     modules: [
         '@enab/appstore',
-        '@enab/todo',
+        '@enab/utilities',
         '@enab/ui',
         MyModule,
         '@nuxt/image-edge',
