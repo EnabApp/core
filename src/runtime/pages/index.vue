@@ -63,7 +63,7 @@ userProfile.fetch()
 const notifications = useNotifications()
 notifications.join()
 
-console.log(appManager.getServiceById(1))
+// console.log(appManager.getServiceById(1))
 
 </script>
 
