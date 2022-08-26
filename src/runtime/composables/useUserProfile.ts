@@ -1,7 +1,7 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
 import App from "../classes/App"
 import Widget from "../classes/Widget"
-import { useSupabaseClient, useNuxtApp, useUser } from '#imports'
+import { useSupabaseClient, useNuxtApp, useUser, useRouter } from '#imports'
 
 export const useUserProfile = defineStore("user-profile", {
     state: () => ({
@@ -14,7 +14,7 @@ export const useUserProfile = defineStore("user-profile", {
     },
 
     actions: {
-        async fetch(){
+        async fetch() {
             const supabase = useSupabaseClient()
             const user = useUser()
             const { data, error } = await supabase.from('profiles').select('*').eq('id', user.value.id).single()
@@ -24,7 +24,7 @@ export const useUserProfile = defineStore("user-profile", {
                 return;
             }
 
-            if (data){
+            if (data) {
                 this.data = data
             }
         },
@@ -35,7 +35,7 @@ export const useUserProfile = defineStore("user-profile", {
 
             const { data, error } = await supabase.from('profiles').update({
                 username: username
-            }).match({ id: user.value.id})
+            }).match({ id: user.value.id })
 
             if (error) {
                 const { $toast } = useNuxtApp()
@@ -48,13 +48,24 @@ export const useUserProfile = defineStore("user-profile", {
             const supabase = useSupabaseClient()
             const user = useUser()
 
-            const { data, error } = await supabase.from('profiles').update(properties).match({ id: user.value.id})
+            const { data, error } = await supabase.from('profiles').update(properties).match({ id: user.value.id })
 
             if (error) {
                 const { $toast } = useNuxtApp()
                 $toast.error('حدث خطأ اثناء تحديث الملف الشخصي')
                 return;
             }
+        },
+        async logout() {
+            const supabase = useSupabaseClient();
+            const router = useRouter();
+            const { error } = await supabase.auth.signOut()
+            if (error) {
+                const { $toast } = useNuxtApp()
+                $toast.error('حدث خطأ اثناء تسجيل الخروج')
+                return;
+            }
+            router.push('/auth')
         }
     },
 });
