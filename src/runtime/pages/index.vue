@@ -59,25 +59,11 @@ const userProfile = useUserProfile();
 appManager.fetch()
 userProfile.fetch()
 
-// appManager.buyApp(3) 
-// console.log(appManager.getCoreApps)
-
-// const supabase = useSupabaseClient()
-const user = useUser()
-
+// const user = useUser()
 const notifications = useNotifications()
 notifications.join()
 
-// onMounted(() => {
-//   notifications.sendNotification({
-//     user_id: user.value.id,
-//     app_id: 1,
-//     datas: null,
-//     message: "Hello world",
-//     title: 'I am here',
-//     dates: new Date(+new Date() + 60000*1)
-//   })
-// })
+console.log(appManager.getServiceById(1))
 
 </script>
 
