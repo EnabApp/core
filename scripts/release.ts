@@ -14,7 +14,7 @@ if (oldVersion === version) {
   process.exit()
 }
 
-execSync('cd .. && yarn dev:prepare', { stdio: 'inherit' })
+// execSync('cd .. && yarn dev:prepare', { stdio: 'inherit' })
 
 execSync('cd .. && git add .', { stdio: 'inherit' })
 execSync(`cd .. && git commit -m "release v${version}"`, { stdio: 'inherit' })
