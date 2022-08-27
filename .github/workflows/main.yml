@@ -1,5 +1,12 @@
-on: [push, pull_request]
-name: Build, Test and maybe Publish
+on: 
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+name: Build, maybe Publish
 jobs:
   test:
     name: Build & Test
