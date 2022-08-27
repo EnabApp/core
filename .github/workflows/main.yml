@@ -1,10 +1,5 @@
 name: CI
-on:
-  push:
-    branches:
-      - master
-    tags:
-      - v*.*.*-beta.*
+on: release
     
 jobs:
   build:
