@@ -3,12 +3,27 @@ on:
   push:
     tags:
       - v*
-      
-env:
+    
+
+jobs:
+  CI:
+    runs-on: ${{ matrix.config.os }}
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      # We keep a matrix for convenience, but we would typically just run on one
+      # single OS and R version, aligned with the target deployment environment
+      matrix:
+        config:
+          - {os: ubuntu-latest, r: 'release'}
+
+    env:
       # Access token for GitHub
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-    
-jobs:
+      # Preserve package sources for informative references in case of errors
+      R_KEEP_PKG_SOURCE: yes
+      
   build:
     name: Test
     runs-on: ubuntu-latest
