@@ -15,6 +15,7 @@ export default class Service {
         this.app_id = args?.app_id
 
         this.title = args?.title
+        this.description = args?.description
         this.icon = args?.icon
 
         this.owned = args.users_services && args.users_services.length > 0
