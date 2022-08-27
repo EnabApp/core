@@ -1,7 +1,7 @@
 {
   "name": "@enab/core",
   "type": "module",
-  "version": "1.8.3",
+  "version": "1.8.5-beta.0",
   "license": "MIT",
   "exports": {
     ".": {
@@ -18,7 +18,8 @@
     "prepack": "nuxt-module-build",
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
-    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground"
+    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
+    "release": "cd scripts && node --loader ts-node/esm release.ts"
   },
   "dependencies": {
     "@enab/appstore": "^1.0.6",
