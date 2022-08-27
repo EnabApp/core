@@ -12,24 +12,24 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
+      - name: Install yarn
+        uses: yarn/action-setup@v2
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: https://registry.npmjs.org/
-          cache: pnpm
+          cache: yarn
 
-      - run: pnpm install
+      - run: yarn install
 
       - run: npx changelogithub --no-group
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      - run: pnpm run publish:ci
+      - run: yarn publish --non-interactive
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
           NODE_OPTIONS: --max-old-space-size=6144
