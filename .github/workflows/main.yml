@@ -24,8 +24,9 @@ jobs:
       # Preserve package sources for informative references in case of errors
       R_KEEP_PKG_SOURCE: yes
 
-    steps:     
-      - uses: actions/checkout@v2
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
 
       - uses: borales/actions-yarn@v3.0.0
         with:
@@ -38,3 +39,5 @@ jobs:
           cmd: publish --access=public
           auth-token: ${{ secrets.NPM_AUTH_TOKEN }}
           registry-url: registry.npmjs.org
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
