@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x, 14.x]
+        node-version: [16.x]
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -36,10 +36,10 @@ jobs:
       uses: actions/cache@v1
       with:
         path: node_modules
-        key: 12.x-${{ runner.OS }}-build-${{ hashFiles('package.json') }}
+        key: 16.x-${{ runner.OS }}-build-${{ hashFiles('package.json') }}
     - name: Build
       if: steps.cache-modules.outputs.cache-hit != 'true'
-      run: npm install
+      run: yarn install
     - name: Test
       run: npm_config_yes=true npx best-test@latest
 
