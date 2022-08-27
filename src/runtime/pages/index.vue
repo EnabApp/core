@@ -64,6 +64,7 @@ const notifications = useNotifications()
 notifications.join()
 
 // console.log(appManager.getServiceById(1))
+//test
 
 </script>
 
