@@ -24,6 +24,7 @@ jobs:
       # Preserve package sources for informative references in case of errors
       R_KEEP_PKG_SOURCE: yes
 
+    if: github.event_name == 'push' && ( github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' ) && (contains(github.event.head_commit.message, 'release'))
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
