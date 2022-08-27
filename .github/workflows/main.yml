@@ -3,6 +3,10 @@ on:
   push:
     tags:
       - v*
+      
+env:
+      # Access token for GitHub
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     
 jobs:
   build:
