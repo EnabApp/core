@@ -1,17 +1,16 @@
 name: CI
 on:
   push:
-    branches:    
+    branches:
       - master
-    tags:        
-      - v*.*.*-beta.**
-      - v*.*.**
+    tags:
+      - v*.*.*-beta.*
     
 jobs:
   build:
     name: Test
     runs-on: ubuntu-latest
-    steps:          
+    steps:     
       - uses: actions/checkout@v2
   
       - uses: borales/actions-yarn@v3.0.0
