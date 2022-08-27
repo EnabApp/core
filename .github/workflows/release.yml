@@ -1,9 +1,12 @@
-name: CI
-on: [push]
+name: RELEASE
+on:
+  push:
+    branches:
+      - master
     
 
 jobs:
-  CI:
+  RELEASE:
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
