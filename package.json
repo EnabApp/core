@@ -1,7 +1,7 @@
 {
   "name": "@enab/core",
   "type": "module",
-  "version": "1.8.5-beta.21",
+  "version": "1.8.5-beta.22",
   "license": "MIT",
   "exports": {
     ".": {
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@enab/appstore": "^1.0.6",
-    "@enab/core": "^1.6.6",
+    "@enab/ui": "^1.4.93",
     "@enab/utilities": "^1.0.12",
     "@iconify/json": "^2.1.77",
     "@nuxt/image-edge": "^1.0.0-27657146.da85542",
@@ -45,11 +45,13 @@
     "@vueuse/core": "^9.0.2",
     "@vueuse/motion": "^2.0.0-beta.18",
     "@vueuse/nuxt": "^9.0.2",
+    "bumpp": "^8.2.1",
     "eslint": "latest",
     "mathjs": "^11.0.1",
     "nuxt": "^3.0.0-rc.6",
     "nuxt-lodash": "^2.2.0",
     "pinia": "^2.0.16",
+    "ts-node": "^10.9.1",
     "unbuild": "^0.7.6",
     "vue-toastification": "^2.0.0-rc.5"
   },
