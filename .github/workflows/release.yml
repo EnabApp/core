@@ -28,33 +28,42 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+      
 
+      # Install
       - uses: borales/actions-yarn@v3.0.0
         with:
           cmd: install
+      
+      # Prepare
       - uses: borales/actions-yarn@v3.0.0
         with:
           cmd: dev:prepare
 
+      # Creating Changelog
       - name: Changelog
         uses: scottbrenner/generate-changelog-action@master
         id: Changelog
         env:
           REPO: ${{ github.repository }}
 
+
+      # Creating Release
       - name: Create Release
+        if: (!contains(github.event.head_commit.message, 'beta'))
         id: create_release
         uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.event.head_commit.message }}
-          release_name: Release ${{ github.event.head_commit.message }}
+          release_name: ${{ github.event.head_commit.message }}
           body: |
             ${{ steps.Changelog.outputs.changelog }}
           draft: true
           prerelease: false
-          
+      
+      # Publish to NPM
       - uses: borales/actions-yarn@v3.0.0
         with:
           cmd: publish --access=public
