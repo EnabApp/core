@@ -1,9 +1,27 @@
-## Change logs
+<!-- SPDX-License-Identifier: MIT -->
 
-## RELEASE v1.8.16
-### Bug fixes
-1. Fixed some bugs...
-### Features
-1. Added some features...
+# Changelog
 
-## RELEASE v1.8.15
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [release-v1.8.17] - 2022-xx-xx
+
+### Changed
+
+- Dependencies updated
