@@ -62,12 +62,10 @@ jobs:
           tag_name: ${{ github.event.head_commit.message }}
           release_name: ${{ github.event.head_commit.message }}
           body: |
-            "
-              # ${{ github.event.head_commit.message }}
-              ## Fixed
+              ## ${{ github.event.head_commit.message }}
+              ### Fixed
 
-              ## Added
-            "
+              ### Added
           draft: true
           prerelease: false
       
