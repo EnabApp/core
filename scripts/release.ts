@@ -15,7 +15,7 @@ if (oldVersion === version) {
 }
 
 execSync('cd .. && git add .', { stdio: 'inherit' })
-execSync(`cd .. && git commit -m "release v${version}"`, { stdio: 'inherit' })
+execSync(`cd .. && git commit -m "v${version}"`, { stdio: 'inherit' })
 execSync(`cd .. && git tag -a v${version} -m "v${version}"`, { stdio: 'inherit' })
 execSync(`cd .. && git push origin master"`, { stdio: 'inherit' })
 
