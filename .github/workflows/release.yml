@@ -51,6 +51,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Creating notes
+      - name: Extract release notes
+        id: extract-release-notes
+        uses: ffurrer2/extract-release-notes@v1
+
 
       # Creating Release
       - name: Create Release
@@ -62,8 +67,7 @@ jobs:
         with:
           tag_name: ${{ github.event.head_commit.message }}
           release_name: ${{ github.event.head_commit.message }}
-          body: |
-            ${{ steps.Changelog.outputs.changelog }}
+          body: ${{ steps.extract-release-notes.outputs.release_notes }}
           draft: true
           prerelease: false
       
