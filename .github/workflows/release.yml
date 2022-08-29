@@ -54,7 +54,7 @@ jobs:
 
       # Creating Release
       - name: Create Release
-        if: (github.event_name == 'push' && ( github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' ) && !contains(github.event.head_commit.message, 'beta') && contains(github.event.head_commit.message, 'release v'))
+        if: ((github.event_name == 'push') && ( github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' ) && (!contains(github.event.head_commit.message, 'beta')) && (contains(github.event.head_commit.message, 'release-v')))
         id: create_release
         uses: actions/create-release@latest
         env:
