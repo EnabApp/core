@@ -22,11 +22,12 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.build.transpile.push(runtimeDir)
     // nuxt.options.alias.core = (runtimeDir)
     addPlugin(resolve(runtimeDir, 'plugins/toast'))
-    addPlugin(resolve(runtimeDir, 'plugins/addApps'))
 
     
 
     if (options.isCore) {
+      addPlugin(resolve(runtimeDir, 'plugins/addApps'))
+
       // Components Hooks
       nuxt.hook('components:dirs', (dirs) => {
         dirs.push({
@@ -35,7 +36,7 @@ export default defineNuxtModule<ModuleOptions>({
         })
       })
 
-      
+
       // Auto Imports Hooks
       nuxt.hook('autoImports:dirs', (dirs) => {
         dirs.push(resolve(runtimeDir, 'composables'))
