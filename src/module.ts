@@ -32,7 +32,7 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt.hook('components:dirs', (dirs) => {
         dirs.push({
           path: resolve(runtimeDir, 'components'),
-          global: true
+          global: true,
         })
       })
 
