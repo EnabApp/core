@@ -24,7 +24,7 @@
   "dependencies": {
     "@enab/appstore": "^1.0.8-beta.4",
     "@enab/core": "^1.8.21-beta.2",
-    "@enab/ui": "^1.4.94-beta.4",
+    "@enab/ui": "^1.4.94-beta.5",
     "@enab/utilities": "^1.0.12",
     "@iconify/json": "^2.1.101",
     "@nuxt/image-edge": "^1.0.0-27657146.da85542",
