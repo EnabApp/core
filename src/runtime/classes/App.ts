@@ -50,6 +50,7 @@ export default class App {
         this.points = args.points ?? 0
 
         this.services = args.apps_services?.map(service => new Service(service))
+
     }
     
     

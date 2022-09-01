@@ -27,10 +27,18 @@
 
 
       <div position="absolute" v-for="component in appManager.getRunningApps" :key="'app-' + component.id">
-
         <Transition>
-          <UiDesktopWindow v-if="component.running" v-show="!component.minimized" :app="component" :key="'app-component-transition-' + component.id">
-            <component :app="component" :is="component.name" :key="'app-component-' + component.id"></component>
+          <UiDesktopWindow v-if="component.running" v-show="!component.minimized && component.booting === false" :app="component" :key="'app-component-transition-' + component.id">
+            <Suspense>
+              <component :app="component" :is="component.name"></component>
+                
+              <template #fallback>
+                <div w="full" h="full" un-text="white" items="center" justify="center" flex="~ col">
+                  <div h="25" w="25" class="i-line-md-loading-twotone-loop"></div>
+                  <span>جاري تحميل التطبيق من أجلك ❤️</span>
+                </div>
+              </template>
+            </Suspense>
           </UiDesktopWindow>
         </Transition>
       </div>
@@ -52,6 +60,8 @@ import { useNotifications } from '../composables/useNotifications';
 import { auth } from '../middleware/auth'
 import { useSupabaseClient } from '#imports'
 import { useUser } from '../composables/states'
+import { defineAsyncComponent } from 'vue'
+
 
 
 definePageMeta({
@@ -68,14 +78,6 @@ userProfile.fetch()
 const notifications = useNotifications()
 notifications.join()
 
-// console.log(appManager.getServiceById(1))
-//test
-//test2
-//test3
-//test4
-//test5
-//test6
-//test7
 </script>
 
 
