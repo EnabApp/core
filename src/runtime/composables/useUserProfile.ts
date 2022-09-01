@@ -29,19 +29,22 @@ export const useUserProfile = defineStore("user-profile", {
             }
         },
 
-        async updateUsername(username) {
+        async updateUsername(username: String) {
+            const { $toast } = useNuxtApp()
             const supabase = useSupabaseClient()
             const user = useUser()
 
             const { data, error } = await supabase.from('profiles').update({
                 username: username
-            }).match({ id: user.value.id })
+            }).eq('id', user.value.id).single()
 
             if (error) {
-                const { $toast } = useNuxtApp()
                 $toast.error('حدث خطأ اثناء تحديث الأسم')
-                return;
+                return false;
             }
+
+            this.data = data
+            return true;
         },
 
         async updateProfile(properties) {

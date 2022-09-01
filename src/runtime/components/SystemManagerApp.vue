@@ -1,15 +1,18 @@
 <template>
   <!-- Application -->
-  <div flex="~ col grow gap-2" w="full">
-    <UiTabGroup p="4" :col="true" :tabs="['المعلومات الأساسية', 'تفاصيل اخرى']">
-      <template #tab-1>
-        <!-- <UiInput v-model="username" placeholder="أسم المستخدم" /> -->
-        <!-- <UiButton @click="userProfile.updateUsername(username)" label="تغيير" /> -->
-      </template>
-      <template #tab-2>
-        <h1>About</h1>
-      </template>
-    </UiTabGroup>
+  <div>
+    <div mx="4" mt="2" flex="~ col gap-2">
+      <div flex="~ gap-2">
+        <UiInput flex="grow" v-model="username" placeholder="أسم المستخدم" />
+        <UiButton @click="updateUsername()">
+          <div v-if="pending">
+            <!-- Loading icon -->
+            <div h="5" class="i-eos-icons-three-dots-loading"></div>
+          </div>
+          <span v-else>تغيير</span>
+        </UiButton>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,5 +32,15 @@ const props = defineProps({
 const userProfile = useUserProfile()
 
 const username = ref(userProfile.data?.username)
+
+const pending = ref(false)
+
+const updateUsername = async () => {
+  pending.value = true
+  const result = await userProfile.updateUsername(username.value)
+  pending.value = false
+}
+
+
 
 </script>
