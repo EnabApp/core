@@ -1,20 +1,16 @@
 <template>
   <!-- Application -->
-  <Transition>
-    <UiDesktopWindow ref="windowRef" v-if="app.running" v-show="!app.minimized" :app="app">
-      <div flex="~ col grow gap-2" w="full">
-          <UiTabGroup p="4" :col="true" :tabs="['المعلومات الأساسية', 'تفاصيل اخرى']">
-            <template #tab-1>
-              <!-- <UiInput v-model="username" placeholder="أسم المستخدم" /> -->
-              <!-- <UiButton @click="userProfile.updateUsername(username)" label="تغيير" /> -->
-            </template>
-            <template #tab-2>
-              <h1>About</h1>
-            </template>
-          </UiTabGroup>
-      </div>
-    </UiDesktopWindow>
-  </Transition>
+  <div flex="~ col grow gap-2" w="full">
+      <UiTabGroup p="4" :col="true" :tabs="['المعلومات الأساسية', 'تفاصيل اخرى']">
+        <template #tab-1>
+          <!-- <UiInput v-model="username" placeholder="أسم المستخدم" /> -->
+          <!-- <UiButton @click="userProfile.updateUsername(username)" label="تغيير" /> -->
+        </template>
+        <template #tab-2>
+          <h1>About</h1>
+        </template>
+      </UiTabGroup>
+  </div>
 </template>
 
 
