@@ -25,7 +25,7 @@
     "@enab/appstore": "^1.0.8-beta.7",
     "@enab/core": "^1.8.21-beta.2",
     "@enab/ui": "^1.4.94-beta.5",
-    "@enab/utilities": "^1.0.13-beta.7",
+    "@enab/utilities": "^1.0.14-beta.0",
     "@iconify/json": "^2.1.101",
     "@nuxt/image-edge": "^1.0.0-27657146.da85542",
     "@nuxt/kit": "^3.0.0-rc.8",
