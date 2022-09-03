@@ -38,7 +38,7 @@ export default defineNuxtModule<ModuleOptions>({
 
 
       // Auto Imports Hooks
-      nuxt.hook('autoImports:dirs', (dirs) => {
+      nuxt.hook('imports:dirs', (dirs) => {
         dirs.push(resolve(runtimeDir, 'composables'))
         dirs.push(resolve(runtimeDir, 'classes'))
         dirs.push(resolve(runtimeDir, 'middleware'))

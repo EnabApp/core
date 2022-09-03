@@ -5,10 +5,6 @@ import MyModule from '..'
 export default defineNuxtConfig({
     ssr: false,
 
-    autoImports: {
-        global: false
-    },
-
     modules: [
         '@enab/appstore',
         '@enab/utilities',

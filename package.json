@@ -1,7 +1,7 @@
 {
   "name": "@enab/core",
   "type": "module",
-  "version": "1.8.21-beta.7",
+  "version": "1.8.21-beta.8",
   "license": "MIT",
   "exports": {
     ".": {
@@ -23,13 +23,13 @@
   },
   "dependencies": {
     "@enab/appstore": "^1.0.8-beta.7",
-    "@enab/ui": "^1.4.94-beta.5",
+    "@enab/ui": "^1.4.94-beta.6",
     "@enab/utilities": "^1.0.14-beta.0",
     "@iconify/json": "^2.1.101",
     "@nuxt/image-edge": "^1.0.0-27657146.da85542",
-    "@nuxt/kit": "^3.0.0-rc.8",
+    "@nuxt/kit": "^3.0.0-rc.9",
     "@nuxt/module-builder": "^0.1.7",
-    "@nuxt/schema": "^3.0.0-rc.8",
+    "@nuxt/schema": "^3.0.0-rc.9",
     "@nuxtjs/color-mode": "^3.1.4",
     "@nuxtjs/composition-api": "^0.33.0",
     "@nuxtjs/eslint-config-typescript": "11.0.0",
@@ -48,7 +48,7 @@
     "bumpp": "^8.2.1",
     "eslint": "latest",
     "mathjs": "^11.0.1",
-    "nuxt": "^3.0.0-rc.8",
+    "nuxt": "3.0.0-rc.9",
     "nuxt-lodash": "^2.2.0",
     "pinia": "^2.0.16",
     "ts-node": "^10.9.1",
