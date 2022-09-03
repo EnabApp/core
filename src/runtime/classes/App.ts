@@ -17,6 +17,8 @@ export default class App {
     // locked: boolean;
     owned: boolean;
     size: string;
+    minWidth: number;
+    minHeight: number;
     zIndex: string;
 
     // utility: boolean;
@@ -46,6 +48,8 @@ export default class App {
         this.core = args.core ?? false
 
         this.size = args.size ?? "w-2xl h-lg"
+        this.minWidth = args.minWidth ?? 100
+        this.minHeight = args.minHeight ?? 100
 
         this.points = args.points ?? 0
 
