@@ -1,7 +1,7 @@
 <template>
   <div ref="notificationsEl" position="relative" un-text="primaryOp dark:primary">
     <!-- Icon -->
-    <UiIconsNotification @click="notificationsPanelToggle()" cursor="pointer" h="32px" w="32px"></UiIconsNotification>
+    <IconNotification @click="notificationsPanelToggle()" cursor="pointer" h="32px" w="32px"></IconNotification>
 
     <!-- Notifications Panel -->
     <Transition name="notifications-panel">

@@ -9,9 +9,8 @@
   import { useAppManager } from '#imports';
   const appStore = useAppManager()
   appStore.addApp({
-    "name": "SystemManagerApp",
+    "name": "SystemManager",
     "title": "مدير النظام",
-    "icon": "i-ci-settings-filled",
     "minWidth": 350,
     "minHeight": 300
   })

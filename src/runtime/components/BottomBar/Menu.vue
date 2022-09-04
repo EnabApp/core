@@ -1,7 +1,7 @@
 <template>
   <div ref="menuEl" position="relative">
     <!-- Menu Icon -->
-    <UiIconsEnab @click="menuPanelToggle()" cursor="pointer" h="45px" />
+    <IconEnab @click="menuPanelToggle()" cursor="pointer" h="45px" />
 
     <!-- Menu Panel -->
     <Transition name="menu-panel">
