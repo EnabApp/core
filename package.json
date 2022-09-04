@@ -29,7 +29,6 @@
     "@unocss/inspector": "^0.44.2",
     "@unocss/nuxt": "^0.44.0",
     "@unocss/preset-attributify": "^0.44.1",
-    "@unocss/preset-icons": "^0.44.1",
     "@unocss/preset-typography": "^0.44.1",
     "@unocss/preset-web-fonts": "^0.44.1",
     "@vueuse/core": "^9.1.1",
