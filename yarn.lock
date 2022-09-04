@@ -301,6 +301,41 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
+"@enab/systemapps@^1.0.1-beta.2":
+  version "1.0.1-beta.2"
+  resolved "https://registry.yarnpkg.com/@enab/systemapps/-/systemapps-1.0.1-beta.2.tgz#f055bf282f11363b5effa95aa7b1743cb490e8d0"
+  integrity sha512-2FQnpVZS/YsQrFMOG4Z/A0iMjIffK/mvAo84A0SD3l+ZNisfiF4yN40AuN+i3HIhTMzdDYkIJfaNLdbogoWUGg==
+  dependencies:
+    "@nuxt/kit" "npm:@nuxt/kit-edge@latest"
+    "@nuxtjs/color-mode" "^3.1.4"
+    "@nuxtjs/supabase" "^0.1.23"
+    "@pinia/nuxt" "^0.4.1"
+    "@unocss/inspector" "^0.44.2"
+    "@unocss/nuxt" "^0.44.0"
+    "@unocss/preset-attributify" "^0.44.1"
+    "@unocss/preset-typography" "^0.44.1"
+    "@unocss/preset-web-fonts" "^0.44.1"
+    "@vueuse/core" "^9.1.1"
+    "@vueuse/nuxt" "^9.1.1"
+
+"@enab/utilities@^1.0.14-beta.4":
+  version "1.0.14-beta.4"
+  resolved "https://registry.yarnpkg.com/@enab/utilities/-/utilities-1.0.14-beta.4.tgz#891111b84f4a7150ca85923f45f773309ceabb86"
+  integrity sha512-XsI6pyP2KszaWT8Zx/Ek2UleH/CsoHapO6osFhNgUQjhf3t0uREnqUuJyD91mVczRf3DQeweOdii6Aec7vPvgA==
+  dependencies:
+    "@nuxt/kit" "npm:@nuxt/kit-edge@latest"
+    "@nuxtjs/color-mode" "^3.1.4"
+    "@nuxtjs/supabase" "0.1.23"
+    "@pinia/nuxt" "^0.4.1"
+    "@unocss/inspector" "^0.44.2"
+    "@unocss/nuxt" "^0.44.0"
+    "@unocss/preset-attributify" "^0.44.1"
+    "@unocss/preset-icons" "^0.44.1"
+    "@unocss/preset-typography" "^0.44.1"
+    "@unocss/preset-web-fonts" "^0.44.1"
+    "@vueuse/core" "^9.1.1"
+    "@vueuse/nuxt" "^9.1.1"
+
 "@esbuild/linux-loong64@0.14.54":
   version "0.14.54"
   resolved "https://registry.yarnpkg.com/@esbuild/linux-loong64/-/linux-loong64-0.14.54.tgz#de2a4be678bd4d0d1ffbb86e6de779cde5999028"
@@ -641,7 +676,7 @@
     lodash.template "^4.5.0"
     pathe "^0.3.0"
 
-"@nuxtjs/supabase@^0.1.23":
+"@nuxtjs/supabase@0.1.23", "@nuxtjs/supabase@^0.1.23":
   version "0.1.23"
   resolved "https://registry.yarnpkg.com/@nuxtjs/supabase/-/supabase-0.1.23.tgz#f7d00c103b70e96bd55471a477ea867facd60dd2"
   integrity sha512-gCBI7cm552RGcbbDzUAlA+NFCuLZXVcfpsvbTVLneOUzh3cvYxLK04qYRTE81x2L/FV9FFWSG0h7Mp6kacGEiw==
@@ -935,7 +970,7 @@
   dependencies:
     "@unocss/core" "0.44.7"
 
-"@unocss/preset-icons@0.44.7":
+"@unocss/preset-icons@0.44.7", "@unocss/preset-icons@^0.44.1":
   version "0.44.7"
   resolved "https://registry.yarnpkg.com/@unocss/preset-icons/-/preset-icons-0.44.7.tgz#300cd8cae5c612a64e20bef73d834f6041b8df18"
   integrity sha512-3PC8a1yjm/rV0Sq192OB+yWokccjNZlh8dsmt3NPdz7OTIRTreNvUaFlV5CHk1JSk2/CNus1VWLG1VeDHqdotg==

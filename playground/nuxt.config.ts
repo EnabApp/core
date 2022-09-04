@@ -6,10 +6,9 @@ export default defineNuxtConfig({
     ssr: false,
 
     modules: [
-        // '@enab/appstore',
-        // '@enab/utilities',
+        '@enab/systemapps',
+        '@enab/utilities',
         MyModule,
-        // '@nuxt/image-edge',
         '@nuxtjs/supabase',
         '@pinia/nuxt',
         '@vueuse/nuxt',

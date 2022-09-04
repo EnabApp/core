@@ -35,6 +35,8 @@
     "@vueuse/nuxt": "^9.1.1"
   },
   "devDependencies": {
+    "@enab/systemapps": "^1.0.1-beta.2",
+    "@enab/utilities": "^1.0.14-beta.4",
     "@nuxt/module-builder": "latest",
     "@tauri-apps/api": "^1.0.2",
     "bumpp": "^8.2.1",
