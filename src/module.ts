@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url'
 import { defineNuxtModule, addPlugin, addAutoImport } from '@nuxt/kit'
 import path from "path";
 import * as fs from 'fs';
+import { uno } from "./runtime/unocss/index";
 
 
 export interface ModuleOptions {
@@ -26,7 +27,7 @@ export default defineNuxtModule<ModuleOptions>({
     
 
     if (options.isCore) {
-      addPlugin(resolve(runtimeDir, 'plugins/addApps'))
+      // addPlugin(resolve(runtimeDir, 'plugins/addApps'))
 
       // Components Hooks
       nuxt.hook('components:dirs', (dirs) => {
@@ -40,7 +41,7 @@ export default defineNuxtModule<ModuleOptions>({
       // Auto Imports Hooks
       nuxt.hook('imports:dirs', (dirs) => {
         dirs.push(resolve(runtimeDir, 'composables'))
-        dirs.push(resolve(runtimeDir, 'classes'))
+        dirs.push(resolve(runtimeDir, 'models'))
         dirs.push(resolve(runtimeDir, 'middleware'))
       })
   
@@ -65,14 +66,34 @@ export default defineNuxtModule<ModuleOptions>({
         pages.push({ path: '/', file: resolve(runtimeDir, 'pages/index.vue')})
         pages.push({ path: '/auth', file: resolve(runtimeDir, 'pages/auth.vue')})
       })
-  
+
+
+      // ColorMode Configuration
+      let colorMode = { classSuffix: "" } as any;
+      nuxt.options["colorMode"] = colorMode;
+
+      // UnoCSS Configurations
+      nuxt.options["unocss"] = uno;
+    
+        
   
       // Supabase 
-      // nuxt.options.supabase = {
-      //   url: 'https://xjrkpvotkmsqephyfmya.supabase.co',
-      //   key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhqcmtwdm90a21zcWVwaHlmbXlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjAyOTc3MjYsImV4cCI6MTk3NTg3MzcyNn0.3doSjk0JXDL8EtfmNjqz3iUx43NrvWgcLkIRhsyvAnM',
-      //   serviceKey: ''
-      // }
+      nuxt.options.supabase = {
+        url: 'https://xjrkpvotkmsqephyfmya.supabase.co',
+        key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhqcmtwdm90a21zcWVwaHlmbXlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjAyOTc3MjYsImV4cCI6MTk3NTg3MzcyNn0.3doSjk0JXDL8EtfmNjqz3iUx43NrvWgcLkIRhsyvAnM',
+        serviceKey: ''
+      }
+    } 
+
+    // Not core ( imported in docs, etc...)
+    else {
+      nuxt.hook("components:dirs", (dirs) => {
+        dirs.push({
+          path: resolve(runtimeDir, "components"),
+          global: true,
+          ignore : ["Ui/Desktop/**", "BottomBar/**", "*.vue"]
+        });
+      });
     }
   }
 })

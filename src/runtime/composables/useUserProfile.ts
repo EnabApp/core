@@ -1,6 +1,6 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
-import App from "../classes/App"
-import Widget from "../classes/Widget"
+import App from "../models/App"
+import Widget from "../models/Widget"
 import { useSupabaseClient, useNuxtApp, useUser, useRouter } from '#imports'
 
 export const useUserProfile = defineStore("user-profile", {

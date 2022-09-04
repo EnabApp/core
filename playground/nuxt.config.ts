@@ -8,13 +8,12 @@ export default defineNuxtConfig({
     modules: [
         // '@enab/appstore',
         // '@enab/utilities',
-        // '@enab/ui',
         MyModule,
         // '@nuxt/image-edge',
-        // '@nuxtjs/supabase',
+        '@nuxtjs/supabase',
         '@pinia/nuxt',
         '@vueuse/nuxt',
-        // '@unocss/nuxt',
-        // "@nuxtjs/color-mode",
+        '@unocss/nuxt',
+        "@nuxtjs/color-mode",
     ],
 })
