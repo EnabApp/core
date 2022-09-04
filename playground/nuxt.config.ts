@@ -13,8 +13,8 @@ export default defineNuxtConfig({
         // '@nuxt/image-edge',
         // '@nuxtjs/supabase',
         '@pinia/nuxt',
-        // '@vueuse/nuxt',
+        '@vueuse/nuxt',
         // '@unocss/nuxt',
-        "@nuxtjs/color-mode",
+        // "@nuxtjs/color-mode",
     ],
 })
