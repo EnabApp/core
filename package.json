@@ -24,7 +24,7 @@
   "dependencies": {
     "@nuxt/kit": "npm:@nuxt/kit-edge@latest",
     "@nuxtjs/color-mode": "^3.1.4",
-    "@nuxtjs/supabase": "0.1.23",
+    "@nuxtjs/supabase": "^0.1.23",
     "@pinia/nuxt": "^0.4.1",
     "@unocss/inspector": "^0.44.2",
     "@unocss/nuxt": "^0.44.0",

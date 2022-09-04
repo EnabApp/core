@@ -641,7 +641,7 @@
     lodash.template "^4.5.0"
     pathe "^0.3.0"
 
-"@nuxtjs/supabase@0.1.23":
+"@nuxtjs/supabase@^0.1.23":
   version "0.1.23"
   resolved "https://registry.yarnpkg.com/@nuxtjs/supabase/-/supabase-0.1.23.tgz#f7d00c103b70e96bd55471a477ea867facd60dd2"
   integrity sha512-gCBI7cm552RGcbbDzUAlA+NFCuLZXVcfpsvbTVLneOUzh3cvYxLK04qYRTE81x2L/FV9FFWSG0h7Mp6kacGEiw==
