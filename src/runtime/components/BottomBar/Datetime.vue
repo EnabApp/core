@@ -6,7 +6,7 @@
     <!-- Datetime Button -->
     <div @click="datetimePanelToggle()" flex="~ gap-24px" items="center" bg="dark:hover:secondaryOp hover:secondary" p="y-2 x-4" border="rounded-10px" cursor="pointer" un-text="primaryOp dark:primary">
         <!-- Calendar -->
-        <div h="32px" w="32px" class="i-bxs-calendar"></div>
+        <IconCalendar h="32px" w="32px"></IconCalendar>
 
         <!-- Datetime -->
         <div un-text="xl">{{ datetext }}</div>
@@ -27,8 +27,8 @@
 
             <!-- Buttons: Change months -->
             <div flex="~ gap-1">
-              <div @click="previous()" cursor="pointer" w="32px" h="32px" class="i-bi-arrow-down-square-fill"></div>
-              <div @click="next()" cursor="pointer" w="32px" h="32px" class="i-bi-arrow-up-square-fill"></div>
+              <IconArrowDown @click="previous()" cursor="pointer" w="32px" h="32px" ></IconArrowDown>
+              <IconArrowUp @click="next()" cursor="pointer" w="32px" h="32px"></IconArrowUp>
             </div>
           </div>
 
