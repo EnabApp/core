@@ -42,7 +42,7 @@ export const useAppManager = defineStore("app-manager", {
     actions: {
         // Fetching Data
         async fetch(){
-            const { $toast } = useNuxtApp()
+            // const { $toast } = useNuxtApp()
             const supabase = useSupabaseClient()
             let { data: apps, error } = await supabase
                 .from('apps')
@@ -53,7 +53,7 @@ export const useAppManager = defineStore("app-manager", {
                             id, app_id, title, points, icon, description, users_services(id)
                         )
                     `)
-            if (error){ $toast.error('حدث خطأ اثناء تحميل التطبيقات'); return false }
+            if (error){ console.log('حدث خطأ اثناء تحميل التطبيقات'); return false }
             this.apps = apps.map(app => new App(app))
             this.apps.push(...this.developmentApps)
         },
@@ -77,7 +77,7 @@ export const useAppManager = defineStore("app-manager", {
 
         // Buy an app
         async buyApp(app_id){
-            const { $toast } = useNuxtApp()
+            // const { $toast } = useNuxtApp()
             const supabase = useSupabaseClient()
             const user = useUser()
             let { data, error } = await supabase
@@ -85,14 +85,14 @@ export const useAppManager = defineStore("app-manager", {
                     _app_id: app_id,
                     _user_id: user.value.id
                 })
-            if (error){ $toast.error('حدث خطأ اثناء شراء التطبيق'); return false }
-            if (!data) { $toast.error('لاتمتلك مايكفي من النقاط'); return false }
+            if (error){ console.log('حدث خطأ اثناء شراء التطبيق'); return false }
+            if (!data) { console.log('لاتمتلك مايكفي من النقاط'); return false }
             this.fetch();
         },
 
         // Buy a service
         async buyService(service_id){
-            const { $toast } = useNuxtApp()
+            // const { $toast } = useNuxtApp()
             const supabase = useSupabaseClient()
             const user = useUser()
             let { data, error } = await supabase
@@ -100,8 +100,8 @@ export const useAppManager = defineStore("app-manager", {
                     _service_id: service_id,
                     _user_id: user.value.id
                 })
-            if (error){ $toast.error('حدث خطأ اثناء شراء الخدمة'); return false }
-            if (!data) { $toast.error('لاتمتلك مايكفي من النقاط'); return false }
+            if (error){ console.log('حدث خطأ اثناء شراء الخدمة'); return false }
+            if (!data) { console.log('لاتمتلك مايكفي من النقاط'); return false }
             this.fetch();
         }
     },

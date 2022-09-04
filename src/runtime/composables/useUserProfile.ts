@@ -19,8 +19,8 @@ export const useUserProfile = defineStore("user-profile", {
             const user = useUser()
             const { data, error } = await supabase.from('profiles').select('*').eq('id', user.value.id).single()
             if (error) {
-                const { $toast } = useNuxtApp()
-                $toast.error('حدث خطأ اثناء تحميل الملف الشخصي')
+                // const { $toast } = useNuxtApp()
+                console.log('حدث خطأ اثناء تحميل الملف الشخصي')
                 return;
             }
 
@@ -30,7 +30,7 @@ export const useUserProfile = defineStore("user-profile", {
         },
 
         async updateUsername(username: String) {
-            const { $toast } = useNuxtApp()
+            // const { $toast } = useNuxtApp()
             const supabase = useSupabaseClient()
             const user = useUser()
 
@@ -39,7 +39,7 @@ export const useUserProfile = defineStore("user-profile", {
             }).eq('id', user.value.id).single()
 
             if (error) {
-                $toast.error('حدث خطأ اثناء تحديث الأسم')
+                console.log('حدث خطأ اثناء تحديث الأسم')
                 return false;
             }
 
@@ -54,8 +54,8 @@ export const useUserProfile = defineStore("user-profile", {
             const { data, error } = await supabase.from('profiles').update(properties).match({ id: user.value.id })
 
             if (error) {
-                const { $toast } = useNuxtApp()
-                $toast.error('حدث خطأ اثناء تحديث الملف الشخصي')
+                // const { $toast } = useNuxtApp()
+                console.log('حدث خطأ اثناء تحديث الملف الشخصي')
                 return;
             }
         },
@@ -64,8 +64,8 @@ export const useUserProfile = defineStore("user-profile", {
             const router = useRouter();
             const { error } = await supabase.auth.signOut()
             if (error) {
-                const { $toast } = useNuxtApp()
-                $toast.error('حدث خطأ اثناء تسجيل الخروج')
+                // const { $toast } = useNuxtApp()
+                console.log('حدث خطأ اثناء تسجيل الخروج')
                 return;
             }
             router.push('/auth')

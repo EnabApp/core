@@ -22,7 +22,6 @@ export default defineNuxtModule<ModuleOptions>({
     const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
     nuxt.options.build.transpile.push(runtimeDir)
     // nuxt.options.alias.core = (runtimeDir)
-    addPlugin(resolve(runtimeDir, 'plugins/toast'))
 
     
 

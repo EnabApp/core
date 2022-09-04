@@ -64,7 +64,7 @@ const target = ref(null);
 
 onClickOutside(target, (event) => (state.value = false));
 
-const { $toast } = useNuxtApp();
+// const { $toast } = useNuxtApp();
 
 // Functionality
 const clickedElement = ref(null);
@@ -79,7 +79,7 @@ const paste = async () => {
   let el = clickedElement.value.target;
   let type = el.tagName.toLowerCase();
   if (type !== "input") {
-    $toast.error("لايمكن استخدام اللصق هنا");
+    console.log("لايمكن استخدام اللصق هنا");
   } else {
     el.value += await navigator.clipboard.readText();
   }

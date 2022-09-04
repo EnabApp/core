@@ -62,8 +62,8 @@ export const useNotifications = defineStore("notifications-store", {
         
         recieveNotification(newNotification){
             // this.notifications.unshift(newNotification)
-            const { $toast } = useNuxtApp()
-            $toast.info('تلقيت اشعار')
+            // const { $toast } = useNuxtApp()
+            console.log('تلقيت اشعار')
             this.fetch()
         },
 
