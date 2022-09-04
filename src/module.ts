@@ -91,7 +91,7 @@ export default defineNuxtModule<ModuleOptions>({
         dirs.push({
           path: resolve(runtimeDir, "components"),
           global: true,
-          ignore : ["Ui/Desktop/**", "BottomBar/**", "*.vue"]
+          ignore : ["Ui/Desktop/**", "BottomBar/**", "Auth/**", "*.vue"]
         });
       });
     }
