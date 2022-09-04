@@ -21,7 +21,7 @@
                 <!-- Right : Icon & Title -->
                 <div flex="~ grow gap-2" justify="start" items="center">
                   <!-- Icon -->
-                  <div h="32px" min-w="32px" max-w="32px" class="i-bxs-cart"></div>
+                  <IconBxsCart h="32px" min-w="32px" max-w="32px" />
                   <!-- Title -->
                   <span un-text="lg xl:xl">{{item.title}}</span>
                 </div>
