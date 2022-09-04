@@ -13,7 +13,7 @@
       bg="w-20 dark:b-20"
       backdrop="~ blur-sm"
     >
-      <div flex="~ col "  max-w="2xl" min-w="lg" max-h="xl" min-h="xs">
+      <div flex="~ col " max-w="70%" min-w="25%" max-h="70%" min-h="25%">
         <!-- Header -->
         <div
           flex="~ gap-4"
@@ -24,7 +24,7 @@
           p="y-2 x-20px"
           text="lg"
           font="medium"
-           class="backdrop-blur-[5px] opacity-90 border-rounded-t-[10px]"
+          class="backdrop-blur-[5px] opacity-90 border-rounded-t-[10px]"
         >
           <div flex="grow" text="primaryOp dark:primary">
             <slot name="title"></slot>
@@ -36,13 +36,18 @@
             cursor="pointer"
             rounded="full"
             bg="error"
-          >
-
-          </div>
+          ></div>
         </div>
 
         <!-- Content -->
-        <div flex="grow" p="x-6 y-6" text="primaryOp dark:primary" overflow="y-auto" rounded="b-lg" bg="primary dark:primaryOp">
+        <div
+          flex="grow"
+          p="x-6 y-6"
+          text="primaryOp dark:primary"
+          overflow="y-auto"
+          rounded="b-lg"
+          bg="primary dark:primaryOp"
+        >
           <slot></slot>
         </div>
 
