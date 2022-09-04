@@ -68,11 +68,11 @@ export default defineNuxtModule<ModuleOptions>({
   
   
       // Supabase 
-      nuxt.options.supabase = {
-        url: 'https://xjrkpvotkmsqephyfmya.supabase.co',
-        key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhqcmtwdm90a21zcWVwaHlmbXlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjAyOTc3MjYsImV4cCI6MTk3NTg3MzcyNn0.3doSjk0JXDL8EtfmNjqz3iUx43NrvWgcLkIRhsyvAnM',
-        serviceKey: ''
-      }
+      // nuxt.options.supabase = {
+      //   url: 'https://xjrkpvotkmsqephyfmya.supabase.co',
+      //   key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhqcmtwdm90a21zcWVwaHlmbXlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjAyOTc3MjYsImV4cCI6MTk3NTg3MzcyNn0.3doSjk0JXDL8EtfmNjqz3iUx43NrvWgcLkIRhsyvAnM',
+      //   serviceKey: ''
+      // }
     }
   }
 })
