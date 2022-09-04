@@ -5,7 +5,12 @@
     class="backdrop-blur-[5px]"
     border="~ t-0 secondary dark:secondaryOp rounded-b-10px"
   >
-    <div flex="~" justify="between" items="center" p="y-10px x-18px sm:y-20px sm:x-36px">
+    <div
+      flex="~"
+      justify="between"
+      items="center"
+      p="y-10px x-18px sm:y-20px sm:x-36px"
+    >
       <!-- Right Actions -->
       <div>
         <div
@@ -35,12 +40,10 @@
           justify="center"
           @click="userProfile.logout()"
         >
-          <div
+          <IconLogOut
             h="16px sm:22px"
             w="16px sm:22px"
-            rotate="180"
-            class="i-octicon-sign-out-16"
-          ></div>
+          ></IconLogOut>
         </div>
 
         <div
@@ -55,13 +58,10 @@
           items="center"
           justify="center"
         >
-          <div
-            h="16px sm:22px"
-            w="16px sm:22px"
-            :class="[
-              isDark ? 'i-ic-baseline-light-mode' : 'i-ic-round-dark-mode',
-            ]"
-          ></div>
+          <div h="16px sm:22px" w="16px sm:22px">
+            <IconLightMode v-if="!isDark" />
+            <IconDarkMode v-else />
+          </div>
         </div>
       </div>
     </div>
