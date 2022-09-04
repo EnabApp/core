@@ -54,13 +54,15 @@
             <span v-if="! (twoXs || xs || sm)" un-text="xl" class="truncate" >
               {{ app.title }}
             </span>
-            <div v-if="! (twoXs || xs || sm)"
+            <IconClose v-if="! (twoXs || xs || sm)"
+              h="13px"
+              w="13px"
               @click.prevent="app.toggleRunning()"
               position="absolute"
               un-text="primaryOp dark:primary"
               left="4"
-              class="i-uiw-close-square invisible group-hover:visible"
-            ></div>
+              class="invisible group-hover:visible"
+            ></IconClose>
           </div>
 
         </TransitionGroup>
