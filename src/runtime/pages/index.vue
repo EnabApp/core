@@ -30,7 +30,7 @@
         <Transition>
           <UiDesktopWindow v-if="component.running" v-show="!component.minimized && component.booting === false" :app="component" :key="'app-component-transition-' + component.id">
             <Suspense>
-              <component :app="component" :is="`${component.name}App`"></component>
+              <component :app="component" :is="`${component.name}Main`"></component>
                 
               <template #fallback>
                 <div w="full" h="full" un-text="white" items="center" justify="center" flex="~ col">

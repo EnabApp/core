@@ -37,6 +37,6 @@ const iconClick = () => {
   appManager.setFocus(props.app.id)
 }
 
-const isInstalled = typeof resolveDynamicComponent(`${props.app.name}App`) !== 'string'
+const isInstalled = typeof resolveDynamicComponent(`${props.app.name}Main`) !== 'string'
 const isIconExists = typeof resolveDynamicComponent(`${props.app.name}Icon`) !== 'string'
 </script>
