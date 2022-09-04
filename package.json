@@ -1,7 +1,7 @@
 {
   "name": "@enab/core",
   "type": "module",
-  "version": "1.8.22-beta.3",
+  "version": "1.8.22-beta.4",
   "license": "MIT",
   "exports": {
     ".": {
@@ -36,7 +36,7 @@
     "@vueuse/nuxt": "^9.1.1"
   },
   "description": "Enab WebOS Core Module",
-  "author": "Enab WebOS Team",
+  "author": "Enab WebOS Core Team",
   "devDependencies": {
     "@nuxt/module-builder": "latest",
     "@tauri-apps/api": "^1.0.2",

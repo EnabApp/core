@@ -11,7 +11,7 @@
   <div v-else animate-pulse="~" w="60px sm:80px xl:100px" h="100px sm:140px" flex="~ col" items="center" justify="start" p="2" border="rounded-10px" un-text="primary dark:primaryOp hover:primaryOp dark:hover:primary">
     <div bg="secondary dark:secondaryOp" flex="~" items="center" justify="center" w="60px sm:80px xl:100px" min-h="60px sm:80px xl:100px" m="b-18px" border="rounded-5px">
     </div>
-    <div un-text="secondary dark:secondaryOp" h="30px" w="30px" class="i-eos-icons-three-dots-loading"></div>
+    <span un-text="sm sm:base error">{{ app.title }}</span>
   </div>
   
   
