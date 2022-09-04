@@ -1,7 +1,7 @@
 {
   "name": "@enab/core",
   "type": "module",
-  "version": "1.8.21-beta.10",
+  "version": "1.8.21-beta.11",
   "license": "MIT",
   "exports": {
     ".": {
@@ -28,7 +28,8 @@
     "@nuxtjs/eslint-config-typescript": "11.0.0",
     "@tauri-apps/api": "^1.0.2",
     "@types/node": "^18.7.14",
-    "bumpp": "^8.2.1"
+    "bumpp": "^8.2.1",
+    "nuxt": "^3.0.0-rc.9"
   },
   "description": "## Development",
   "author": "Hasan Alkarnosy",
@@ -37,7 +38,6 @@
     "@nuxtjs/composition-api": "^0.33.1",
     "@nuxtjs/supabase": "0.1.23",
     "@pinia/nuxt": "^0.4.1",
-    "nuxt": "^2.15.8",
     "ts-node": "^10.9.1"
   }
 }
