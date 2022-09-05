@@ -3,6 +3,9 @@
     <!-- Icon -->
     <IconNotification @click="notificationsPanelToggle()" cursor="pointer" h="32px" w="32px"></IconNotification>
 
+    <!-- Instant Notifications -->
+    <BottomBarNotificationsInstant />
+
     <!-- Notifications Panel -->
     <Transition name="notifications-panel">
       <div v-if="notificationsPanelState" bg="primary dark:primaryOp" position="absolute" left="-8px xl:-16px" bottom="50px sm:60px" border="~ secondary dark:secondaryOp rounded-10px">

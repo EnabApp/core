@@ -8,17 +8,19 @@ type Notification = {
     message: String,
     title: String,
     dates: Date,
+    showed: Boolean,
 }
 
 export const useNotifications = defineStore("notifications-store", {
     state: () => ({
         data: null,
-        notifications: []
+        notifications: [],
     }),
 
     getters: {
         getNotificationsObject: state => state.data,
-        getNotifications: state => state.notifications
+        getNotifications: state => state.notifications,
+        getShowedNotifications: state => state.notifications.filter((notification: Notification) => notification.showed)
     },
 
     actions: {
@@ -61,10 +63,11 @@ export const useNotifications = defineStore("notifications-store", {
         },
         
         recieveNotification(newNotification){
-            // this.notifications.unshift(newNotification)
+            newNotification.showed = true
+            this.notifications.unshift(newNotification)
             // const { $toast } = useNuxtApp()
             console.log('تلقيت اشعار')
-            this.fetch()
+            // this.fetch()
         },
 
         async sendNotification(notification: Notification){
