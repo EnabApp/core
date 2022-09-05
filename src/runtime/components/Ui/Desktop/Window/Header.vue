@@ -1,6 +1,6 @@
 <template>
     <!-- Header -->
-    <div @dblclick="app.toggleMaximize()" :class="{ 'border-rounded-t-[5px]': !app.maximized,  'opacity-90': appManager.focused != app.id}" class="backdrop-blur-[5px]" ref="el" bg="primary dark:primaryOp" h="70%" flex="~ gap-4" place="items-center" justify="between" p="y-2 x-20px" text="lg" font="medium">
+    <div @dblclick="app.toggleMaximize()" :class="{ 'border-rounded-t-[5px]': !app.maximized,  'opacity-90': appManager.focused != app.id}" class="backdrop-blur-[5px]" ref="el" bg="primary dark:primaryOp" h="70%" flex="~ gap-2" place="items-center" justify="between" p="y-2 x-20px" text="lg" font="medium">
 
         <!-- Title & Icon -->
         <div flex="~ grow gap-14px" items="center" text="primaryOp dark:primary">
@@ -13,11 +13,11 @@
             <div @click="nextSize()" cursor="pointer" text="w-80 dark:w-40" class="w-4 h-4 i-akar-icons-circle-plus-fill"></div>
         </div> -->
 
-        <span @dblclick.stop="() => { }" @click="app.toggleMinimize()" cursor="pointer" w="20px" h="20px" border="rounded-full" bg="secondary">
+        <span @dblclick.stop="() => { }" @click="app.toggleMinimize()" cursor="pointer" w="18px" h="18px" border="rounded-full"  bg="secondary">
         </span>
-        <span @dblclick.stop="() => { }" @click="app.toggleMaximize()" cursor="pointer" w="20px" h="20px" border="rounded-full" bg="secondary">
+        <span @dblclick.stop="() => { }" @click="app.toggleMaximize()" cursor="pointer" w="18px" h="18px" border="rounded-full" bg="secondary">
         </span>
-        <span @dblclick.stop="() => { }" @click="app.toggleRunning()" cursor="pointer" w="20px" h="20px" border="rounded-full" class="bg-error">
+        <span @dblclick.stop="() => { }" @click="app.toggleRunning()" cursor="pointer" w="18px" h="18px" border="rounded-full" class="bg-error">
         </span>
     </div>
 </template>

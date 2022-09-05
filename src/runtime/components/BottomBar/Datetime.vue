@@ -27,8 +27,8 @@
 
             <!-- Buttons: Change months -->
             <div flex="~ gap-1">
-              <IconArrowDown @click="previous()" cursor="pointer" w="32px" h="32px" ></IconArrowDown>
-              <IconArrowUp @click="next()" cursor="pointer" w="32px" h="32px"></IconArrowUp>
+              <IconArrowDown @click="previous()" cursor="pointer" w="35px" h="35px" ></IconArrowDown>
+              <IconArrowUp @click="next()" cursor="pointer" w="35px" h="35px"></IconArrowUp>
             </div>
           </div>
 
