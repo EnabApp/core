@@ -110,13 +110,12 @@
       items="center"
       justify="center"
     >
-      <div
+      <IconArrowUp
         @dblclick="barToggle()"
         cursor="pointer"
         h="32px"
         w="32px"
-        class="i-bi-arrow-up-right-square-fill"
-      ></div>
+      ></IconArrowUp>
     </div>
   </div>
 </template>

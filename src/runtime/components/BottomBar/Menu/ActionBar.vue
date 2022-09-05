@@ -13,13 +13,12 @@
     >
       <!-- Right Actions -->
       <div>
-        <div
+        <IconLoading
           v-if="!username"
           h="30px sm:35px xl:40px"
           w="30px sm:35px xl:40px"
           un-text="primaryOp dark:primary"
-          class="i-line-md-loading-twotone-loop"
-        ></div>
+        ></IconLoading>
         <div v-else un-text="md sm:lg xl:xl primaryOp dark:primary">
           <span v-if="username">{{ username }}</span>
           <span v-else>لا يوجد اسم</span>

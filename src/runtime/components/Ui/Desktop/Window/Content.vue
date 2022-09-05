@@ -1,5 +1,5 @@
 <template>
-    <div flex="~ grow col" bg="primary dark:primaryOp" :class="{ 'rounded-b-[10px]' : !app.maximized }" ref="contentEl">
+    <div flex="~ grow col" bg="primary dark:primaryOp" :class="{ 'rounded-b-[5px]' : !app.maximized }" ref="contentEl">
         <slot />
     </div>
 </template>
