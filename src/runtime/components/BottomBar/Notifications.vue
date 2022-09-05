@@ -10,7 +10,7 @@
           <!-- Header - Title & Button -->
           <div flex="~" items="center" justify="between">
             <span un-text="lg xl:xl">الإشعارات</span>
-            <IconTrash w="32px" h="32px" cursor="pointer" un-text="error 2xl"></IconTrash>
+            <IconTrash w="20px" h="20px" cursor="pointer" un-text="error 2xl"></IconTrash>
           </div>
 
           <!-- Notifications List -->

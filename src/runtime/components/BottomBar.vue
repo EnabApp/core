@@ -14,8 +14,7 @@
     <!-- Content -->
     <div h="46px" flex="~" items="center" w="full" m="x-3%">
       <!-- Menu Icon -->
-      <BottomBarMenu />
-
+      <BottomBarMenu :BreakpointWindow="BreakpointWindow"/>
       <!-- Divider -->
       <div h="32px" w="1px" bg="secondary dark:secondaryOp" m="x-16px"></div>
 
