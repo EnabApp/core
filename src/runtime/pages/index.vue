@@ -73,8 +73,6 @@ const userProfile = useUserProfile();
 appManager.fetch()
 userProfile.fetch()
 
-appManager.buyApp(1)
-
 // const user = useUser()
 const notifications = useNotifications()
 notifications.join()

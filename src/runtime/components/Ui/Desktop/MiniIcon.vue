@@ -4,7 +4,8 @@
     <!-- Icon Container -->
     <div bg="primaryOp dark:primary" flex="~" items="center" justify="center" w="32px sm:48px xl:64px" h="32px sm:48px xl:64px" m="b-7px sm:b-10px xl:b-14px" border="rounded-5px">
       <!-- Icon -->
-      <div :class="app.icon" un-text="primary dark:primaryOp" w="18px sm:24px xl:32px" h="18px sm:24px xl:32px"></div>
+      <component un-text="primary dark:primaryOp" w="18px sm:24px xl:32px" h="18px sm:24px xl:32px" :is="`${app.name}Icon`"></component>
+
     </div>
 
     <!-- Title -->
