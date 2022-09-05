@@ -1,7 +1,7 @@
 {
   "name": "@enab/core",
   "type": "module",
-  "version": "1.8.22-beta.14",
+  "version": "1.8.22-beta.15",
   "license": "MIT",
   "exports": {
     ".": {
@@ -25,8 +25,8 @@
     "@nuxt/kit": "npm:@nuxt/kit-edge@latest"
   },
   "devDependencies": {
-    "@enab/systemapps": "^1.0.1-beta.2",
-    "@enab/utilities": "^1.0.14-beta.4",
+    "@enab/systemapps": "^1.0.1-beta.3",
+    "@enab/utilities": "^1.0.14-beta.5",
     "@nuxt/image-edge": "^1.0.0-27703825.db0934c",
     "@nuxt/module-builder": "latest",
     "@nuxtjs/color-mode": "^3.1.4",

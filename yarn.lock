@@ -301,10 +301,10 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@enab/systemapps@^1.0.1-beta.2":
-  version "1.0.1-beta.2"
-  resolved "https://registry.yarnpkg.com/@enab/systemapps/-/systemapps-1.0.1-beta.2.tgz#f055bf282f11363b5effa95aa7b1743cb490e8d0"
-  integrity sha512-2FQnpVZS/YsQrFMOG4Z/A0iMjIffK/mvAo84A0SD3l+ZNisfiF4yN40AuN+i3HIhTMzdDYkIJfaNLdbogoWUGg==
+"@enab/systemapps@^1.0.1-beta.3":
+  version "1.0.1-beta.3"
+  resolved "https://registry.yarnpkg.com/@enab/systemapps/-/systemapps-1.0.1-beta.3.tgz#4da6233de08f8be9996704c9759221294216814f"
+  integrity sha512-tjkETWeyQyvBL37uIXzGLtbTVJtaY9F9uibAX42Djiyb/scMMKrNOQCrW3eSwxj3zcxKhGnIEFHCnBaFtbN+Yg==
   dependencies:
     "@nuxt/kit" "npm:@nuxt/kit-edge@latest"
     "@nuxtjs/color-mode" "^3.1.4"
@@ -318,10 +318,10 @@
     "@vueuse/core" "^9.1.1"
     "@vueuse/nuxt" "^9.1.1"
 
-"@enab/utilities@^1.0.14-beta.4":
-  version "1.0.14-beta.4"
-  resolved "https://registry.yarnpkg.com/@enab/utilities/-/utilities-1.0.14-beta.4.tgz#891111b84f4a7150ca85923f45f773309ceabb86"
-  integrity sha512-XsI6pyP2KszaWT8Zx/Ek2UleH/CsoHapO6osFhNgUQjhf3t0uREnqUuJyD91mVczRf3DQeweOdii6Aec7vPvgA==
+"@enab/utilities@^1.0.14-beta.5":
+  version "1.0.14-beta.5"
+  resolved "https://registry.yarnpkg.com/@enab/utilities/-/utilities-1.0.14-beta.5.tgz#306fd0d8262982daca8644eb31313db44d68516f"
+  integrity sha512-qWOMc9X+XSdsFFA6ynh/0FLxqMhawXyr5jhzeGu93xZjVhrIil1cJD2IF0aRggqhiIPJlJOSRfx0t8q1199W/Q==
   dependencies:
     "@nuxt/kit" "npm:@nuxt/kit-edge@latest"
     "@nuxtjs/color-mode" "^3.1.4"

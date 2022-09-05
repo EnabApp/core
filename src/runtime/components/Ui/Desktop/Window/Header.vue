@@ -1,10 +1,10 @@
 <template>
     <!-- Header -->
-    <div @dblclick="app.toggleMaximize()" :class="{ 'border-rounded-t-[5px]': !app.maximized,  'opacity-90': appManager.focused != app.id}" class="backdrop-blur-[5px]" ref="el" bg="primary dark:primaryOp" h="70%" flex="~ gap-4" place="items-center" justify="between" p="y-2 x-20px" text="lg" font="medium">
+    <div @dblclick="app.toggleMaximize()" :class="{ 'border-rounded-t-[10px]': !app.maximized,  'opacity-90': appManager.focused != app.id}" class="backdrop-blur-[5px]" ref="el" bg="primary dark:primaryOp" flex="~ gap-4" place="items-center" justify="between" p="y-4 x-20px" text="lg" font="medium">
 
         <!-- Title & Icon -->
         <div flex="~ grow gap-14px" items="center" text="primaryOp dark:primary">
-            <div :class="app.icon" class="text-4xl"></div>
+            <component w="6" h="6" un-text="text-4xl" :is="`${app.name}Icon`"></component>
             <span class="text-xl">{{ app.parentApp && app.parentApp + " - " }} {{ app.title }}</span>
         </div>
 
