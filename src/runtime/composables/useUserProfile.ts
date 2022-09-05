@@ -5,12 +5,14 @@ import { useSupabaseClient, useNuxtApp, useUser, useRouter } from '#imports'
 
 export const useUserProfile = defineStore("user-profile", {
     state: () => ({
-        data: null
+        data: null,
+        userProtected: null
     }),
 
     getters: {
         getProfile: state => state.data,
-        getUsername: state => state.data?.username
+        getUsername: state => state.data?.username,
+        getPoints: state => state.userProtected?.points
     },
 
     actions: {
@@ -18,15 +20,18 @@ export const useUserProfile = defineStore("user-profile", {
             const supabase = useSupabaseClient()
             const user = useUser()
             const { data, error } = await supabase.from('profiles').select('*').eq('id', user.value.id).single()
+            const { data: userProtected, error: userProtectedError } = await supabase.from('user_protected').select('*').single()
             if (error) {
-                // const { $toast } = useNuxtApp()
                 console.log('حدث خطأ اثناء تحميل الملف الشخصي')
                 return;
             }
-
-            if (data) {
-                this.data = data
+            if (userProtectedError) {
+                console.log('حدث خطأ اثناء تحميل المعلومات المحمية')
+                return;
             }
+
+            if (data) this.data = data
+            if (userProtected) this.userProtected = userProtected
         },
 
         async updateUsername(username: String) {

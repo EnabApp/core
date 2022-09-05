@@ -6,9 +6,16 @@
     </div>
 
     <!-- Bottom Bar -->
-    <Transition>
-      <BottomBar />
-    </Transition>
+    <Suspense>
+      <Transition>
+        <BottomBar />
+      </Transition>
+      <template #fallback>
+        <div>
+          <IconLoading w="64px" h="64px" />
+        </div>
+      </template>
+    </Suspense>
   </div>
 </template>
 

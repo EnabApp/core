@@ -10,6 +10,7 @@ export default defineNuxtConfig({
         '@enab/utilities',
         MyModule,
         '@nuxtjs/supabase',
+        '@nuxt/image-edge',
         '@pinia/nuxt',
         '@vueuse/nuxt',
         '@unocss/nuxt',

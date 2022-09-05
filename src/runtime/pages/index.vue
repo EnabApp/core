@@ -80,6 +80,7 @@ appManager.buyApp(1)
 const notifications = useNotifications()
 notifications.join()
 
+
 </script>
 
 

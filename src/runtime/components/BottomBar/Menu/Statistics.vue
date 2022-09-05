@@ -10,7 +10,7 @@
             <IconPoints w="26px sm:36px xl:52px" h="26px sm:36px xl:52px" m="r-5px l-9px sm:r-10px sm:l-18px" />
             <!-- Title -->
             <div flex="~ col">
-                <span font="bold" un-text="xs sm:sm xl:base">23,400</span>
+                <span font="bold" un-text="xs sm:sm xl:base">{{ userProfile.getPoints }}</span>
                 <span un-text="xs">نقطة</span>
             </div>
         </div>
@@ -40,4 +40,6 @@
 </template>
 
 <script setup>
+import { useUserProfile } from '../../../composables/useUserProfile';
+const userProfile = useUserProfile()
 </script>

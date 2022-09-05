@@ -1,7 +1,7 @@
 {
   "name": "@enab/core",
   "type": "module",
-  "version": "1.8.22-beta.11",
+  "version": "1.8.22-beta.12",
   "license": "MIT",
   "exports": {
     ".": {
@@ -37,6 +37,7 @@
   "devDependencies": {
     "@enab/systemapps": "^1.0.1-beta.2",
     "@enab/utilities": "^1.0.14-beta.4",
+    "@nuxt/image-edge": "^1.0.0-27703825.db0934c",
     "@nuxt/module-builder": "latest",
     "@tauri-apps/api": "^1.0.2",
     "bumpp": "^8.2.1",
