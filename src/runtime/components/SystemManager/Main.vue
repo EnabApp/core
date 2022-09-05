@@ -7,7 +7,7 @@
         <UiButton @click="updateUsername()">
           <div v-if="pending">
             <!-- Loading icon -->
-            <div h="5" class="i-eos-icons-three-dots-loading"></div>
+            <IconLoading w="16px"/>
           </div>
           <span v-else>تغيير</span>
         </UiButton>

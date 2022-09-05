@@ -2,8 +2,8 @@
   <NuxtLayout name="desktop">
     <div @click="appManager.setFocus('')" flex="~" w="full" h="full" items="start" justify="between">
       <!-- Desktop Applications & Icons -->
-      <div min-w="1/4" grid="~ cols-3 md:cols-4 auto-rows-min" m="70px">
-        <div v-if="appManager.getApps.length <= 0" h="64px" w="64px" class="i-line-md-loading-twotone-loop"></div>
+      <div min-w="1/4" grid="~ cols-2 sm:cols-3 md:cols-4 auto-rows-min" m="70px">
+        <IconLoading v-if="appManager.getApps.length <= 0" h="64px" w="64px" />
         <div v-for="component in appManager.getOwned" :key="'app-' + component.id">
           <UiDesktopIcon :app="component" />
 
@@ -31,10 +31,9 @@
           <UiDesktopWindow v-if="component.running" v-show="!component.minimized && component.booting === false" :app="component" :key="'app-component-transition-' + component.id">
             <Suspense>
               <component :app="component" :is="`${component.name}Main`"></component>
-                
               <template #fallback>
-                <div w="full" h="full" un-text="white" items="center" justify="center" flex="~ col">
-                  <div h="25" w="25" class="i-line-md-loading-twotone-loop"></div>
+                <div w="full" h="full" un-text="primaryOp dark:primary" items="center" justify="center" flex="~ col">
+                  <IconLoading h="25" w="25" />
                   <span>جاري تحميل التطبيق من أجلك ❤️</span>
                 </div>
               </template>
