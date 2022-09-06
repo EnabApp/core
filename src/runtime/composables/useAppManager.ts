@@ -77,18 +77,14 @@ export const useAppManager = defineStore("app-manager", {
 
         // Buy an app
         async buyApp(app_id){
-            // const { $toast } = useNuxtApp()
-            const supabase = useSupabaseClient()
-            const user = useUser()
-            let { data, error } = await supabase
-                .rpc('buyApp', {
-                    _app_id: app_id,
-                    _user_id: user.value.id
-                })
-            if (error){ console.log('حدث خطأ اثناء شراء التطبيق'); return false }
-            if (!data) { console.log('لاتمتلك مايكفي من النقاط'); return false }
-            this.fetch();
-        },
+          const supabase = useSupabaseClient()
+          let { data, error } = await supabase.functions.invoke('core-buy-app', {
+                  body: JSON.stringify({ app_id: app_id }),
+              })
+          if (error){ console.log('حدث خطأ اثناء شراء التطبيق'); return false }
+          if (!data) { console.log('لاتمتلك مايكفي من النقاط لشراء التطبيق'); return false }
+          this.fetch();
+      },
 
         // Buy a service
         async buyService(service_id){
