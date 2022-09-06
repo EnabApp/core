@@ -13,14 +13,8 @@
         </UiButton>
       </div>
     </div>
-    <div p="4">
-      <UiCheckBox
-        v-model="checked"
-        :options="[
-          { name: 'check 1', id: 1 },
-          { name: 'check 2', id: 2 },
-        ]"
-      />
+    <div flex="~ col" p="4">
+      
     </div>
   </div>
 </template>
