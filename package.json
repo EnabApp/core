@@ -19,6 +19,7 @@
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
+    "enab:update": "yarn add @enab/core@latest @enab/utilities@latest @enab/systemapps@latest --dev",
     "release": "cd scripts && node --loader ts-node/esm release.ts"
   },
   "dependencies": {
