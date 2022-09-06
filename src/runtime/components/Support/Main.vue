@@ -2,6 +2,7 @@
   <!-- Application -->
   <div h="full" flex="~ col">
     <div m="4" h="full" flex="~ col gap-2">
+      <SupportConversations />
       <div ref="messagesRef" text="white" flex="~ col grow gap-2" h="50px" pl="2" overflow-y="auto" py="4">
         <SupportMessage v-for="(msg, index) in messages" :same="msg.user_id == messages[index-1]?.user_id" :message="msg" :key="msg.id" />
       </div>
@@ -46,15 +47,11 @@ const fetchMessages = async () => {
   const { data, error } = await supabase
     .from('support_messages')
     .select('*, profiles:user_id(id, username)')
-    .limit(25)
+    .limit(100)
     .order('id', { ascending: false })
   if (data) {
     messages.value = data.reverse()
-    if (messagesRef.value) {
-      setTimeout(() => {
-        messagesRef.value.lastElementChild.scrollIntoView({behaviour:'smooth'})
-      }, 1000);
-    }
+    messagesRef.value.lastElementChild.scrollIntoView({behaviour:'smooth'})
   }
 }
 
