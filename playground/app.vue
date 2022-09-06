@@ -14,4 +14,11 @@
     "minWidth": 350,
     "minHeight": 300
   })
+
+  appStore.addApp({
+    "name": "Support",
+    "title": "الدعم الفني",
+    "minWidth": 350,
+    "minHeight": 600
+  })
 </script>
