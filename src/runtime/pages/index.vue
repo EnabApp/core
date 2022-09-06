@@ -1,5 +1,7 @@
 <template>
   <NuxtLayout name="desktop">
+    <UiButton @click="sendNotification()">Push Notification</UiButton>
+
     <div @click="appManager.setFocus('')" flex="~" w="full" h="full" items="start" justify="between">
       <!-- Desktop Applications & Icons -->
       <div min-w="1/4" grid="~ cols-2 sm:cols-3 md:cols-4 auto-rows-min" m="70px">
@@ -42,6 +44,8 @@
         </Transition>
       </div>
 
+
+
       <!-- Desktop Widgets -->
       <!-- <div min-w="1/4" @click="appManager.setFocus('')" flex="~" h="h-minus-bottombar" items="center" justify="center">
         <div w="full" overflow-y="scroll" h="minus-bottombar">
@@ -73,9 +77,18 @@ const userProfile = useUserProfile();
 appManager.fetch()
 userProfile.fetch()
 
-// const user = useUser()
+const user = useUser()
 const notifications = useNotifications()
 notifications.join()
+
+const sendNotification = () => notifications.sendNotification({
+    user_id: user.value.id,
+    app_id: 1,
+    datas: {},
+    message: "Test Message",
+    title: "test title " + notifications.getNotifications.length,
+    dates: new Date(),
+})
 
 
 </script>
