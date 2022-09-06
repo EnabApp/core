@@ -2,7 +2,7 @@
   <!-- Application -->
   <div h="full" flex="~ col">
     <div m="4" h="full" flex="~ col gap-2">
-      <SupportConversations />
+      <SupportConversations v-if="userProfile.isSupport" />
       <div ref="messagesRef" text="white" flex="~ col grow gap-2" h="50px" pl="2" overflow-y="auto" py="4">
         <SupportMessage v-for="(msg, index) in messages" :same="msg.user_id == messages[index-1]?.user_id" :message="msg" :key="msg.id" />
       </div>
@@ -18,9 +18,13 @@
 
 
 <script setup>
-import { useSupabaseClient, useUser } from '#imports'
+import { useSupabaseClient, ref } from '#imports'
+import { useUser } from '../../composables/states'
+import { useUserProfile } from '../../composables/useUserProfile'
+
 const supabase = useSupabaseClient()
 const user = useUser()
+const userProfile = useUserProfile()
 
 const messages = ref([])
 const message = ref('')
@@ -51,7 +55,11 @@ const fetchMessages = async () => {
     .order('id', { ascending: false })
   if (data) {
     messages.value = data.reverse()
-    messagesRef.value.lastElementChild.scrollIntoView({behaviour:'smooth'})
+    if (messagesRef.value){
+      setTimeout(() => {
+        messagesRef.value.lastElementChild?.scrollIntoView({behaviour:'smooth'})
+      }, 100)
+    }
   }
 }
 

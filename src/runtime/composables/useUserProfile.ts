@@ -12,7 +12,8 @@ export const useUserProfile = defineStore("user-profile", {
     getters: {
         getProfile: state => state.data,
         getUsername: state => state.data?.username,
-        getPoints: state => state.userProtected?.points
+        getPoints: state => state.userProtected?.points,
+        isSupport: state => state.userProtected?.is_support
     },
 
     actions: {

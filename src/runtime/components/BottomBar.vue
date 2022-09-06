@@ -1,20 +1,10 @@
 <template>
   <!-- Main -->
-  <div
-    v-if="barState"
-    ref="windowRef"
-    w="full"
-    h="60px"
-    flex="~"
-    justify="center"
-    items="center"
-    bg="primary dark:primaryOp"
-    z="200"
-  >
+  <div v-if="barState" ref="windowRef" w="full" h="60px" flex="~" justify="center" items="center" bg="primary dark:primaryOp" z="200">
     <!-- Content -->
     <div h="46px" flex="~" items="center" w="full" m="x-3%">
       <!-- Menu Icon -->
-      <BottomBarMenu :BreakpointWindow="BreakpointWindow"/>
+      <BottomBarMenu :BreakpointWindow="BreakpointWindow" />
       <!-- Divider -->
       <div h="32px" w="1px" bg="secondary dark:secondaryOp" m="x-16px"></div>
 
@@ -23,46 +13,21 @@
         <TransitionGroup>
           <!-- Application loop -->
 
-            <div
-            v-for="app in appManager.getRunningApps"
-            :key="'bottom-bar-app-' + app.id"
-            @click="minimizeApp(app)"
-            :class="[
-              app.id == appManager.focused
-                ? 'text-primaryOp dark:text-primary '
-                : 'text-secondaryOp dark:text-secondary hover:text-primaryOp dark:hover:text-primary' ,
-                twoXs || xs || sm ? 'w-[5%]' : md ? 'w-[10%]' : 'w-[15%]' ,
-            ]"
-            class="group"
-            cursor="pointer"
-            px="16px"
-
-            h="87%"
-            flex="~ gap-7px"
-            position="relative"
-            items="center"
-            justify="start"
-            bg="secondary dark:secondaryOp"
-            border="rounded-5px"
-            transition="all 0.025s ease-in-out"
-          >
+          <div v-for="app in appManager.getRunningApps" :key="'bottom-bar-app-' + app.id" @click="minimizeApp(app)" :class="[
+            app.id == appManager.focused
+              ? 'text-primaryOp dark:text-primary '
+              : 'text-secondaryOp dark:text-secondary hover:text-primaryOp dark:hover:text-primary' ,
+              twoXs || xs || sm ? 'w-[5%]' : md ? 'w-[10%]' : 'w-[15%]' ,
+          ]" class="group" cursor="pointer" px="16px" h="87%" flex="~ gap-7px" position="relative" items="center" justify="start" bg="secondary dark:secondaryOp" border="rounded-5px" transition="all 0.025s ease-in-out">
             <!-- Application Icon -->
             <component h="16px" w="16px" :is="`${app.name}Icon`"></component>
 
             <!-- Application Title -->
 
-            <span v-if="! (twoXs || xs || sm)" un-text="xl" class="truncate" >
+            <span v-if="! (twoXs || xs || sm)" un-text="xl" class="truncate">
               {{ app.title }}
             </span>
-            <IconClose v-if="! (twoXs || xs || sm)"
-              h="13px"
-              w="13px"
-              @click.prevent="app.toggleRunning()"
-              position="absolute"
-              un-text="primaryOp dark:primary"
-              left="4"
-              class="invisible group-hover:visible"
-            ></IconClose>
+            <IconClose v-if="! (twoXs || xs || sm)" h="13px" w="13px" @click.prevent="app.toggleRunning()" position="absolute" un-text="primaryOp dark:primary" left="4" class="invisible group-hover:visible"></IconClose>
           </div>
 
         </TransitionGroup>
@@ -91,32 +56,9 @@
   </div>
 
   <!-- Floating Button -->
-  <div
-    ref="floatingButton"
-    v-else
-    p="20px"
-    position="fixed"
-    left="0"
-    bottom="0"
-    :style="style"
-    z="200"
-  >
-    <div
-      un-text="primaryOp dark:primary"
-      bg="primary dark:primaryOp"
-      border="rounded-10px"
-      w="60px"
-      h="60px"
-      flex="~"
-      items="center"
-      justify="center"
-    >
-      <IconArrowUp
-        @dblclick="barToggle()"
-        cursor="pointer"
-        h="32px"
-        w="32px"
-      ></IconArrowUp>
+  <div ref="floatingButton" v-else p="20px" position="fixed" left="0" bottom="0" :style="style" z="200">
+    <div un-text="primaryOp dark:primary" bg="primary dark:primaryOp" border="rounded-10px" w="60px" h="60px" flex="~" items="center" justify="center">
+      <IconArrowUp @dblclick="barToggle()" cursor="pointer" h="32px" w="32px"></IconArrowUp>
     </div>
   </div>
 </template>

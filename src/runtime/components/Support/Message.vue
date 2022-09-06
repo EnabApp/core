@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { useUser } from '#imports'
+import { useUser } from '../../composables/states'
 const user = useUser()
 const props = defineProps(['message', 'same'])
 </script> 
