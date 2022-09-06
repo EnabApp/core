@@ -7,8 +7,8 @@ type Notification = {
     datas: Object,
     message: String,
     title: String,
-    dates: Date,
-    notSeen: Boolean,
+    dates?: Date,
+    notSeen?: Boolean,
 }
 
 export const useNotifications = defineStore("notifications-store", {
