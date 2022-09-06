@@ -112,7 +112,6 @@ export const useAppManager = defineStore("app-manager", {
             let { data, error } = await supabase.functions.invoke('core-buy-pack', {
                     body: JSON.stringify({ pack_id: pack_id }),
                 })
-            console.log(error)
             if (error){ console.log('حدث خطأ اثناء شراء الحزمة'); return false }
             if (!data) { console.log('لاتمتلك مايكفي من النقاط لشراء الحزمة'); return false }
             this.fetch();
