@@ -22,7 +22,6 @@ export const useNotifications = defineStore("notifications-store", {
     getters: {
         getNotificationsObject: state => state.data,
         getNotifications: state => state.notifications,
-        getShowedNotifications: state => state.notifications.filter((notification: Notification) => notification.showed),
         isConnected: state => state.connected,
         getNotSeenLength: state => state.notifications.filter(notification => notification.notSeen)?.length,
     },
