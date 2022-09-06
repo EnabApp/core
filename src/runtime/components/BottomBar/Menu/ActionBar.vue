@@ -40,8 +40,8 @@
           @click="userProfile.logout()"
         >
           <IconLogOut
-            h="16px sm:22px"
-            w="16px sm:22px"
+            h="18px sm:28px"
+            w="18px sm:28px"
           ></IconLogOut>
         </div>
 
