@@ -47,7 +47,8 @@
             transition="all 0.025s ease-in-out"
           >
             <!-- Application Icon -->
-            <div h="16px" w="16px" :class="app.icon"></div>
+            <component h="16px" w="16px" :is="`${app.name}Icon`"></component>
+
             <!-- Application Title -->
 
             <span v-if="! (twoXs || xs || sm)" un-text="xl" class="truncate" >
