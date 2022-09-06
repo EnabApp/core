@@ -103,7 +103,20 @@ export const useAppManager = defineStore("app-manager", {
             if (error){ console.log('حدث خطأ اثناء شراء الخدمة'); return false }
             if (!data) { console.log('لاتمتلك مايكفي من النقاط'); return false }
             this.fetch();
-        }
+        },
+
+        // Buy an package
+        async buyPack(pack_id){
+            const supabase = useSupabaseClient()
+
+            let { data, error } = await supabase.functions.invoke('core-buy-pack', {
+                    body: JSON.stringify({ pack_id: pack_id }),
+                })
+            console.log(error)
+            if (error){ console.log('حدث خطأ اثناء شراء الحزمة'); return false }
+            if (!data) { console.log('لاتمتلك مايكفي من النقاط لشراء الحزمة'); return false }
+            this.fetch();
+        },
     },
 });
 
