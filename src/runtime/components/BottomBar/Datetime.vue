@@ -69,7 +69,6 @@
               </TransitionGroup>
             </div>
           </Transition>
-           
         </div>
       </div>
     </Transition>
