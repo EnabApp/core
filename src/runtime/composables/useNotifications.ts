@@ -8,19 +8,23 @@ type Notification = {
     message: String,
     title: String,
     dates: Date,
-    showed: Boolean,
+    notSeen: Boolean,
 }
 
 export const useNotifications = defineStore("notifications-store", {
     state: () => ({
         data: null,
         notifications: [],
+        connected: false,
+        toasts: [],
     }),
 
     getters: {
         getNotificationsObject: state => state.data,
         getNotifications: state => state.notifications,
-        getShowedNotifications: state => state.notifications.filter((notification: Notification) => notification.showed)
+        getShowedNotifications: state => state.notifications.filter((notification: Notification) => notification.showed),
+        isConnected: state => state.connected,
+        getNotSeenLength: state => state.notifications.filter(notification => notification.notSeen)?.length,
     },
 
     actions: {
@@ -30,21 +34,13 @@ export const useNotifications = defineStore("notifications-store", {
                 .from('notifications')
                 .on('INSERT', payload => this.recieveNotification(payload.new))
                 .subscribe(async (state) => {
-                    // if (state === 'SUBSCRIBED') {
-                        // now you can start broadcasting messages
-                        // sending a new message every second
-                        // setInterval(async () => {
-                        //   const status = await channel.send({
-                        //     type: 'broadcast',
-                        //     event: 'location',
-                        //     payload: { x: Math.random(), y: Math.random() },
-                        //   })
-                        //   console.log(state)
-                        // }, 1000)
-                    // }
+                    if (state === 'SUBSCRIBED') {
+                        this.connected = true
+                    } else {
+                        this.connected = false
+                    }
                 })
             
-            notifications
                 
             this.data = notifications
             this.fetch()
@@ -63,11 +59,8 @@ export const useNotifications = defineStore("notifications-store", {
         },
         
         recieveNotification(newNotification){
-            newNotification.showed = true
+            newNotification.notSeen = true
             this.notifications.unshift(newNotification)
-            // const { $toast } = useNuxtApp()
-            console.log('تلقيت اشعار')
-            // this.fetch()
         },
 
         async sendNotification(notification: Notification){
@@ -76,8 +69,12 @@ export const useNotifications = defineStore("notifications-store", {
 
             let { data, error } = await supabase.rpc('sendNotification', notification)
             return data || error
+        },
+
+        setSeenAll(){
+            this.notifications.forEach(notification => notification.notSeen = false)
         }
-    },
+    }
 });
 
 if (import.meta.hot) {

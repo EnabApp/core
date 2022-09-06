@@ -1,8 +1,8 @@
 <template>
     <Teleport to="body">
-        <div v-if="notificationsCenter.getShowedNotifications?.length > 0" z="120" class="absolute" flex="~ col gap-3" left="0" top="0" w="100" p="8">
+        <div v-show="toasts.getToasts?.length > 0" z="120" class="absolute" flex="~ col gap-3" left="0" top="0" w="100" p="8">
             <TransitionGroup>
-                <BottomBarNotificationsNotify :notify="notify" v-for="notify in notificationsCenter.getShowedNotifications?.splice(0, 5)" :key="'notify-' + notify.id" />
+                <BottomBarNotificationsNotify :toast="toast" v-for="toast in toasts.getToasts?.slice(0, 5)" :key="toast.title" />
             </TransitionGroup>
         </div>
     </Teleport>
@@ -10,9 +10,8 @@
 
 
 <script setup>
-    import { useNotifications } from '../../../composables/useNotifications'
-    const notificationsCenter = useNotifications()
-    
+    import { useToasts } from '../../../composables/useToasts'
+    const toasts = useToasts()
 </script>
 
 <style scoped>
@@ -21,16 +20,16 @@
   durations and timing functions.
 */
 .v-enter-active {
-  transition: all 0.15s ease-out;
+  transition: all 0.25s ease-out;
 }
 
 .v-leave-active {
-  transition: all 0.15s ease-in;
+  transition: all 0.25s ease-in;
 }
 
 .v-enter-from,
 .v-leave-to {
-  transform: translateX(-100px);
+  transform: translateX(-200px);
   opacity: 0;
 }
 </style>
