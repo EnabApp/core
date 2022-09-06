@@ -19,6 +19,6 @@
     "name": "Support",
     "title": "الدعم الفني",
     "minWidth": 350,
-    "minHeight": 600
+    "minHeight": 400
   })
 </script>

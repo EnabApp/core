@@ -2,7 +2,7 @@
   <!-- Application -->
   <div h="full" flex="~ col">
     <div m="4" h="full" flex="~ col gap-2">
-      <div text="white" flex="~ col grow gap-2" overflow-y="auto" py="4">
+      <div ref="messagesRef" text="white" flex="~ col grow gap-2" h="50px" pl="2" overflow-y="auto" py="4">
         <SupportMessage v-for="(msg, index) in messages" :same="msg.user_id == messages[index-1]?.user_id" :message="msg" :key="msg.id" />
       </div>
       <div flex="~ gap-2">
@@ -23,6 +23,8 @@ const user = useUser()
 
 const messages = ref([])
 const message = ref('')
+const messagesRef = ref(null)
+const isConnected = ref(false)
 
 
 const mySubscription = supabase
@@ -33,6 +35,9 @@ const mySubscription = supabase
   .subscribe(async (state) => {
       if (state === 'SUBSCRIBED') {
         fetchMessages()
+        isConnected.value = true
+      } else {
+        isConnected.value = false
       }
   })
 
@@ -44,7 +49,12 @@ const fetchMessages = async () => {
     .limit(25)
     .order('id', { ascending: false })
   if (data) {
-    messages.value = data
+    messages.value = data.reverse()
+    if (messagesRef.value) {
+      setTimeout(() => {
+        messagesRef.value.lastElementChild.scrollIntoView({behaviour:'smooth'})
+      }, 1000);
+    }
   }
 }
 
