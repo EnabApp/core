@@ -7,20 +7,22 @@
         <UiButton @click="updateUsername()">
           <div v-if="pending">
             <!-- Loading icon -->
-            <IconLoading w="16px"/>
+            <IconLoading w="16px" />
           </div>
           <span v-else>تغيير</span>
         </UiButton>
       </div>
     </div>
+    <div flex="~ col" p="4">
+      
+    </div>
   </div>
 </template>
 
-
 <script setup>
-import { watch, ref } from '#imports'
-import { useSupabaseClient } from '#imports'
-import { useUserProfile } from '../../composables/useUserProfile'
+import { watch, ref } from "#imports";
+import { useSupabaseClient } from "#imports";
+import { useUserProfile } from "../../composables/useUserProfile";
 
 const props = defineProps({
   app: {
@@ -29,18 +31,15 @@ const props = defineProps({
   },
 });
 
-const userProfile = useUserProfile()
+const userProfile = useUserProfile();
 
-const username = ref(userProfile.data?.username)
+const username = ref(userProfile.data?.username);
 
-const pending = ref(false)
+const pending = ref(false);
 
 const updateUsername = async () => {
-  pending.value = true
-  const result = await userProfile.updateUsername(username.value)
-  pending.value = false
-}
-
-
-
+  pending.value = true;
+  const result = await userProfile.updateUsername(username.value);
+  pending.value = false;
+};
 </script>
