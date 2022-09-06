@@ -30,8 +30,11 @@ export const useNotifications = defineStore("notifications-store", {
         join() {
             const supabase = useSupabaseClient()
             const notifications = supabase
-                .from('notifications')
-                .on('INSERT', payload => this.recieveNotification(payload.new))
+                .channel('public:notifications')
+                .on(
+                    'postgres_changes',
+                    { event: 'INSERT', schema: 'public', table: 'notifications' },
+                    (payload) => this.recieveNotification(payload.new))
                 .subscribe(async (state) => {
                     if (state === 'SUBSCRIBED') {
                         this.connected = true

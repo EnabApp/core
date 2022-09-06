@@ -32,50 +32,52 @@ const messagesRef = ref(null)
 const isConnected = ref(false)
 
 
-const mySubscription = supabase
-  .from('support_messages')
-  .on('INSERT', (payload) => {
-    fetchMessages()
-  })
-  .subscribe(async (state) => {
-      if (state === 'SUBSCRIBED') {
-        fetchMessages()
-        isConnected.value = true
-      } else {
-        isConnected.value = false
-      }
-  })
+const channel = supabase.channel('#random')
+channel.on('broadcast',
+  { event: 'message' },
+  (event) => { recievedMessage(event) }
+)
+.subscribe()
 
+const recievedMessage = (msg) => console.log(msg)
 
-const fetchMessages = async () => {
-  const { data, error } = await supabase
-    .from('support_messages')
-    .select('*, profiles:user_id(id, username)')
-    .limit(100)
-    .order('id', { ascending: false })
-  if (data) {
-    messages.value = data.reverse()
-    if (messagesRef.value){
-      setTimeout(() => {
-        messagesRef.value.lastElementChild?.scrollIntoView({behaviour:'smooth'})
-      }, 100)
-    }
-  }
+const sendMessage = () => {
+    channel.send({
+        type: 'broadcast',
+        event: 'message',
+        payload: { user: user.value.id, message: message.value }
+    })
 }
 
-const sendMessage = async () => {
-  const { data, error } = await supabase
-    .from('support_messages')
-    .insert([
-      {
-        user_id: user.value.id,
-        message: message.value
-      },
-    ])
-  if (data) {
-    message.value = ''
-  }
-}
+// const fetchMessages = async () => {
+//   const { data, error } = await supabase
+//     .from('support_messages')
+//     .select('*, profiles:user_id(id, username)')
+//     .limit(100)
+//     .order('id', { ascending: false })
+//   if (data) {
+//     messages.value = data.reverse()
+//     if (messagesRef.value){
+//       setTimeout(() => {
+//         messagesRef.value.lastElementChild?.scrollIntoView({behaviour:'smooth'})
+//       }, 100)
+//     }
+//   }
+// }
+
+// const sendMessage = async () => {
+//   const { data, error } = await supabase
+//     .from('support_messages')
+//     .insert([
+//       {
+//         user_id: user.value.id,
+//         message: message.value
+//       },
+//     ])
+//   if (data) {
+//     message.value = ''
+//   }
+// }
 
 const props = defineProps({
   app: {
