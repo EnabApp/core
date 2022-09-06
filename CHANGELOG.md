@@ -2,26 +2,15 @@
 
 # Changelog
 
-All notable changes to this project will be documented in this file.
+## [release-v1.8.22]
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+### New
+1. `useToasts` composable for new toasts.
+1. [`IconNotificationOff`, `IconNotificationRing`] icons.
 
-## [Unreleased]
+### Update
+1. `useNotifications` added `notSeen` property for `Notification` Type and it is optional.
+1. `BottomBar - Notifications` improvements on notifications icon with respect to states (new notification, not seen notifications count and connected to realtime notifications (default state)).
 
-### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
-
-## [release-v1.8.17] - 2022-xx-xx
-
-### Changed
-
-- Dependencies updated
+### Fix
+1. 

@@ -13,11 +13,11 @@
             <div @click="nextSize()" cursor="pointer" text="w-80 dark:w-40" class="w-4 h-4 i-akar-icons-circle-plus-fill"></div>
         </div> -->
 
-        <span @dblclick.stop="() => { }" @click="app.toggleMinimize()" cursor="pointer" w="18px" h="18px" border="rounded-full"  bg="secondary">
+        <span @dblclick.stop="() => { }" @click="app.toggleMinimize()" cursor="pointer" w="20px" h="20px" border="rounded-full" bg="secondary">
         </span>
-        <span @dblclick.stop="() => { }" @click="app.toggleMaximize()" cursor="pointer" w="18px" h="18px" border="rounded-full" bg="secondary">
+        <span @dblclick.stop="() => { }" @click="app.toggleMaximize()" cursor="pointer" w="20px" h="20px" border="rounded-full" bg="secondary">
         </span>
-        <span @dblclick.stop="() => { }" @click="app.toggleRunning()" cursor="pointer" w="18px" h="18px" border="rounded-full" class="bg-error">
+        <span @dblclick.stop="() => { }" @click="app.toggleRunning()" cursor="pointer" w="20px" h="20px" border="rounded-full" class="bg-error">
         </span>
     </div>
 </template>

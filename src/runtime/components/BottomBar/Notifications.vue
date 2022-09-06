@@ -1,7 +1,18 @@
 <template>
   <div ref="notificationsEl" position="relative" un-text="primaryOp dark:primary">
     <!-- Icon -->
-    <IconNotification @click="notificationsPanelToggle()" cursor="pointer" h="32px" w="32px"></IconNotification>
+    <UiToolTip :text="notifications.getNotSeenLength + ' إشعارات'">
+      <div position="relative" @click="() => { notificationsPanelToggle(), setSeen() }" cursor="pointer">
+        <IconNotificationOff v-if="!notifications.isConnected" text="error" h="32px" w="32px"></IconNotificationOff>
+        <IconNotificationRing v-else-if="notifications.getNotSeenLength > 0" text="warning" h="32px" w="32px"></IconNotificationRing>
+        <IconNotification v-else h="32px" w="32px"></IconNotification>
+        <!-- <span position="absolute" p="x-1 y-0.5" rounded="~" bg="error" top="1" text="xs">{{notifications.getNotRead}}</span> -->
+      </div>
+    </UiToolTip>
+
+
+    <!-- Instant Notifications -->
+    <BottomBarNotificationsInstant />
 
     <!-- Notifications Panel -->
     <Transition name="notifications-panel">
@@ -55,6 +66,9 @@ onClickOutside(
 
 const notifications = useNotifications()
 
+const setSeen = () => {
+  notifications.setSeenAll()
+}
 
 </script>
 

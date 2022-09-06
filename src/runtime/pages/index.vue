@@ -42,6 +42,8 @@
         </Transition>
       </div>
 
+
+
       <!-- Desktop Widgets -->
       <!-- <div min-w="1/4" @click="appManager.setFocus('')" flex="~" h="h-minus-bottombar" items="center" justify="center">
         <div w="full" overflow-y="scroll" h="minus-bottombar">
@@ -73,10 +75,9 @@ const userProfile = useUserProfile();
 appManager.fetch()
 userProfile.fetch()
 
-// const user = useUser()
+const user = useUser()
 const notifications = useNotifications()
 notifications.join()
-
 
 </script>
 
