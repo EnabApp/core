@@ -5,7 +5,7 @@
             user.id == message.user_id
             ? 'bg-opacity-30 dark:bg-opacity-30'
             : 'bg-opacity-100 dark:bg-opacity-100'
-        ]" bg="secondary dark:secondaryOp" text="sm" p="2" rounded="~">
+        ]" bg="secondary dark:secondaryOp" class="break-words" text="sm" p="2" rounded="~">
             {{message.message}}
         </div>
     </div>
