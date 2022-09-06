@@ -4,7 +4,7 @@
     <UiToolTip :text="notifications.getNotSeenLength + ' إشعارات'">
       <div position="relative" @click="() => { notificationsPanelToggle(), setSeen() }" cursor="pointer">
         <IconNotificationOff v-if="!notifications.isConnected" text="error" h="32px" w="32px"></IconNotificationOff>
-        <IconNotificationRing v-else-if="notifications.getNotSeenLength > 0" text="warning-300" h="32px" w="32px"></IconNotificationRing>
+        <IconNotificationRing v-else-if="notifications.getNotSeenLength > 0" text="warning" h="32px" w="32px"></IconNotificationRing>
         <IconNotification v-else h="32px" w="32px"></IconNotification>
         <!-- <span position="absolute" p="x-1 y-0.5" rounded="~" bg="error" top="1" text="xs">{{notifications.getNotRead}}</span> -->
       </div>

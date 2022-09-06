@@ -38,5 +38,5 @@ watch( () => isOutside.value, (_isOutside) => {
 
 const props = defineProps(['toast'])
 
-const isIconExists = typeof resolveDynamicComponent(props.toast.icon) !== 'string'
+const isIconExists = typeof resolveDynamicComponent(props.toast.icon) !== 'string' && props.toast.icon
 </script>
