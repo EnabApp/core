@@ -39,8 +39,8 @@ export const useNotifications = defineStore("notifications-store", {
                         this.connected = false
                     }
                 })
-            
-                
+
+
             this.data = notifications
             this.fetch()
         },
@@ -56,7 +56,7 @@ export const useNotifications = defineStore("notifications-store", {
 
             this.notifications = notifications
         },
-        
+
         recieveNotification(newNotification){
             newNotification.notSeen = true
             this.notifications.unshift(newNotification)
