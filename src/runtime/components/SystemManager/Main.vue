@@ -13,9 +13,6 @@
         </UiButton>
       </div>
     </div>
-    <div flex="~ col" p="4">
-      
-    </div>
   </div>
 </template>
 
