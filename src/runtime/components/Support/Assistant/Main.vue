@@ -50,7 +50,6 @@ supabase.channel('public:support_conversations')
 const getConversations = async () => {
     const {data, error} = await supabase.from('support_conversations')
         .select(`id, assistant_id, user_id (id, username)`)
-        .or(`assistant_id.eq.${user.value.id},assistant_id.is.null`)
     if (data) conversations.value = data
 }
 
