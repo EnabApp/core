@@ -1,5 +1,5 @@
 <template>
-    <div flex="~ col gap-2">
+    <div flex="~ col gap-2 grow">
         <SupportMessage v-for="msg in messages" :message="msg" :key="msg" />
         <div>
             <UiInput v-model="message" />
