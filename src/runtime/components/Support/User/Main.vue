@@ -1,11 +1,5 @@
 <template>
     <div flex="~ col grow gap-4">
-        <!-- Support Team -->
-        <div flex="~" justify="between">
-            <span text="primaryOp dark:primary">الدعم الفني</span>
-            <span text="primaryOp dark:primary">{{ assistant }}</span>
-        </div>
-
         <!-- Messages -->
         <div border="~ secondary dark:secondaryOp rounded-lg" flex="~ col gap-2" h="full" text="white" p="4">
             <SupportMessage v-for="msg in messages" :message="msg" :key="msg" />
@@ -30,7 +24,6 @@ const userProfile = useUserProfile()
 const conversation_id = useStorage('support:conversation_id')
 
 const message = ref(null)
-const assistant = ref(null)
 const messages = ref([])
 const isConnected = ref(false)
 
