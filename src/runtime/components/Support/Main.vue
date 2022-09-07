@@ -1,53 +1,32 @@
 <template>
   <!-- Application -->
   <div h="full" flex="~ col">
-    <div m="4" h="full" flex="~ col gap-2">
-      <SupportConversations v-if="userProfile.isSupport" />
-      <div ref="messagesRef" text="white" flex="~ col grow gap-2" h="50px" pl="2" overflow-y="auto" py="4">
-        <SupportMessage v-for="(msg, index) in messages" :same="msg.user_id == messages[index-1]?.user_id" :message="msg" :key="msg.id" />
-      </div>
-      <div flex="~ gap-2">
-        <UiInput @keydown.enter="sendMessage()" flex="grow" v-model="message" placeholder="رسالة جديدة" />
-        <UiButton @click="sendMessage()">
-          <span>ارسال</span>
-        </UiButton>
-      </div>
+    <div m="4" h="full" flex="~ col">
+      <!-- <div w="5" h="5" rounded="full" :class="[ isConnected ? 'bg-success' : 'bg-error' ]"></div> -->
+      <SupportAssistantMain v-if="userProfile.isSupport" />
+      <SupportUserMain v-else />
     </div>
   </div>
 </template>
 
 
 <script setup>
-import { useSupabaseClient, ref } from '#imports'
-import { useUser } from '../../composables/states'
 import { useUserProfile } from '../../composables/useUserProfile'
 
-const supabase = useSupabaseClient()
-const user = useUser()
 const userProfile = useUserProfile()
 
-const messages = ref([])
-const message = ref('')
-const messagesRef = ref(null)
-const isConnected = ref(false)
 
 
-const channel = supabase.channel('#random')
-channel.on('broadcast',
-  { event: 'message' },
-  (event) => { recievedMessage(event) }
-)
-.subscribe()
 
-const recievedMessage = (msg) => console.log(msg)
+// const recievedMessage = (msg) => console.log(msg)
 
-const sendMessage = () => {
-    channel.send({
-        type: 'broadcast',
-        event: 'message',
-        payload: { user: user.value.id, message: message.value }
-    })
-}
+// const sendMessage = () => {
+//     channel.send({
+//         type: 'broadcast',
+//         event: 'message',
+//         payload: { user: user.value.id, message: message.value }
+//     })
+// }
 
 // const fetchMessages = async () => {
 //   const { data, error } = await supabase
