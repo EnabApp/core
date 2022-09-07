@@ -7,8 +7,8 @@
         </div>
 
         <!-- Messages -->
-        <div border="~ secondary dark:secondaryOp rounded-lg" h="full" text="white" p="4">
-            messages
+        <div border="~ secondary dark:secondaryOp rounded-lg" flex="~ col gap-2" h="full" text="white" p="4">
+            <SupportMessage v-for="msg in messages" :message="msg" :key="msg" />
         </div>
         <div>
             <UiInput v-model="message" />
@@ -34,6 +34,12 @@ const assistant = ref(null)
 const messages = ref([])
 const isConnected = ref(false)
 
+const getMessages = async () => {
+    if (!conversation_id.value) return
+    const {data, error} = await supabase.from('support_messages')
+        .select('message, sender_id(id, username)').eq('conversation_id', conversation_id.value)
+    if (data) messages.value = data
+}
 
 // Create Conversation with Support Team
 onMounted( async () => {
@@ -51,17 +57,21 @@ onMounted( async () => {
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'support_messages', filter: `conversation_id=eq.${conversation_id.value}`, },
         (payload) => {
-            console.log('Change received!', payload)
+            getMessages()
         }
     )
     .subscribe((state) => {
         if (state === 'SUBSCRIBED') isConnected.value = true
         else isConnected.value = false
     })
+
+    getMessages()
 })
 
 const sendMessage = async () => await supabase
     .from('support_messages')
-    .insert({ conversation_id: conversation_id.value, message: message.value })
+    .insert({ conversation_id: conversation_id.value, message: message.value, sender_id: user.value.id })
+
+
 
 </script>

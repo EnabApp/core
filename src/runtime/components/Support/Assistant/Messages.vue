@@ -1,7 +1,6 @@
 <template>
     <div flex="~ col gap-2">
-        <div> {{ id }} </div>
-        <span v-for="msg in messages" :key="msg"> {{ msg }} </span>
+        <SupportMessage v-for="msg in messages" :message="msg" :key="msg" />
         <div>
             <UiInput v-model="message" />
             <UiButton @click="sendMessage">ارسال</UiButton>
@@ -26,12 +25,13 @@ const message = ref(null)
 
 const getMessages = async () => {
     const {data, error} = await supabase.from('support_messages')
-        .select('*').eq('conversation_id', props.id)
+        .select('message, sender_id(id, username)').eq('conversation_id', props.id)
     if (data) messages.value = data
 }
 
 watch ( () => props.id, () => {
     if (!props.id) return
+    
     getMessages()
 
     supabase.channel('public:support_messages')
@@ -49,5 +49,5 @@ watch ( () => props.id, () => {
 
 const sendMessage = async () => await supabase
         .from('support_messages')
-        .insert({ conversation_id: props.id, message: message.value })
+        .insert({ conversation_id: props.id, message: message.value, sender_id: user.value.id })
 </script>

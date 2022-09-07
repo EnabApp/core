@@ -2,7 +2,7 @@
     <div flex="~ gap-4 grow" w="full">
         <!-- Users -->
         <div flex="~ col gap-2 basis-1/6" w="1/6" p="4" text="primary">
-            <span @click="selectedConversationId = conversation.id" v-for="conversation in conversations" :key="conversation.id"> 
+            <span @click="selectConversation(conversation)" v-for="conversation in conversations" :key="conversation.id"> 
                 {{conversation.user_id?.username}}
             </span>
         </div>
@@ -49,9 +49,19 @@ supabase.channel('public:support_conversations')
 
 const getConversations = async () => {
     const {data, error} = await supabase.from('support_conversations')
-        .select(`id, user_id (id, username)`)
+        .select(`id, assistant_id, user_id (id, username)`)
         .or(`assistant_id.eq.${user.value.id},assistant_id.is.null`)
     if (data) conversations.value = data
 }
-    
+
+
+const selectConversation = async (conv) => {
+    selectedConversationId.value = conv.id
+    if (!conv.assistant_id) {
+        const { data, error } = await supabase
+        .from('support_conversations')
+        .update({ assistant_id: user.value.id })
+        .eq('id', conv.id)
+    }
+}
 </script>
