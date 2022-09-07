@@ -28,10 +28,10 @@ export const useAppManager = defineStore("app-manager", {
         getServiceById() {
             return (id: number) => this.getServices.find(service => service.id === id)
         },
-        getOwnedServices(){
+        getOwnedServices() {
             return this.getServices.filter(service => service.owned)
         },
-        getUnownedServices(){
+        getUnownedServices() {
             return this.getServices.filter(service => !service.owned)
         },
 
@@ -41,7 +41,7 @@ export const useAppManager = defineStore("app-manager", {
 
     actions: {
         // Fetching Data
-        async fetch(){
+        async fetch() {
             // const { $toast } = useNuxtApp()
             const supabase = useSupabaseClient()
             let { data: apps, error } = await supabase
@@ -53,20 +53,20 @@ export const useAppManager = defineStore("app-manager", {
                             id, app_id, title, points, icon, description, users_services(id)
                         )
                     `)
-            if (error){ console.log('حدث خطأ اثناء تحميل التطبيقات'); return false }
+            if (error) { console.log('حدث خطأ اثناء تحميل التطبيقات'); return false }
             this.apps = apps.map(app => new App(app))
             this.apps.push(...this.developmentApps)
         },
 
         // Set Focus to an App
-        async setFocus(id){
+        async setFocus(id) {
             this.appLayers = this.appLayers.filter(app_id => app_id !== id)
             this.appLayers.push(id)
             this.focused = id;
         },
 
         // Adding app for development purposes
-        addApp(app){
+        addApp(app) {
             if (!process.dev) return;
             app.title = `[ ${app.title} ]`
             let newApp = new App(app)
@@ -76,18 +76,18 @@ export const useAppManager = defineStore("app-manager", {
         },
 
         // Buy an app
-        async buyApp(app_id){
-          const supabase = useSupabaseClient()
-          let { data, error } = await supabase.functions.invoke('core-buy-app', {
-                  body: JSON.stringify({ app_id: app_id }),
-              })
-          if (error){ console.log('حدث خطأ اثناء شراء التطبيق'); return false }
-          if (!data) { console.log('لاتمتلك مايكفي من النقاط لشراء التطبيق'); return false }
-          this.fetch();
-      },
+        async buyApp(app_id) {
+            const supabase = useSupabaseClient()
+            let { data, error } = await supabase.functions.invoke('core-buy-app', {
+                body: JSON.stringify({ app_id: app_id }),
+            })
+            if (error) console.log('حدث خطأ اثناء شراء التطبيق')
+            if (data) console.log(data)
+            this.fetch();
+        },
 
         // Buy a service
-        async buyService(service_id){
+        async buyService(service_id) {
             // const { $toast } = useNuxtApp()
             const supabase = useSupabaseClient()
             const user = useUser()
@@ -96,7 +96,7 @@ export const useAppManager = defineStore("app-manager", {
                     _service_id: service_id,
                     _user_id: user.value.id
                 })
-            if (error){ console.log('حدث خطأ اثناء شراء الخدمة'); return false }
+            if (error) { console.log('حدث خطأ اثناء شراء الخدمة'); return false }
             if (!data) { console.log('لاتمتلك مايكفي من النقاط'); return false }
             this.fetch();
         }
