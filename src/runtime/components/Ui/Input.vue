@@ -25,7 +25,7 @@
     >
       <div flex="~ gap-2 grow" items="center">
         <!-- Icon -->
-        <div v-if="icon" :class="icon" text="dark:primary primaryOp"></div>
+        <component v-if="icon" h="20px" w="20px" text="dark:primary primaryOp" :is="`${icon}`" />
 
         <!-- Input -->
         <input

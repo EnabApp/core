@@ -19,7 +19,7 @@
       :label="label"
       :placeholder="placeholder"
       v-model="search"
-      :icon="icon ? icon : dropdown ? '<IconBxsUpArrow />' : '<IconBxsDownArrow />'"
+      :icon="icon ? icon : dropdown ? 'IconBxsUpArrow' : 'IconBxsDownArrow'"
     >
       <slot />
     </UiInput>
