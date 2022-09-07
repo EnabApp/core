@@ -13,11 +13,6 @@
         </UiButton>
       </div>
     </div>
-    <UiDropdown v-model="dropdown" :list="[
-  {id: 1, value: 'John'},
-  {id: 2, value: 'Jane'},
-]" label="Select One" placeholder="Type to search" icon="IconUsers" multiple w="96">
-</UiDropdown>
   </div>
 </template>
 
