@@ -35,7 +35,7 @@
           </div>
         </UiToolTip>
 
-        <UiToolTip text="الدعم لفني">
+        <UiToolTip text="الدعم الفني">
           <div cursor="pointer" bg="primaryOp dark:primary" border="rounded-5px" un-text="primary dark:primaryOp"
             h="30px sm:35px xl:40px" w="30px sm:35px xl:40px" flex="~" items="center" justify="center"
             @click="userProfile.logout()">
