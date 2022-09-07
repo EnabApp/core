@@ -1,11 +1,17 @@
 <template>
     <div flex="~ col gap-2">
+        <div> {{ id }} </div>
         <span v-for="msg in messages" :key="msg"> {{ msg }} </span>
+        <div>
+            <UiInput v-model="message" />
+            <UiButton @click="sendMessage">ارسال</UiButton>
+        </div>
     </div>
 </template>
 
 <script setup>
 import { useSupabaseClient, ref } from '#imports'
+import { useUser } from '../../../composables/states'
 
 const props = defineProps({
     id: {
@@ -13,12 +19,35 @@ const props = defineProps({
     },
 })
 
+const supabase = useSupabaseClient()
+const user = useUser()
 const messages = ref([])
+const message = ref(null)
+
+const getMessages = async () => {
+    const {data, error} = await supabase.from('support_messages')
+        .select('*').eq('conversation_id', props.id)
+    if (data) messages.value = data
+}
 
 watch ( () => props.id, () => {
     if (!props.id) return
-    
+    getMessages()
+
+    supabase.channel('public:support_messages')
+    .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'support_messages', filters: `conversation_id=${props.id}`, },
+        (payload) => {
+            getMessages()
+        }
+    )
+    .subscribe((state) => {
+        console.log('state', state)
+    })
 })
 
-
+const sendMessage = async () => await supabase
+        .from('support_messages')
+        .insert({ conversation_id: props.id, message: message.value })
 </script>

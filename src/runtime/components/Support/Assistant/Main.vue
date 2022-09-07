@@ -1,13 +1,15 @@
 <template>
     <div flex="~ gap-4 grow" w="full">
         <!-- Users -->
-        <div flex="basis-1/6" w="1/6" p="4">
-            <span @click="selectedUserId = u.id" v-for="u in users" :key="u.id"> {{ u.username }} </span>
+        <div flex="~ col gap-2 basis-1/6" w="1/6" p="4" text="primary">
+            <span @click="selectedConversationId = conversation.id" v-for="conversation in conversations" :key="conversation.id"> 
+                {{conversation.user_id?.username}}
+            </span>
         </div>
 
         <!-- Messages -->
         <div flex="basis-4/6" w="4/6" border="~ secondary dark:secondaryOp rounded-lg" p="4">
-            <SupportAssistantMessages :id="selectedUserId" />
+            <SupportAssistantMessages :id="selectedConversationId" />
         </div>
 
         <!-- States -->
@@ -26,7 +28,30 @@ const supabase = useSupabaseClient()
 const user = useUser()
 const userProfile = useUserProfile()
 
-const users = ref([])
-const selectedUserId = ref(null)
+const selectedConversationId = ref(null)
+const conversations = ref([])
+const isConnected = ref(false)
 
+onMounted(async () => await getConversations())
+
+supabase.channel('public:support_conversations')
+    .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'support_conversations', filters: `assistant_id=eq.null,eq.${user.value.id}`, },
+        (payload) => {
+            getConversations()
+        }
+    )
+    .subscribe((state) => {
+        if (state === 'SUBSCRIBED') isConnected.value = true
+        else isConnected.value = false
+    })
+
+const getConversations = async () => {
+    const {data, error} = await supabase.from('support_conversations')
+        .select(`id, user_id (id, username)`)
+        .or(`assistant_id.eq.${user.value.id},assistant_id.is.null`)
+    if (data) conversations.value = data
+}
+    
 </script>
