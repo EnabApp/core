@@ -28,36 +28,27 @@ const userProfile = useUserProfile()
 
 const message = ref(null)
 const assistant = ref(null)
-
-// Join Channels
-const globalChannel = supabase.channel(`support`)
-const privatechannel = supabase.channel(`support:${user.value.id}`)
-
-globalChannel.on( 'broadcast',
-    { event: 'join' },
-    (event) => { 
-        console.log(event)
-    })
-    .subscribe()
-
-globalChannel.send({
-    type: 'broadcast',
-    event: 'join',
-    payload: { user: userProfile.getProfile, type: 0 }
-})
-
-privatechannel.on( 'broadcast',
-    { event: 'message' },
-    (event) => { 
-        console.log('receive', event)
-    })
-    .subscribe()
+const isConversationStarted = ref(false)
 
 const sendMessage = async () => {
-    privatechannel.send({
-        type: 'broadcast',
-        event: 'message',
-        payload: { message: message.value }
-    })
+    if (!isConversationStarted) createConversation()
+}
+
+
+const createConversation = () => {
+    // If conversation not started
+    isConversationStarted.value = true
+    supabase.from('support_conversations')
+        .upsert({ user_id: user.value.id })
+
+    supabase.channel('public:support_messages')
+    .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'support_messages', filter: 'conversation_id=eq.200', },
+        (payload) => {
+            console.log('Change received!', payload)
+        }
+    )
+    .subscribe()
 }
 </script>

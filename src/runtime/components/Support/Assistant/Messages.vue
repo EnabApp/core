@@ -1,6 +1,6 @@
 <template>
-    <div>
-        {{ id }}
+    <div flex="~ col gap-2">
+        <span v-for="msg in messages" :key="msg"> {{ msg }} </span>
     </div>
 </template>
 
@@ -13,25 +13,11 @@ const props = defineProps({
     },
 })
 
-const privatechannel = ref(null)
+const messages = ref([])
 
 watch ( () => props.id, () => {
     if (!props.id) return
-    privatechannel.value = useSupabaseClient().channel(`support:${props.id}`)
-    privatechannel.value
-        .on( 'broadcast',
-            { event: 'join' },
-            (event) => { 
-                console.log('join', event)
-            })
-        .on( 'broadcast',
-            { event: 'message' },
-            (event) => { 
-                console.log('message', event)
-            })
-        .subscribe((event) => {
-            console.log('subscribe', event)
-        })
+    
 })
 
 
