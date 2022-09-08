@@ -7,7 +7,7 @@
     w="full"
   >
     <!-- Users -->
-    <div flex="~ col gap-1 basis-1/6" w="1/6" overflow-y="auto" text="primary">
+    <div flex="~ col " w="330px" overflow-y="auto" text="primary">
       <SupportAssistantConversation
         v-for="conversation in conversations"
         :key="conversation.id"
@@ -19,7 +19,7 @@
 
     <!-- Messages -->
     <div
-      flex="~ col basis-4/6"
+      flex="~ col"
       overflow-y="auto"
       w="4/6"
       border="~ secondary dark:secondaryOp rounded-lg"
