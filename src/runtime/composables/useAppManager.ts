@@ -8,6 +8,7 @@ export const useAppManager = defineStore("app-manager", {
   state: () => ({
     focused: "",
     apps: [],
+    packs: [],
     developmentApps: [],
     appLayers: [], // Focusing and ordering of apps windows
   }),
@@ -62,9 +63,9 @@ export const useAppManager = defineStore("app-manager", {
       const supabase = useSupabaseClient()
       let { data: packs, error } = await supabase
         .from('packs')
-        .select('*,apps(*)')
+        .select('*,users_packs(id),packs_apps(app_id),packs_services(service_id)')
       if (error) console.log(error)
-      if (packs) console.log(packs)
+      else console.log(packs)
     },
     // Set Focus to an App
     async setFocus(id) {
