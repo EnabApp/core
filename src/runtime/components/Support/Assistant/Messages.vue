@@ -1,5 +1,5 @@
 <template>
-  <div flex="~ col gap-1 grow" overflow-y="auto">
+  <div flex="~ col gap-3 grow" overflow-y="auto">
     <div flex="~ col gap-1 grow" overflow-y="auto" pl="2">
       <SupportMessage v-for="msg in messages" :message="msg" :key="msg" />
     </div>
