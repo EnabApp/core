@@ -5,7 +5,7 @@
       <component v-if="isIconExists" un-text="primaryOp dark:primary" w="32px sm:48px xl:64px" h="32px sm:48px xl:64px" :is="`${app.name}Icon`"></component>
       <IconAppDefault v-else un-text="primaryOp dark:primary" w="32px sm:48px xl:64px" h="32px sm:48px xl:64px"></IconAppDefault>
     </div>
-    <span un-text="sm sm:base">{{ app.title }}</span>
+    <span truncate="~" w="80px md:90px xl:100px" un-text="sm center sm:base">{{ app.title }}</span>
   </div>
   
   <!-- If Not Installed -->

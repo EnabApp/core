@@ -7,7 +7,7 @@
 
 
     <!-- Default  Button -->
-    <button :class="classes" :disabled="disabled ? true : false">
+    <button v-else :class="classes" :disabled="disabled ? true : false">
       <!-- Title & icon button -->
         <slot/>
     </button>
