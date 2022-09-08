@@ -9,14 +9,10 @@
   </div>
 </template>
 
-
 <script setup>
-import { useUserProfile } from '../../composables/useUserProfile'
+import { useUserProfile } from "../../composables/useUserProfile";
 
-const userProfile = useUserProfile()
-
-
-
+const userProfile = useUserProfile();
 
 // const recievedMessage = (msg) => console.log(msg)
 
@@ -64,8 +60,4 @@ const props = defineProps({
     required: true,
   },
 });
-
-
-
-
 </script>
