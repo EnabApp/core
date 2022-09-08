@@ -1,19 +1,35 @@
 <template>
-    <div w="70%" flex="~ col gap-1" :class="{ 'self-end text-left': user.id !== messageUser?.id }">
-        <span v-if="user.id !== messageUser?.id" text="xs secondary dark:secondaryOp">{{messageUser?.username}}</span>
-        <div w="fit" min-w="50%" :class="[
-            user.id == messageUser?.id
-            ? 'bg-opacity-20 dark:bg-opacity-20 text-primaryOp dark:text-primary'
-            : 'bg-opacity-100 dark:bg-opacity-100 text-primary dark:text-primaryOp self-end'
-        ]" bg="primaryOp dark:primary" class="break-words" text="sm" p="2" rounded="~">
-            {{message.message}}
-        </div>
+  <div
+    w="70%"
+    flex="~ col gap-2px"
+    :class="{ 'self-end text-left': user.id !== messageUser?.id }"
+  >
+    <!-- User name can be either primary or secondaryOp -->
+    <span v-if="user.id !== messageUser?.id" text="xs secondaryOp">{{
+      messageUser?.username
+    }}</span>
+    <div
+      w="fit"
+      min-w="50%"
+      :class="[
+        user.id == messageUser?.id
+          ? 'bg-secondary dark:text-primaryOp dark:text-primary'
+          : 'bg-secondaryOp text-secondary self-end',
+      ]"
+      class="break-words"
+      text="16px right"
+      font="medium"
+      p="x-5 y-2"
+      rounded="5px"
+    >
+      {{ message.message }}
     </div>
+  </div>
 </template>
 
 <script setup>
-import { useUser } from '../../composables/states'
-const user = useUser()
-const props = defineProps(['message'])
-const messageUser = computed(() => props.message.sender_id)
-</script> 
+import { useUser } from "../../composables/states";
+const user = useUser();
+const props = defineProps(["message"]);
+const messageUser = computed(() => props.message.sender_id);
+</script>
