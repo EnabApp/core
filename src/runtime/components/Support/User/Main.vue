@@ -4,15 +4,15 @@
         <div border="~ secondary dark:secondaryOp rounded-lg" flex="~ col gap-2" h="full" text="white" p="4">
             <SupportMessage v-for="msg in messages" :message="msg" :key="msg" />
         </div>
-        <div>
-            <UiInput v-model="message" />
+        <div v-if="isConnected" flex="~ gap-4">
+            <UiInput @keyup.enter="sendMessage" w="full" v-model="message" />
             <UiButton @click="sendMessage">ارسال</UiButton>
         </div>
     </div>
 </template>
 
 <script setup>
-import { useSupabaseClient, ref } from '#imports'
+import { useSupabaseClient, ref, computed, onMounted, onBeforeUnmount } from '#imports'
 import { useUser } from '../../../composables/states'
 import { useUserProfile } from '../../../composables/useUserProfile'
 import { useStorage } from '@vueuse/core'
@@ -33,6 +33,26 @@ const getMessages = async () => {
         .select('message, sender_id(id, username)').eq('conversation_id', conversation_id.value)
     if (data) messages.value = data
 }
+
+// Online status
+const channel = supabase.channel("support", {
+  config: {
+    presence: { key: user.value.id }
+  }
+})
+channel
+  .on('presence', { event: 'sync' }, () => onlineState())
+  .subscribe()
+
+const onlineState = () => {
+    const newState = channel.presenceState()
+}
+const interval = setInterval(function() {
+    channel.track({ isOnline: true })
+ }, 5000);
+
+ // End of online status
+
 
 // Create Conversation with Support Team
 onMounted( async () => {
@@ -61,9 +81,19 @@ onMounted( async () => {
     getMessages()
 })
 
-const sendMessage = async () => await supabase
+onBeforeUnmount(() => {
+    channel.track({ isOnline: false })
+    clearInterval(interval);
+})
+
+const sendMessage = async () => {
+    await supabase
     .from('support_messages')
     .insert({ conversation_id: conversation_id.value, message: message.value, sender_id: user.value.id })
+    this.message.value = ""
+}
+
+
 
 
 

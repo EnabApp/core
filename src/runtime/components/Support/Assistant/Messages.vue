@@ -1,8 +1,10 @@
 <template>
-    <div flex="~ col gap-2 grow">
-        <SupportMessage v-for="msg in messages" :message="msg" :key="msg" />
-        <div>
-            <UiInput v-model="message" />
+    <div flex="~ col gap-1 grow" overflow-y="auto">
+        <div flex="~ col gap-1 grow" overflow-y="auto" pl="2">
+            <SupportMessage v-for="msg in messages" :message="msg" :key="msg" />
+        </div>
+        <div v-if="isConnected" flex="~ gap-4">
+            <UiInput @keyup.enter="sendMessage" w="full" v-model="message" />
             <UiButton @click="sendMessage">ارسال</UiButton>
         </div>
     </div>
@@ -22,6 +24,7 @@ const supabase = useSupabaseClient()
 const user = useUser()
 const messages = ref([])
 const message = ref(null)
+const isConnected = ref(false)
 
 const getMessages = async () => {
     const {data, error} = await supabase.from('support_messages')
@@ -29,12 +32,13 @@ const getMessages = async () => {
     if (data) messages.value = data
 }
 
-watch ( () => props.id, () => {
+watch ( () => props.id, async () => {
     if (!props.id) return
+    isConnected.value = false
     
-    getMessages()
+    await getMessages()
 
-    supabase.channel('public:support_messages')
+    await supabase.channel('public:support_messages')
     .on(
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'support_messages', filters: `conversation_id=${props.id}`, },
@@ -43,11 +47,18 @@ watch ( () => props.id, () => {
         }
     )
     .subscribe((state) => {
-        console.log('state', state)
+        if (state === 'SUBSCRIBED') {
+            isConnected.value = true
+        } else {
+            isConnected.value = false
+        }
     })
 })
 
-const sendMessage = async () => await supabase
+const sendMessage = async () =>{
+    await supabase
         .from('support_messages')
         .insert({ conversation_id: props.id, message: message.value, sender_id: user.value.id })
+    this.message.value = ""
+} 
 </script>

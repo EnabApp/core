@@ -1,15 +1,23 @@
 <template>
-    <div flex="~ gap-4 grow" w="full">
+    <div v-if="isConnected" flex="~ gap-4 grow" overflow-y="auto" h="100px" w="full">
         <!-- Users -->
-        <div flex="~ col gap-2 basis-1/6" w="1/6" p="4" text="primary">
-            <span @click="selectConversation(conversation)" v-for="conversation in conversations" :key="conversation.id"> 
-                {{conversation.user_id?.username}}
-            </span>
+        <div flex="~ col gap-1 basis-1/6" w="1/6" overflow-y="auto" text="primary">
+            <SupportAssistantConversation
+                v-for="conversation in conversations" :key="conversation.id"
+                @click="selectConversation(conversation)"
+                :conversation="conversation"
+                :selectedConversationId="selectedConversationId"
+            />
         </div>
 
         <!-- Messages -->
-        <div flex="basis-4/6" w="4/6" border="~ secondary dark:secondaryOp rounded-lg" p="4">
-            <SupportAssistantMessages :id="selectedConversationId" />
+        <div flex="~ col basis-4/6" overflow-y="auto" w="4/6" border="~ secondary dark:secondaryOp rounded-lg" p="4">
+            <SupportAssistantMessages v-if="selectedConversationId" :id="selectedConversationId" />
+            <div v-else flex="~" h="full" items="center" justify="center">
+                <span text="secondary dark:secondaryOp 4xl" opacity="40" font="bold">
+                    يرجى تحديد محادثة
+                </span>
+            </div>
         </div>
 
         <!-- States -->
@@ -17,10 +25,13 @@
             states
         </div>
     </div>
+    <div v-else text="primaryOp dark:primary">
+        Disconnected...
+    </div>
 </template>
 
 <script setup>
-import { useSupabaseClient, ref } from '#imports'
+import { useSupabaseClient, ref, onMounted, computed, onBeforeUnmount } from '#imports'
 import { useUser } from '../../../composables/states'
 import { useUserProfile } from '../../../composables/useUserProfile'
 
@@ -32,7 +43,35 @@ const selectedConversationId = ref(null)
 const conversations = ref([])
 const isConnected = ref(false)
 
-onMounted(async () => await getConversations())
+onMounted(async () => {
+    channel.track({ isOnline: true })
+    await getConversations()
+})
+onBeforeUnmount(() => {
+    channel.track({ isOnline: false })
+})
+
+
+// Tracking online/offline statue
+const channel = supabase.channel("support", {
+  config: {
+    presence: { key: user.value.id }
+  }
+})
+channel
+  .on('presence', { event: 'sync' }, () => onlineState())
+  .subscribe()
+
+const onlineState = () => {
+    const newState = channel.presenceState()
+    conversations.value = conversations.value.map(conversation => {
+        newState[conversation.user_id.id] ? conversation.isOnline = newState[conversation.user_id.id][0]?.isOnline : conversation.isOnline = false
+        return conversation
+    })
+}
+// End of tracking online/offline statue
+
+
 
 supabase.channel('public:support_conversations')
     .on(
@@ -48,9 +87,12 @@ supabase.channel('public:support_conversations')
     })
 
 const getConversations = async () => {
-    const {data, error} = await supabase.from('support_conversations')
+    const { data, error } = await supabase.from('support_conversations')
         .select(`id, assistant_id, user_id (id, username)`)
-    if (data) conversations.value = data
+    if (data) {
+        conversations.value = data
+        conversations.value.isOnline = false
+    }
 }
 
 
@@ -58,9 +100,9 @@ const selectConversation = async (conv) => {
     selectedConversationId.value = conv.id
     if (!conv.assistant_id) {
         const { data, error } = await supabase
-        .from('support_conversations')
-        .update({ assistant_id: user.value.id })
-        .eq('id', conv.id)
+            .from('support_conversations')
+            .update({ assistant_id: user.value.id })
+            .eq('id', conv.id)
     }
 }
 </script>

@@ -1,11 +1,11 @@
 <template>
-    <div w="70%" flex="~ col gap-1" :class="{ 'self-end': user.id !== messageUser?.id }">
+    <div w="70%" flex="~ col gap-1" :class="{ 'self-end text-left': user.id !== messageUser?.id }">
         <span v-if="user.id !== messageUser?.id" text="xs secondary dark:secondaryOp">{{messageUser?.username}}</span>
-        <div :class="[
+        <div w="fit" min-w="50%" :class="[
             user.id == messageUser?.id
-            ? 'bg-opacity-30 dark:bg-opacity-30'
-            : 'bg-opacity-100 dark:bg-opacity-100'
-        ]" bg="secondary dark:secondaryOp" class="break-words" text="sm" p="2" rounded="~">
+            ? 'bg-opacity-20 dark:bg-opacity-20 text-primaryOp dark:text-primary'
+            : 'bg-opacity-100 dark:bg-opacity-100 text-primary dark:text-primaryOp self-end'
+        ]" bg="primaryOp dark:primary" class="break-words" text="sm" p="2" rounded="~">
             {{message.message}}
         </div>
     </div>
