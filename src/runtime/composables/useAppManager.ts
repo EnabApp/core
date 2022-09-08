@@ -64,8 +64,8 @@ export const useAppManager = defineStore("app-manager", {
       let { data: packs, error } = await supabase
         .from('packs')
         .select('*,users_packs(id),packs_apps(app_id),packs_services(service_id)')
-      if (error) console.log(error)
-      else console.log(packs)
+      if (error) { console.log('حدث خطأ اثناء تحميل الباقات'); return false }
+      this.packs = packs.map(pack => new Pack(pack))
     },
     // Set Focus to an App
     async setFocus(id) {
