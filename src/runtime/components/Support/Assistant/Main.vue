@@ -38,16 +38,14 @@
 
     <!-- States -->
     <div
-      flex="basis-1/6"
       w="1/6"
       border="~ secondary dark:secondaryOp rounded-lg"
       p="4"
-      text="center 2xl primaryOp dark:primary"
     >
-      States
+      <SupportAssistantStates />
     </div>
   </div>
-  <div v-else text="center 2xl primaryOp dark:primary"> ...Disconnected</div>
+  <div v-else text="center 2xl primaryOp dark:primary">...Disconnected</div>
 </template>
 
 <script setup>
