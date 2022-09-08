@@ -15,5 +15,6 @@ export default defineNuxtConfig({
         '@vueuse/nuxt',
         '@unocss/nuxt',
         "@nuxtjs/color-mode",
+        "@enab/systemapps",
     ],
 })
