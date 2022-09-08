@@ -59,6 +59,6 @@ const sendMessage = async () =>{
     await supabase
         .from('support_messages')
         .insert({ conversation_id: props.id, message: message.value, sender_id: user.value.id })
-    this.message.value = ""
+    message.value = ""
 } 
 </script>

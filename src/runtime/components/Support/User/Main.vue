@@ -1,7 +1,7 @@
 <template>
-    <div flex="~ col grow gap-4">
+    <div flex="~ col grow gap-4" h="100px" overflow-y="auto">
         <!-- Messages -->
-        <div border="~ secondary dark:secondaryOp rounded-lg" flex="~ col gap-2" h="full" text="white" p="4">
+        <div border="~ secondary dark:secondaryOp rounded-lg" flex="~ col gap-2" h="full" text="white" p="4" overflow-y="auto">
             <SupportMessage v-for="msg in messages" :message="msg" :key="msg" />
         </div>
         <div v-if="isConnected" flex="~ gap-4">
@@ -90,7 +90,7 @@ const sendMessage = async () => {
     await supabase
     .from('support_messages')
     .insert({ conversation_id: conversation_id.value, message: message.value, sender_id: user.value.id })
-    this.message.value = ""
+    message.value = ""
 }
 
 
