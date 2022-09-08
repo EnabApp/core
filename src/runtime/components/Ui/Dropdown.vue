@@ -9,7 +9,7 @@
         p="x-1"
         text="xs gray-600"
         bg="gray-200"
-        border="~ rounded-lg gray-100 dark:gray-600"
+        border="~ rounded-md gray-100 dark:gray-600"
         >{{ item.value }}</span
       >
     </div>
@@ -19,7 +19,7 @@
       :label="label"
       :placeholder="placeholder"
       v-model="search"
-      :icon="icon ? icon : dropdown ? 'i-bxs-up-arrow' : 'i-bxs-down-arrow'"
+      :icon="icon ? icon : dropdown ? 'IconBxsUpArrow' : 'IconBxsDownArrow'"
     >
       <slot />
     </UiInput>
@@ -31,7 +31,7 @@
       bg="white dark:secondary-500"
       border="~ gray-50 dark:gray-600 rounded-lg"
       position="absolute"
-      text="secondary-500 dark:secondary-100"
+      text="secondary-900"
       m="t-1"
       shadow="~ gray-200 dark:gray-900"
     >

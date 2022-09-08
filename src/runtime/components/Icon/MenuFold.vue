@@ -1,8 +1,8 @@
 <template>
   <svg viewBox="0 0 24 24">
     <path
-      d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm10.618-3L15 2H9L7.382 4H3v2h18V4z"
       fill="currentColor"
+      d="M21 18v2H3v-2h18zM6.95 3.55v9.9L2 8.5l4.95-4.95zM21 11v2h-9v-2h9zm0-7v2h-9V4h9z"
     />
   </svg>
 </template>

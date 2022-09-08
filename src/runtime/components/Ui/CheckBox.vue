@@ -5,7 +5,8 @@
           :key="option.id"
           class="flex flex-row items-center cursor-pointer text-primaryOp dark:text-primary"
         >
-          <UiIcon class="ml-2" :icon="checked.includes(option.id) ? 'i-ic-baseline-check-box' : 'i-ic-baseline-check-box-outline-blank'"/>
+        <IconCheckBoxFilled ml="2" w="18px" v-if="checked.includes(option.id)" />
+        <IconCheckBoxOutline ml="2" w="18px" v-else />
           <span :for="option.id">{{ option.name }}</span>
           
           <input
