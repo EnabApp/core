@@ -81,9 +81,9 @@ export const useAppManager = defineStore("app-manager", {
             let { data, error } = await supabase.functions.invoke('core-buy-app', {
                 body: JSON.stringify({ app_id: app_id }),
             })
-            if (error) console.log('حدث خطأ اثناء شراء التطبيق')
-            if (data) console.log(data)
             this.fetch();
+            if (error) return error;
+            if (data) return data;
         },
 
         // Buy a service
