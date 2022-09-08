@@ -10,7 +10,7 @@
   const appStore = useAppManager()
   appStore.addApp({
     "name": "SystemManager",
-    "title": "النظام مدير النظام",
+    "title": "مدير النظام",
     "minWidth": 350,
     "minHeight": 300
   })
