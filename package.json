@@ -23,7 +23,8 @@
     "release": "cd scripts && node --loader ts-node/esm release.ts"
   },
   "dependencies": {
-    "@nuxt/kit": "npm:@nuxt/kit-edge@latest"
+    "@nuxt/kit": "npm:@nuxt/kit-edge@latest",
+    "@nuxtjs/supabase": "^0.1.25"
   },
   "devDependencies": {
     "@enab/systemapps": "^1.0.1-beta.3",
@@ -31,7 +32,6 @@
     "@nuxt/image-edge": "^1.0.0-27703825.db0934c",
     "@nuxt/module-builder": "latest",
     "@nuxtjs/color-mode": "^3.1.4",
-    "@nuxtjs/supabase": "^0.1.25",
     "@pinia/nuxt": "^0.4.1",
     "@tauri-apps/api": "^1.0.2",
     "@unocss/inspector": "^0.45.15",
