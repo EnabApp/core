@@ -23,7 +23,7 @@
           </div>
         </div>
 
-        <div cursor="pointer" bg="primaryOp dark:primary" border="rounded-5px" un-text="primary dark:primaryOp" h="30px sm:35px xl:40px" w="30px sm:35px xl:40px" flex="~" items="center" justify="center" @click="userProfile.logout()">
+        <div cursor="pointer" bg="primaryOp dark:primary" border="rounded-5px" un-text="primary dark:primaryOp" h="30px sm:35px xl:40px" w="30px sm:35px xl:40px" flex="~" items="center" justify="center" @click="supportApp.open()">
           <IconSupport h="18px sm:28px" w="18px sm:28px"></IconSupport>
         </div>
       </div>
@@ -33,9 +33,14 @@
 
 <script setup>
 import { useDark, useToggle, useUserProfile } from "#imports";
+import { useAppManager } from '../../../composables/useAppManager'
+const appManager = useAppManager()
+
 const userProfile = useUserProfile();
 const profile = userProfile.getProfile;
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
+
+const supportApp = computed(() => appManager.getAppByName('Support'))
 </script>

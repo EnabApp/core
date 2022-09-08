@@ -19,6 +19,7 @@ export const useAppManager = defineStore("app-manager", {
         getCoreApps: state => state.apps.filter(app => app.core),
         // isRunning: (state) => (app) => state.all.find(a => a.title === app.title).running,
         getApp: state => id => state.apps.find(app => app.id === id),
+        getAppByName: state => (name: String) => state.apps.find(app => app.name === name),
         getRunningApps: (state) => state.apps.filter(app => app.running),
         getFocused: (state) => state.apps.find(app => app.id == state.focused),
         getDevelopmentApps: state => state.developmentApps,

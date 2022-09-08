@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import { useAppManager, ref, onMounted, useMouse, reactive, useElementBounding, useElementSize } from '#imports';
+import { useAppManager, ref, onMounted, useMouse, reactive, useElementSize } from '#imports';
 
 const props = defineProps({
     app: {
@@ -60,15 +60,13 @@ const props = defineProps({
     },
 });
 
-const test = (x) => console.log(x)
-
 onMounted(() => {
     console.log('mounted')
     props.app.booting = false
 })
 
-const x = ref(40);
-const y = ref(40);
+const x = ref(100);
+const y = ref(100);
 
 const size = ref(props.app.size);
 
