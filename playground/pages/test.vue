@@ -1,6 +1,6 @@
 <template>
 
-<button @click="appManager.buyPack(1)">شراء حزمة</button>
+<button @click="appManager.getSolvedConversations()">جلب المحادثات المحلوله</button>
 
 </template>
 
