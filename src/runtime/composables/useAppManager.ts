@@ -3,6 +3,7 @@ import App from "../models/App"
 import Widget from "../models/Widget"
 import Service from "../models/Service"
 import { useSupabaseClient, useNuxtApp, useUser } from '#imports'
+import Pack from "../models/Pack";
 
 export const useAppManager = defineStore("app-manager", {
   state: () => ({
