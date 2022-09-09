@@ -18,7 +18,7 @@
       items="center"
       cursor="pointer"
     >
-      <div v-if="item.icon" :class="item.icon"></div>
+      <component v-if="item.icon" h="20px" w="20px" text="dark:primaryOp primary" :is="`${item.icon}`" />
       <span>{{ item.value }}</span>
     </div>
   </div>
