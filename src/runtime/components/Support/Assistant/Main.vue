@@ -49,6 +49,7 @@
       }"
     >
       <SupportAssistantMiniProfile
+      :md="md" :sm="sm"
         @unselect="selectedConversationId = null"
         v-if="!(lg || xl || twoXl) && selectedConversationId"
         h="60px"
