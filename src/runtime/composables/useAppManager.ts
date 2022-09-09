@@ -11,7 +11,7 @@ export const useAppManager = defineStore("app-manager", {
         apps: [],
         developmentApps: [],
         appLayers: [], // Focusing and ordering of apps windows
-        conversations: [],
+        unSolvedConversations: [],
         solvedConversations: [],
 
     }),
@@ -44,7 +44,7 @@ export const useAppManager = defineStore("app-manager", {
         anyRunningIsMaximized: (state) => state.apps.some(app => app.maximized && app.running && !app.minimized),
 
         // Conversations
-        getConversations: state => state.conversations,
+        getunSolvedConversations: state => state.unSolvedConversations,
         getsolvedConversations: state => state.solvedConversations,
     },
 
@@ -122,13 +122,13 @@ export const useAppManager = defineStore("app-manager", {
             else  return data;
         },
         // get unsolved conversations
-        async getConversations() {
+        async getUnSolvedConversations() {
             const supabase = useSupabaseClient()
             let { data: conversations, error } = await supabase.functions.invoke('core-get-conversations', {
                 body: JSON.stringify({ conversations_type: false }),
             })
             if (error) return error;
-            this.conversations = conversations.map(conversation => new Conversation(conversation))
+            this.unSolvedConversations = conversations.map(conversation => new Conversation(conversation))
         },
         // get solved conversations
         async getSolvedConversations() {
