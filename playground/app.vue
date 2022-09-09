@@ -6,19 +6,19 @@
 </template>
 
 <script setup>
-  import { useAppManager } from '#imports';
-  const appStore = useAppManager()
-  appStore.addApp({
-    "name": "SystemManager",
-    "title": "مدير النظام",
-    "minWidth": 350,
-    "minHeight": 300,
-  })
+import { useAppManager } from "#imports";
+const appStore = useAppManager();
+appStore.addApp({
+  name: "SystemManager",
+  title: "مدير النظام",
+  minWidth: 370,
+  minHeight: 635,
+});
 
-  appStore.addApp({
-    "name": "Support",
-    "title": "الدعم الفني",
-    "minWidth": 350,
-    "minHeight": 400
-  })
+appStore.addApp({
+  name: "Support",
+  title: "الدعم الفني",
+  minWidth: 350,
+  minHeight: 400,
+});
 </script>
