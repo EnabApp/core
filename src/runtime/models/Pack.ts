@@ -11,6 +11,7 @@ export default class Pack {
   discount: number;
   apps: App[];
 
+
   constructor(args){
     this.id = args?.id
     this.title = args?.title
@@ -18,7 +19,6 @@ export default class Pack {
     this.icon = args?.icon
     this.points = args?.points
     this.discount = args?.discount
-
-    this.apps = args.apps?.map(app => new App(app))
+    this.apps = args?.packs_apps?.map(pack_app => new App(pack_app.app))
   }
 }

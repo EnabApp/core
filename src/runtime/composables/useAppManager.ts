@@ -15,9 +15,10 @@ export const useAppManager = defineStore("app-manager", {
   }),
 
   getters: {
+    //Packs
+    getPacks: state => state.packs,
     // Apps
     getApps: state => state.apps,
-    getPacks: state => state.packs,
     getOwned: (state) => state.apps.filter(app => app.owned && !app.core),
     getCoreApps: state => state.apps.filter(app => app.core),
     // isRunning: (state) => (app) => state.all.find(a => a.title === app.title).running,
@@ -65,7 +66,7 @@ export const useAppManager = defineStore("app-manager", {
       const supabase = useSupabaseClient()
       let { data: packs, error } = await supabase
         .from('packs')
-        .select('*,users_packs(id),packs_apps(app_id),packs_services(service_id)')
+        .select('*, packs_apps (id,app:app_id (*,users_apps(id),apps_services(id, app_id, title, points, icon, description, users_services(id))')
       if (error) { console.log('حدث خطأ اثناء تحميل الباقات'); return false }
       this.packs = packs.map(pack => new Pack(pack))
     },
