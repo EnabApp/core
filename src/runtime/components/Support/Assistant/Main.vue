@@ -7,10 +7,25 @@
     w="full"
   >
     <!-- Users -->
-    <div v-if="(!selectedConversationId && (xs || twoXs)) || (sm || md || lg || xl || twoXl)" flex="~ col " :class="{'w-20%': xl || twoXl ,
-      'w-25%': lg,
-      'w-40%':md || sm,
-      'w-100%': xs || twoXs}" overflow-y="auto" text="primary">
+    <div
+      v-if="
+        (!selectedConversationId && (xs || twoXs)) ||
+        sm ||
+        md ||
+        lg ||
+        xl ||
+        twoXl
+      "
+      flex="~ col "
+      :class="{
+        'w-20%': xl || twoXl,
+        'w-25%': lg,
+        'w-40%': md || sm,
+        'w-100%': xs || twoXs,
+      }"
+      overflow-y="auto"
+      text="primary"
+    >
       <SupportAssistantConversation
         v-for="conversation in conversations"
         :key="conversation.id"
@@ -24,21 +39,28 @@
     <!-- Messages -->
 
     <div
-    v-if="!(xs || twoXs) || selectedConversationId "
+      v-if="!(xs || twoXs) || selectedConversationId"
       flex="~ col gap-2"
       overflow-y="auto"
-      :class="{'w-60%': xl || twoXl || md || sm,
-      'w-50%': lg,
-      'w-100%': xs || twoXs }"
-
+      :class="{
+        'w-60%': xl || twoXl || md || sm,
+        'w-50%': lg,
+        'w-100%': xs || twoXs,
+      }"
     >
-    <SupportAssistantMiniProfile v-if="!(lg || xl || twoXl)" h="60px" />
-    <UiButton v-if="xs || twoXs" @click="selectedConversationId=null">sjjdj</UiButton>
-      <SupportAssistantMessages p="2" border="~ secondary dark:secondaryOp rounded-lg"
+      <SupportAssistantMiniProfile
+        @unselect="selectedConversationId = null"
+        v-if="!(lg || xl || twoXl) && selectedConversationId"
+        h="60px"
+      />
+
+      <SupportAssistantMessages
+        p="2"
+        border="~ secondary dark:secondaryOp rounded-lg"
         v-if="selectedConversationId"
         :id="selectedConversationId"
       />
-      <div v-else flex="~" h="full" items="center" justify="center">
+      <div v-else flex="~" border="~ secondary dark:secondaryOp rounded-lg" h="full" items="center" justify="center">
         <span text="secondary dark:secondaryOp 4xl" opacity="40" font="bold">
           يرجى تحديد محادثة
         </span>
@@ -46,12 +68,13 @@
     </div>
 
     <!-- States -->
-    <div v-if="lg || xl || twoXl"
+    <div
+      v-if="lg || xl || twoXl"
       w="20%"
       border="~ secondary dark:secondaryOp rounded-lg"
       p="4"
     >
-    <span un-text="white">{{size}}</span>
+      <span un-text="white">{{ size }}</span>
       <SupportAssistantStates />
     </div>
   </div>

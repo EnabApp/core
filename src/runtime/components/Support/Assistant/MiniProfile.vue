@@ -1,6 +1,7 @@
 <template>
-  <div flex="~ gap-3" p="2" bg="secondaryOp" rounded="5px">
-    <div relative="~" w="15%">
+  <div flex="~ gap-3" p="2" bg="secondaryOp" rounded="5px" items="center" justify="between">
+    <div flex="~ gap-3" w="65%">
+      <div relative="~">
       <img
         src="https://d1oqwsnd25kjn6.cloudfront.net/production/curio_primary_images/12566/original/Feb._25_2018-SteveJobs.jpg?1518809726"
         w="48px"
@@ -13,7 +14,7 @@
         right="34px"
         bottom="2px"
         position="absolute"
-        border="rounded-full primaryOp 3"
+        border="rounded-full secondaryOp 3"
         class="bg-secondaryOp dark:bg-secondary"
       ></div>
     </div>
@@ -23,11 +24,15 @@
       >
       <span un-text="secondary sm">الفئة : Ui / Bugs</span>
     </div>
-    <div flex="~ gap-2">
-      <IconConversation w="24px" h="24px" text="primary" />
+    </div>
+
+    <div flex="~ gap-2" justify="between" w="30%" px="1">
+      <IconConversation  @click="$emit('unselect')" w="24px" h="24px" text="primary" />
       <IconProfile w="24px" h="24px" text="primary" />
       <IconLock w="24px" h="24px" text="primary" />
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+  const emit = defineEmits(["unselect"]);
+</script>
