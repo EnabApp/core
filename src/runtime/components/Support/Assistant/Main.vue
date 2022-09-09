@@ -7,25 +7,34 @@
     w="full"
   >
     <!-- Users -->
-    <div flex="~ col " w="330px" overflow-y="auto" text="primary">
+    <div v-if="(!selectedConversationId && (xs || twoXs)) || (sm || md || lg || xl || twoXl)" flex="~ col " :class="{'w-20%': xl || twoXl ,
+      'w-25%': lg,
+      'w-40%':md || sm,
+      'w-100%': xs || twoXs}" overflow-y="auto" text="primary">
       <SupportAssistantConversation
         v-for="conversation in conversations"
         :key="conversation.id"
         @click="selectConversation(conversation)"
         :conversation="conversation"
         :selectedConversationId="selectedConversationId"
+        :BreakpointWindow="BreakpointWindow"
       />
     </div>
 
     <!-- Messages -->
+
     <div
-      flex="~ col"
+    v-if="!(xs || twoXs) || selectedConversationId "
+      flex="~ col gap-2"
       overflow-y="auto"
-      w="4/6"
-      border="~ secondary dark:secondaryOp rounded-lg"
-      p="4"
+      :class="{'w-60%': xl || twoXl || md || sm,
+      'w-50%': lg,
+      'w-100%': xs || twoXs }"
+
     >
-      <SupportAssistantMessages
+    <SupportAssistantMiniProfile v-if="!(lg || xl || twoXl)" h="60px" />
+    <UiButton v-if="xs || twoXs" @click="selectedConversationId=null">sjjdj</UiButton>
+      <SupportAssistantMessages p="2" border="~ secondary dark:secondaryOp rounded-lg"
         v-if="selectedConversationId"
         :id="selectedConversationId"
       />
@@ -37,11 +46,12 @@
     </div>
 
     <!-- States -->
-    <div
-      w="1/6"
+    <div v-if="lg || xl || twoXl"
+      w="20%"
       border="~ secondary dark:secondaryOp rounded-lg"
       p="4"
     >
+    <span un-text="white">{{size}}</span>
       <SupportAssistantStates />
     </div>
   </div>
@@ -58,6 +68,14 @@ import {
 } from "#imports";
 import { useUser } from "../../../composables/states";
 import { useUserProfile } from "../../../composables/useUserProfile";
+
+const props = defineProps({
+  BreakpointWindow: {
+    type: Object,
+  },
+});
+
+const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
 
 const supabase = useSupabaseClient();
 const user = useUser();

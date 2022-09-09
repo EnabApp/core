@@ -1,9 +1,10 @@
 <template>
   <!-- Application -->
-  <div h="full" flex="~ col">
+  <div h="full" flex="~ col" ref="windowRef">
     <div m="4" h="full" flex="~ col">
+      <span un-text="white">{{size}}</span>
       <!-- <div w="5" h="5" rounded="full" :class="[ isConnected ? 'bg-success' : 'bg-error' ]"></div> -->
-      <SupportAssistantMain v-if="userProfile.isSupport" />
+      <SupportAssistantMain v-if="userProfile.isSupport" :BreakpointWindow="BreakpointWindow" />
       <SupportUserMain v-else />
     </div>
   </div>
@@ -11,8 +12,13 @@
 
 <script setup>
 import { useUserProfile } from "../../composables/useUserProfile";
+import { useBreakpointWindow } from "#imports";
 
 const userProfile = useUserProfile();
+
+const windowRef = ref(null);
+const BreakpointWindow = useBreakpointWindow(windowRef);
+const { size, twoXs, xs, sm, md, lg, xl, twoXl } = BreakpointWindow;
 
 // const recievedMessage = (msg) => console.log(msg)
 
