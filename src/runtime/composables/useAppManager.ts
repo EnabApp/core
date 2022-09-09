@@ -12,7 +12,7 @@ export const useAppManager = defineStore("app-manager", {
         developmentApps: [],
         appLayers: [], // Focusing and ordering of apps windows
         conversations: [],
-        unsolvedConversations: [],
+        solvedConversations: [],
 
     }),
 
@@ -45,7 +45,7 @@ export const useAppManager = defineStore("app-manager", {
 
         // Conversations
         getConversations: state => state.conversations,
-        getUnsolvedConversations: state => state.unsolvedConversations,
+        getsolvedConversations: state => state.solvedConversations,
     },
 
     actions: {
