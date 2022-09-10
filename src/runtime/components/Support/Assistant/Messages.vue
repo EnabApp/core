@@ -3,7 +3,7 @@
   <div v-if="support.selectedConversation?.id" flex="~ col gap-3 grow" overflow-y="auto" p="2" border="~ secondary dark:secondaryOp rounded-lg" >
     <!-- //===== Messages =====// -->
     <div @scroll="scrollingMessages($event)" ref="messagesElement" flex="~ col gap-1 grow" overflow-y="auto" pl="2" overscroll="y-contain" snap="y mandatory" :class="{ 'snapType' : scrollToEnd }">
-      <SupportMessage v-for="msg in support.getMessages" :message="msg" :key="msg" />
+      <SupportMessage v-for="msg in support.getMessages" :message="msg" :key="msg.id" />
     </div>
 
 

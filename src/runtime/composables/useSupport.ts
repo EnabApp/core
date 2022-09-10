@@ -106,8 +106,9 @@ export const useSupport = defineStore("support-store", {
             const supabase = useSupabaseClient()
             const { data, error } = await supabase
                 .from("support_messages")
-                .select("message, sender_id(id, username)")
-                .eq("conversation_id", this.selectedConversation?.id);
+                .select("id, message, sender_id(id, username)")
+                .eq("conversation_id", this.selectedConversation?.id)
+                .order("created_at", { ascending: true });
             if (data) this.messages = data;
         },
 
