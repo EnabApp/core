@@ -1,61 +1,61 @@
 <template>
-    <div items="center" justify="center" flex="~" h="screen" w="screen" bg="primary dark:primaryOp">
-        <div flex="~ col" items="center" justify="center" w="lg sm:3xl" h="lg" border="rounded-lg" text="lg sm:2xl primaryOp dark:primary">
-            <div position="relative">
-                <!-- <div position="absolute" top="0" bg="info opacity-50" w="full" h="full"></div> -->
-                <IconEnabAnimated text="primaryOp dark:primary" w="xs sm:md" />
-            </div>
-            <div animate-pulse>
-                جاري تحميل سطح المكتب
-            </div>
-        </div>
-        <div id="cursor"></div>
-<div id="cursor-border"></div>
+  <div items="center" justify="center" flex="~" h="screen" w="screen" bg="primary dark:primaryOp">
+    <div flex="~ col" items="center" justify="center" w="lg sm:3xl" h="lg" border="rounded-lg" text="lg sm:2xl primaryOp dark:primary">
+      <div position="relative">
+        <!-- <div position="absolute" top="0" bg="info opacity-50" w="full" h="full"></div> -->
+        <IconEnabAnimated text="primaryOp dark:primary" w="xs sm:md" />
+      </div>
+      <div animate-pulse>
+        جاري تحميل سطح المكتب
+      </div>
     </div>
+    <div id="cursor"></div>
+    <div id="cursor-border"></div>
+  </div>
 </template>
 <script setup>
-    onMounted(() => {
-        const cursor = document.querySelector("#cursor");
-        const cursorBorder = document.querySelector("#cursor-border");
-        const cursorPos = { x: 0, y: 0 };
-        const cursorBorderPos = { x: 0, y: 0 };
+onMounted(() => {
+  const cursor = document.querySelector("#cursor");
+  const cursorBorder = document.querySelector("#cursor-border");
+  const cursorPos = { x: 0, y: 0 };
+  const cursorBorderPos = { x: 0, y: 0 };
 
-        document.addEventListener("mousemove", (e) => {
-        cursorPos.x = e.clientX;
-        cursorPos.y = e.clientY;
+  document.addEventListener("mousemove", (e) => {
+    cursorPos.x = e.clientX;
+    cursorPos.y = e.clientY;
 
-        cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-        });
+    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+  });
 
-        requestAnimationFrame(function loop() {
-        const easting = 4;
-        cursorBorderPos.x += (cursorPos.x - cursorBorderPos.x) / easting;
-        cursorBorderPos.y += (cursorPos.y - cursorBorderPos.y) / easting;
+  requestAnimationFrame(function loop() {
+    const easting = 4;
+    cursorBorderPos.x += (cursorPos.x - cursorBorderPos.x) / easting;
+    cursorBorderPos.y += (cursorPos.y - cursorBorderPos.y) / easting;
 
-        cursorBorder.style.transform = `translate(${cursorBorderPos.x}px, ${cursorBorderPos.y}px)`;
-        requestAnimationFrame(loop);
-        });
+    cursorBorder.style.transform = `translate(${cursorBorderPos.x}px, ${cursorBorderPos.y}px)`;
+    requestAnimationFrame(loop);
+  });
 
-        document.querySelectorAll("[data-cursor]").forEach((item) => {
-        item.addEventListener("mouseover", (e) => {
-            if (item.dataset.cursor === "pointer") {
-            cursorBorder.style.backgroundColor = "rgba(255, 255, 255, .6)";
-            cursorBorder.style.setProperty("--size", "30px");
-            }
-            if (item.dataset.cursor === "pointer2") {
-            cursorBorder.style.backgroundColor = "#2d89da";
-            cursorBorder.style.mixBlendMode = "difference";
-            cursorBorder.style.setProperty("--size", "80px");
-            }
-        });
-        item.addEventListener("mouseout", (e) => {
-            cursorBorder.style.backgroundColor = "unset";
-            cursorBorder.style.mixBlendMode = "unset";
-            cursorBorder.style.setProperty("--size", "50px");
-        });
-        });
+  document.querySelectorAll("[data-cursor]").forEach((item) => {
+    item.addEventListener("mouseover", (e) => {
+      if (item.dataset.cursor === "pointer") {
+        cursorBorder.style.backgroundColor = "rgba(255, 255, 255, .6)";
+        cursorBorder.style.setProperty("--size", "30px");
+      }
+      if (item.dataset.cursor === "pointer2") {
+        cursorBorder.style.backgroundColor = "#2d89da";
+        cursorBorder.style.mixBlendMode = "difference";
+        cursorBorder.style.setProperty("--size", "80px");
+      }
+    });
+    item.addEventListener("mouseout", (e) => {
+      cursorBorder.style.backgroundColor = "unset";
+      cursorBorder.style.mixBlendMode = "unset";
+      cursorBorder.style.setProperty("--size", "50px");
+    });
+  });
 
-    })
+})
 </script>
 
 <style scoped>
@@ -63,6 +63,7 @@
   margin: 0;
   cursor: none;
 }
+
 #cursor {
   position: fixed;
   top: -5px;
@@ -134,6 +135,4 @@ input:nth-of-type(2):active {
   transform: scale(0.85);
   box-shadow: 0 0 30px #2d89da;
 }
-
-
 </style>

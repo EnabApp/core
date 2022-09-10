@@ -2,8 +2,7 @@
   <!-- //===== here is the Conversation case  ======// -->
   <div w="98%">
     <div cursor="pointer" transition="~ duration-200 ease-in-out" :class="{
-      'bg-secondary dark:bg-secondaryOp':
-        selectedConversationId == conversation.id,
+      'bg-secondary dark:bg-secondaryOp': isSelected,
     }" bg="hover:secondary dark:hover:secondaryOp" p="2%" rounded="10px" flex="~ gap-3" items="center" h="60px">
 
       <!-- //===== User Image and Online State =====// -->
@@ -49,17 +48,19 @@
 </template>
 
 <script setup>
+import { useSupport } from "../../../composables/useSupport";
+
 const props = defineProps({
   conversation: {
     type: Object,
-  },
-  selectedConversationId: {
-    type: String,
   },
   BreakpointWindow: {
     type: Object,
   },
 });
+
+const support = useSupport();
+const isSelected = computed(() => support.selectedConversation?.id == props.conversation?.id)
 
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
 </script>

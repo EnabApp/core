@@ -1,54 +1,37 @@
 <template>
-  <div v-if="isConnected" flex="~ gap-4 grow" overflow-y="auto" h="100px" w="full">
+  <div v-if="support.isConnected" flex="~ gap-4 grow" overflow-y="auto" h="100px" w="full">
 
     <!-- //===== Assistant Stuff =====// -->
     <div v-if="
-      (!selectedConversationId && (xs || twoXs)) ||
-      sm ||
-      md ||
-      lg ||
-      xl ||
-      twoXl
-    " flex="~ col " :class="{
-      'w-20%': xl || twoXl,
-      'w-25%': lg,
-      'w-40%': md || sm,
-      'w-100%': xs || twoXs,
-    }" overflow-y="auto" text="primary">
+    (!support.selectedConversation?.id && (xs || twoXs)) || sm || md || lg || xl || twoXl" flex="~ col " :class="{
+        'w-20%': xl || twoXl,
+        'w-25%': lg,
+        'w-40%': md || sm,
+        'w-100%': xs || twoXs,
+      }" overflow-y="auto" text="primary">
 
       <!-- //===== Assistant Conversation =====// -->
-      <SupportAssistantConversation v-for="conversation in conversations" :key="conversation.id"
-        @click="selectConversation(conversation)" :conversation="conversation"
-        :selectedConversationId="selectedConversationId" :BreakpointWindow="BreakpointWindow" />
+      <SupportAssistantConversation v-for="conversation in support.getConversations" :key="conversation.id" @click="support.selectConversation(conversation)" :BreakpointWindow="BreakpointWindow" :conversation="conversation" />
     </div>
 
     <!-- //===== Message =====// -->
-    <div v-if="!(xs || twoXs) || selectedConversationId" flex="~ col gap-2" overflow-y="auto" :class="{
+    <div v-show="!(xs || twoXs) || support.selectedConversation?.id" flex="~ col gap-2" overflow-y="auto" :class="{
       'w-60%': xl || twoXl || md || sm,
       'w-50%': lg,
       'w-100%': xs || twoXs,
-      'blur-2': miniState && (xs || twoXs || sm || md),
+      'blur-2': support.miniProfileState && (xs || twoXs || sm || md),
     }">
 
       <!-- //===== Mini Profile =====// -->
-      <SupportAssistantMiniProfile v-if="!(lg || xl || twoXl) && selectedConversationId" :BreakpointWindow="BreakpointWindow"
-        @unselect="selectedConversationId = null" @showProfile="miniState = true" h="60px" />
+      <SupportAssistantMiniProfile v-if="!(lg || xl || twoXl) && support.selectedConversation?.id" :BreakpointWindow="BreakpointWindow" h="60px" />
 
       <!-- //===== Assistant Messages =====// -->
-      <SupportAssistantMessages p="2" border="~ secondary dark:secondaryOp rounded-lg" v-if="selectedConversationId"
-        :id="selectedConversationId" />
+      <SupportAssistantMessages />
 
-      <!-- //===== Else Statement if no Conversation Selected =====// -->
-      <div v-else flex="~" border="~ secondary dark:secondaryOp rounded-lg" h="full" items="center" justify="center">
-        <span text="secondary dark:secondaryOp 4xl" opacity="40" font="bold">
-          يرجى تحديد محادثة
-        </span>
-      </div>
     </div>
 
     <!-- //===== Assistant => User Mini State =====// -->
-    <SupportAssistantMiniState @closeMiniState="miniState = false" v-if="miniState && (twoXs || xs || sm || md)"
-      :BreakpointWindow="BreakpointWindow" />
+    <SupportAssistantMiniState @closeMiniState="support.miniProfileState = false" v-if="support.miniProfileState && (twoXs || xs || sm || md)" :BreakpointWindow="BreakpointWindow" />
 
     <!-- //===== Assistant => User State =====// -->
     <div v-if="lg || xl || twoXl" w="20%" border="~ secondary dark:secondaryOp rounded-lg" p="4">
@@ -62,8 +45,7 @@
 
 <script setup>
 import { useSupabaseClient, ref, onMounted, onBeforeUnmount } from "#imports";
-import { useUser } from "../../../composables/states";
-import { useUserProfile } from "../../../composables/useUserProfile";
+import { useSupport } from "../../../composables/useSupport";
 
 const props = defineProps({
   BreakpointWindow: {
@@ -73,79 +55,16 @@ const props = defineProps({
 
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
 
-const miniState = ref(false);
-
-const supabase = useSupabaseClient();
-const user = useUser();
-const userProfile = useUserProfile();
-
-const selectedConversationId = ref(null);
-const conversations = ref([]);
-const isConnected = ref(false);
+const support = useSupport()
 
 onMounted(async () => {
-  channel.track({ isOnline: true });
-  await getConversations();
+  await support.join()
+  await support.initAssistant()
+  await support.fetchConversations()
+  support.supportChannel.track({ isOnline: true });
 });
 onBeforeUnmount(() => {
-  channel.track({ isOnline: false });
+  support.supportChannel.track({ isOnline: false });
 });
 
-// Tracking online/offline statue
-const channel = supabase.channel("support", {
-  config: {
-    presence: { key: user.value.id },
-  },
-});
-channel.on("presence", { event: "sync" }, () => onlineState()).subscribe();
-
-const onlineState = () => {
-  const newState = channel.presenceState();
-  conversations.value = conversations.value.map((conversation) => {
-    newState[conversation.user_id.id]
-      ? (conversation.isOnline = newState[conversation.user_id.id][0]?.isOnline)
-      : (conversation.isOnline = false);
-    return conversation;
-  });
-};
-// End of tracking online/offline statue
-
-supabase
-  .channel("public:support_conversations")
-  .on(
-    "postgres_changes",
-    {
-      event: "INSERT",
-      schema: "public",
-      table: "support_conversations",
-      filters: `assistant_id=eq.null,eq.${user.value.id}`,
-    },
-    (payload) => {
-      getConversations();
-    }
-  )
-  .subscribe((state) => {
-    if (state === "SUBSCRIBED") isConnected.value = true;
-    else isConnected.value = false;
-  });
-
-const getConversations = async () => {
-  const { data, error } = await supabase
-    .from("support_conversations")
-    .select(`id, assistant_id, user_id (id, username)`);
-  if (data) {
-    conversations.value = data;
-    conversations.value.isOnline = false;
-  }
-};
-
-const selectConversation = async (conv) => {
-  selectedConversationId.value = conv.id;
-  if (!conv.assistant_id) {
-    const { data, error } = await supabase
-      .from("support_conversations")
-      .update({ assistant_id: user.value.id })
-      .eq("id", conv.id);
-  }
-};
 </script>

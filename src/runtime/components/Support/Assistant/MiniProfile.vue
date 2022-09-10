@@ -1,10 +1,10 @@
 <template>
   <div flex="~" p="2" bg="secondaryOp hover:opacity-70" rounded="5px" items="center" justify="between">
-    <div @click="$emit('showProfile')" flex="~ gap-3" items="center">
+    <div @click.stop="support.showMiniProfile()" flex="~ gap-3" items="center">
 
       <!-- //===== Back Icon =====// -->
       <div w="30px" v-if="!(md || sm)">
-        <IconBack @click="$emit('unselect')" w="24px" h="24px" text="primary" cursor="pointer" />
+        <IconBack @click.stop="support.unselectConversation()" w="24px" h="24px" text="primary" cursor="pointer" />
       </div>
 
       <div flex="~ gap-3" max-w="200px" cursor="pointer">
@@ -40,8 +40,12 @@
 </template>
 <script setup>
 import { ref } from "#imports";
+import { useSupport } from "../../../composables/useSupport";
 
 const props = defineProps(['BreakpointWindow']);
+
+const support = useSupport()
+
 const {size, xs, sm, md, lg, xl, twoXs } = props.BreakpointWindow;
 
 const showLock = ref(true);
