@@ -46,20 +46,16 @@
         'w-60%': xl || twoXl || md || sm,
         'w-50%': lg,
         'w-100%': xs || twoXs,
+        'blur-2' : miniState && (xs || twoXs || sm || md)
       }"
     >
       <SupportAssistantMiniProfile
         v-if="!(lg || xl || twoXl) && selectedConversationId"
         @unselect="selectedConversationId = null"
-        @showProfile="miniToggle"
+        @showProfile="miniState = true"
         :sm="sm"
         :md="md"
         h="60px"
-      />
-
-      <SupportAssistantMiniState
-        v-if="miniState && (twoXs || xs || sm || md)"
-        :BreakpointWindow="BreakpointWindow"
       />
       <SupportAssistantMessages
         p="2"
@@ -80,7 +76,11 @@
         </span>
       </div>
     </div>
-
+    <SupportAssistantMiniState
+    @closeMiniState="miniState = false"
+        v-if="miniState && (twoXs || xs || sm || md)"
+        :BreakpointWindow="BreakpointWindow"
+      />
     <!-- States -->
     <div
       v-if="lg || xl || twoXl"
@@ -115,7 +115,7 @@ const props = defineProps({
 
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
 
-const [miniState, miniToggle] = useToggle(false);
+const miniState = ref(false);
 
 const supabase = useSupabaseClient();
 const user = useUser();

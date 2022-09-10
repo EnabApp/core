@@ -1,17 +1,15 @@
 <template>
   <div
-  absolute="~"
-  top="32"
+    absolute="~"
+    top="32"
     :class="{
-      'right-13%' : twoXs,
-      'right-24%' : xs,
-      'right-50%' : sm,
-      'right-53%' : md,
+      'right-10% w-80%': twoXs,
+      'right-20% w-60%': xs,
+      'mr-40% right-10% w-40% ': sm || md,
     }"
     rounded="10px"
     bg="primary dark:primaryOp"
     border="1 secondaryOp dark:secondary"
-    w="272px"
     h="70%"
     flex="~ col"
     items="center"
@@ -23,8 +21,18 @@
       border="1 secondaryOp dark:secondary"
       rounded="full"
       top="-12"
-      right="33%"
       absolute="~"
+    />
+    <IconClose
+      absolute="~"
+      left="12px"
+      top="12px"
+      w="14px"
+      h="14px"
+      text="primary"
+      cursor="pointer"
+      z="30"
+      @click="$emit('closeMiniState')"
     />
     <div
       mt="56px"
@@ -39,7 +47,7 @@
         text="24px primaryOp dark:primary"
         truncate="~"
         font="thin"
-        :class="{ 'max-w-98%': twoXs, }"
+        :class="{ 'max-w-98%': twoXs }"
         >حسن الخالدي حسابي الثاني
       </span>
 
