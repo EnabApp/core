@@ -7,7 +7,7 @@
     </div>
 
     <!-- New Message Indicator -->
-    <div w="full" @click="scrollToBottom" v-if="support.hasNewMessage" text="center xs secondaryOp dark:secondary" cursor="pointer" bg="secondary dark:secondaryOp" rounded="lg">
+    <div w="full" @click="scrollToBottom" v-if="support.hasNewMessage && hasSrollbars" text="center xs secondaryOp dark:secondary" cursor="pointer" bg="secondary dark:secondaryOp" rounded="lg">
       <div p="0.5">لديك رسائل جديدة</div>
     </div>
     
@@ -45,6 +45,7 @@ const message = ref(null);
 const sendMessageButtonState = ref(true);
 const scrollToEnd = ref(true);
 const messagesElement = ref(null);
+const hasSrollbars = ref(false)
 
 const scrollToBottom = () => messagesElement.value.scroll({ top: messagesElement.value.scrollHeight, behavior: 'smooth' });
 
@@ -59,6 +60,11 @@ const scrollingMessages = () => {
   }
 }
 
+watch(() => support.hasNewMessage, () => {
+  if (support.hasNewMessage) {
+    hasSrollbars.value = messagesElement.value.scrollHeight > messagesElement.value.clientHeight
+  }
+})
 
 watch(
   () => support.getSelectedConversationId,
