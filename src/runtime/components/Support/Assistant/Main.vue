@@ -49,19 +49,32 @@
       }"
     >
       <SupportAssistantMiniProfile
-      :md="md" :sm="sm"
-        @unselect="selectedConversationId = null"
         v-if="!(lg || xl || twoXl) && selectedConversationId"
+        @unselect="selectedConversationId = null"
+        @showProfile="miniToggle"
+        :sm="sm"
+        :md="md"
         h="60px"
       />
 
+      <SupportAssistantMiniState
+        v-if="miniState && (twoXs || xs || sm || md)"
+        :BreakpointWindow="BreakpointWindow"
+      />
       <SupportAssistantMessages
         p="2"
         border="~ secondary dark:secondaryOp rounded-lg"
         v-if="selectedConversationId"
         :id="selectedConversationId"
       />
-      <div v-else flex="~" border="~ secondary dark:secondaryOp rounded-lg" h="full" items="center" justify="center">
+      <div
+        v-else
+        flex="~"
+        border="~ secondary dark:secondaryOp rounded-lg"
+        h="full"
+        items="center"
+        justify="center"
+      >
         <span text="secondary dark:secondaryOp 4xl" opacity="40" font="bold">
           يرجى تحديد محادثة
         </span>
@@ -89,6 +102,7 @@ import {
   onMounted,
   computed,
   onBeforeUnmount,
+  useToggle,
 } from "#imports";
 import { useUser } from "../../../composables/states";
 import { useUserProfile } from "../../../composables/useUserProfile";
@@ -100,6 +114,8 @@ const props = defineProps({
 });
 
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
+
+const [miniState, miniToggle] = useToggle(false);
 
 const supabase = useSupabaseClient();
 const user = useUser();
