@@ -11,6 +11,7 @@ export const useSupport = defineStore("support-store", {
         miniProfileState: false,
         isMessagesLoaded: false,
         isSendingMessage: false,
+        newMessage: false,
 
         // Assistant
         conversations: [],
@@ -22,7 +23,8 @@ export const useSupport = defineStore("support-store", {
         getSelectedConversation: state => state.selectedConversation,
         getSelectedConversationId: state => state.selectedConversation?.id,
 
-        getMessages: state => state.messages,
+        getMessages: state => state.messages.reverse(),
+        hasNewMessage: state => state.newMessage
     },
 
     actions: {
@@ -108,7 +110,8 @@ export const useSupport = defineStore("support-store", {
                 .from("support_messages")
                 .select("id, message, sender_id(id, username)")
                 .eq("conversation_id", this.selectedConversation?.id)
-                .order("created_at", { ascending: true });
+                .order("created_at", { ascending: false })
+                .limit(100);
             if (data) this.messages = data;
         },
 
@@ -127,7 +130,10 @@ export const useSupport = defineStore("support-store", {
                         table: "support_messages",
                         filters: `conversation_id=${this.selectConversation?.id}`,
                     },
-                    () => this.fetchMessages()
+                    () => {
+                        this.fetchMessages()
+                        this.newMessage = true
+                    }
                 )
                 .subscribe((state) => {
                     if (state === "SUBSCRIBED") {
@@ -172,7 +178,9 @@ export const useSupport = defineStore("support-store", {
             }
         },
 
-
+        setNewMessage(state = false){
+            this.newMessage = state
+        },
 
 
 

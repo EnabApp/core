@@ -6,10 +6,11 @@
       <SupportMessage v-for="msg in support.getMessages" :message="msg" :key="msg.id" />
     </div>
 
-
-    <div w="full" @click="scrollToBottom" v-if="haveNewMessages" text="center xs secondaryOp dark:secondary" cursor="pointer" bg="secondary dark:secondaryOp" rounded="lg">
+    <!-- New Message Indicator -->
+    <div w="full" @click="scrollToBottom" v-if="support.hasNewMessage" text="center xs secondaryOp dark:secondary" cursor="pointer" bg="secondary dark:secondaryOp" rounded="lg">
       <div p="0.5">لديك رسائل جديدة</div>
     </div>
+    
     <!-- //===== Input & Send Button =====// -->
     <Transition>
       <div v-if="support.isMessagesLoaded" flex="~ gap-4">
@@ -44,7 +45,6 @@ const message = ref(null);
 const sendMessageButtonState = ref(true);
 const scrollToEnd = ref(true);
 const messagesElement = ref(null);
-const haveNewMessages = ref(false);
 
 const scrollToBottom = () => messagesElement.value.scroll({ top: messagesElement.value.scrollHeight, behavior: 'smooth' });
 
@@ -52,14 +52,13 @@ const scrollingMessages = () => {
   const endOfMessages = messagesElement.value.scrollHeight - messagesElement.value.scrollTop - messagesElement.value.clientHeight <= 50;
   if (endOfMessages) {
     scrollToEnd.value = true
-    haveNewMessages.value = false;
+    support.setNewMessage(false);
   }
-  else scrollToEnd.value = false
+  else {
+    scrollToEnd.value = false
+  }
 }
 
-watch (() => support.getMessages?.length, () => {
-  if (!scrollToEnd.value) haveNewMessages.value = true
-})
 
 watch(
   () => support.getSelectedConversationId,
