@@ -1,5 +1,6 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
 import { useSupabaseClient, useNuxtApp, useUser } from '#imports'
+import Conversation from "../models/Conversation";
 
 export const useSupport = defineStore("support-store", {
     state: () => ({
@@ -13,7 +14,6 @@ export const useSupport = defineStore("support-store", {
         // Assistant
         conversations: [],
         selectedConversation: null,
-        
     }),
 
     getters: {
@@ -64,6 +64,14 @@ export const useSupport = defineStore("support-store", {
         // Fetch Support Assistant Conversations
         async fetchConversations() {
             const supabase = useSupabaseClient();
+
+            // let { data: conversations, error } = await supabase.functions.invoke('core-get-conversations', {
+            //     body: JSON.stringify({ conversations_type: false }),
+            // })
+            // if (error) return error;
+            // this.conversations = conversations.data?.map(conversation => new Conversation(conversation))
+
+
             const { data, error } = await supabase
               .from("support_conversations")
               .select(`id, assistant_id, user_id (id, username)`);

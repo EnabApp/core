@@ -16,8 +16,11 @@
             w="48px" h="48px" rounded="full" />
 
           <!-- //===== Online State =====// -->
-          <div w="10px" h="10px" right="34px" bottom="2px" position="absolute" border="rounded-full primaryOp 1px"
-            class="bg-secondaryOp dark:bg-secondary"></div>
+          <div w="10px" h="10px" right="34px" bottom="2px" position="absolute" border="rounded-full primaryOp 3" :class="
+          support.selectedConversation.isOnline
+            ? 'bg-success'
+            : 'bg-secondaryOp dark:bg-secondary'
+        "></div>
         </div>
         <div flex="~ col gap-1" max-w="full">
 
