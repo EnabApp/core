@@ -1,10 +1,10 @@
 <template>
-  <div flex="~" p="2" bg="secondaryOp hover:opacity-70" rounded="5px" items="center" justify="between">
+  <div flex="~" p="2" bg="secondary dark:secondaryOp  hover:opacity-70" rounded="5px" items="center" justify="between">
     <div @click.stop="support.showMiniProfile()" flex="~ gap-3" items="center">
 
       <!-- //===== Back Icon =====// -->
       <div w="30px" v-if="!(md || sm)">
-        <IconBack @click.stop="support.unselectConversation()" w="24px" h="24px" text="primary" cursor="pointer" />
+        <IconBack @click.stop="support.unselectConversation()" w="24px" h="24px" text="primaryOp dark:primary" cursor="pointer" />
       </div>
 
       <div flex="~ gap-3" max-w="200px" cursor="pointer">
@@ -16,7 +16,7 @@
             w="48px" h="48px" rounded="full" />
 
           <!-- //===== Online State =====// -->
-          <div w="10px" h="10px" right="34px" bottom="2px" position="absolute" border="rounded-full primaryOp 3" :class="
+          <div w="10px" h="10px" right="34px" bottom="2px" position="absolute" border="rounded-full primary dark:primaryOp 3" :class="
           support.selectedConversation.isOnline
             ? 'bg-success'
             : 'bg-secondaryOp dark:bg-secondary'
@@ -29,14 +29,14 @@
             font="semibold">حسن الخالدي حسابي الثاني</span>
 
           <!-- //===== User Issue =====// -->
-          <span un-text="secondary sm">الفئة : Ui / Bugs</span>
+          <span un-text="secondaryOp dark:secondary sm">الفئة : Ui / Bugs</span>
         </div>
       </div>
     </div>
 
     <!-- //===== Conversation Lock =====// -->
     <div flex="~ gap-2" justify="between" w="30px" mx="2" px="1">
-      <IconUnlock v-if="showLock" @click="showLock = false" w="24px" h="24px" text="primary" cursor="pointer" />
+      <IconUnlock v-if="showLock" @click="showLock = false" w="24px" h="24px" text="primaryOp dark:primary" cursor="pointer" />
       <IconLock v-else @click="showLock = true" w="24px" h="24px" text="error" cursor="pointer" />
     </div>
   </div>
