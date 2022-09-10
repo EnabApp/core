@@ -1,7 +1,7 @@
 <template>
   <div w="70%" flex="~ col gap-2px" :class="{ 'self-end text-left': user.id !== messageUser?.id }">
     <!-- User name can be either primary or secondaryOp -->
-    <span v-if="user.id !== messageUser?.id" text="xs secondaryOp">{{
+    <span v-if="user.id !== messageUser?.id" text="xs secondaryOp dark:secondary">{{
     messageUser?.username
     }}</span>
     <div  max-w="70%" w="auto" :class="[
