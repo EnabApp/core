@@ -1,8 +1,12 @@
 <template>
   <div flex="~ col gap-3 grow" overflow-y="auto">
+
+    <!-- //===== Messages =====// -->
     <div flex="~ col gap-1 grow" overflow-y="auto"  pl="2">
       <SupportMessage v-for="msg in messages" :message="msg" :key="msg" />
     </div>
+
+    <!-- //===== Input & Send Button =====// -->
     <div v-if="isConnected" flex="~ gap-4">
       <UiInput @keyup.enter="sendMessage" icon="IconPen" w="full" placeholder="اكتب هنا..." v-model="message" />
       <UiButton @click="sendMessage">ارسال</UiButton>

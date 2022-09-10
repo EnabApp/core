@@ -1,6 +1,7 @@
 <template>
   <div flex="~ col gap-42px">
     <div flex="~ col gap-42px" justify="center" items="center">
+
       <!-- //====== User Picture/Name =======// -->
       <div flex="~ col gap-15px" p="t-20px" items="center">
         <img
@@ -14,6 +15,7 @@
 
       <!-- //====== User Stuff =======// -->
       <div flex="~ col gap-8px" w="74%">
+
         <!-- //====== User Email =======// -->
         <div flex="~" items="center" justify="between">
           <span truncate="~" text="primaryOp dark:primary"
@@ -23,18 +25,21 @@
         </div>
 
         <div flex="~" items="center" justify="between">
+
           <!-- //====== User Phone Number =======// -->
           <span truncate="~" text="primaryOp dark:primary">07730281556</span>
           <IconPhone text="primaryOp dark:primary" w="18px" h="18px" />
         </div>
 
         <div flex="~" items="center" justify="between">
+
           <!-- //====== User Business Title =======// -->
           <span truncate="~" text="primaryOp dark:primary">خل يولن</span>
           <IconBusiness text="primaryOp dark:primary" w="18px" h="18px" />
         </div>
 
         <div flex="~" items="center" justify="between">
+
           <!-- //====== User Points =======// -->
           <span truncate="~" text="primaryOp dark:primary">5,584</span>
           <IconPoints text="primaryOp dark:primary" w="18px" h="18px" />
@@ -46,6 +51,7 @@
       <span text="right 16px primaryOp dark:primary">تطبيقات المستخدم</span>
 
       <!-- //====== Component =======// -->
+      
       <div flex="~ col gap-4px">
         <div
           flex="~"

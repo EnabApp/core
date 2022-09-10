@@ -1,109 +1,67 @@
 <template>
-  <div
-    v-if="isConnected"
-    flex="~ gap-4 grow"
-    overflow-y="auto"
-    h="100px"
-    w="full"
-  >
-    <!-- Users -->
-    <div
-      v-if="
-        (!selectedConversationId && (xs || twoXs)) ||
-        sm ||
-        md ||
-        lg ||
-        xl ||
-        twoXl
-      "
-      flex="~ col "
-      :class="{
-        'w-20%': xl || twoXl,
-        'w-25%': lg,
-        'w-40%': md || sm,
-        'w-100%': xs || twoXs,
-      }"
-      overflow-y="auto"
-      text="primary"
-    >
-      <SupportAssistantConversation
-        v-for="conversation in conversations"
-        :key="conversation.id"
-        @click="selectConversation(conversation)"
-        :conversation="conversation"
-        :selectedConversationId="selectedConversationId"
-        :BreakpointWindow="BreakpointWindow"
-      />
+  <div v-if="isConnected" flex="~ gap-4 grow" overflow-y="auto" h="100px" w="full">
+
+    <!-- //===== Assistant Stuff =====// -->
+    <div v-if="
+      (!selectedConversationId && (xs || twoXs)) ||
+      sm ||
+      md ||
+      lg ||
+      xl ||
+      twoXl
+    " flex="~ col " :class="{
+      'w-20%': xl || twoXl,
+      'w-25%': lg,
+      'w-40%': md || sm,
+      'w-100%': xs || twoXs,
+    }" overflow-y="auto" text="primary">
+
+      <!-- //===== Assistant Conversation =====// -->
+      <SupportAssistantConversation v-for="conversation in conversations" :key="conversation.id"
+        @click="selectConversation(conversation)" :conversation="conversation"
+        :selectedConversationId="selectedConversationId" :BreakpointWindow="BreakpointWindow" />
     </div>
 
-    <!-- Messages -->
+    <!-- //===== Message =====// -->
+    <div v-if="!(xs || twoXs) || selectedConversationId" flex="~ col gap-2" overflow-y="auto" :class="{
+      'w-60%': xl || twoXl || md || sm,
+      'w-50%': lg,
+      'w-100%': xs || twoXs,
+      'blur-2': miniState && (xs || twoXs || sm || md),
+    }">
 
-    <div
-      v-if="!(xs || twoXs) || selectedConversationId"
-      flex="~ col gap-2"
-      overflow-y="auto"
-      :class="{
-        'w-60%': xl || twoXl || md || sm,
-        'w-50%': lg,
-        'w-100%': xs || twoXs,
-        'blur-2' : miniState && (xs || twoXs || sm || md)
-      }"
-    >
-      <SupportAssistantMiniProfile
-        v-if="!(lg || xl || twoXl) && selectedConversationId"
-        @unselect="selectedConversationId = null"
-        @showProfile="miniState = true"
-        :sm="sm"
-        :md="md"
-        h="60px"
-      />
-      <SupportAssistantMessages
-        p="2"
-        border="~ secondary dark:secondaryOp rounded-lg"
-        v-if="selectedConversationId"
-        :id="selectedConversationId"
-      />
-      <div
-        v-else
-        flex="~"
-        border="~ secondary dark:secondaryOp rounded-lg"
-        h="full"
-        items="center"
-        justify="center"
-      >
+      <!-- //===== Mini Profile =====// -->
+      <SupportAssistantMiniProfile v-if="!(lg || xl || twoXl) && selectedConversationId" :BreakpointWindow="BreakpointWindow"
+        @unselect="selectedConversationId = null" @showProfile="miniState = true" h="60px" />
+
+      <!-- //===== Assistant Messages =====// -->
+      <SupportAssistantMessages p="2" border="~ secondary dark:secondaryOp rounded-lg" v-if="selectedConversationId"
+        :id="selectedConversationId" />
+
+      <!-- //===== Else Statement if no Conversation Selected =====// -->
+      <div v-else flex="~" border="~ secondary dark:secondaryOp rounded-lg" h="full" items="center" justify="center">
         <span text="secondary dark:secondaryOp 4xl" opacity="40" font="bold">
           يرجى تحديد محادثة
         </span>
       </div>
     </div>
-    <SupportAssistantMiniState
-    @closeMiniState="miniState = false"
-        v-if="miniState && (twoXs || xs || sm || md)"
-        :BreakpointWindow="BreakpointWindow"
-      />
-    <!-- States -->
-    <div
-      v-if="lg || xl || twoXl"
-      w="20%"
-      border="~ secondary dark:secondaryOp rounded-lg"
-      p="4"
-    >
-      <span un-text="white">{{ size }}</span>
+
+    <!-- //===== Assistant => User Mini State =====// -->
+    <SupportAssistantMiniState @closeMiniState="miniState = false" v-if="miniState && (twoXs || xs || sm || md)"
+      :BreakpointWindow="BreakpointWindow" />
+
+    <!-- //===== Assistant => User State =====// -->
+    <div v-if="lg || xl || twoXl" w="20%" border="~ secondary dark:secondaryOp rounded-lg" p="4">
       <SupportAssistantStates />
     </div>
   </div>
+
+  <!-- //===== Disconnection State =====// -->
   <div v-else text="center 2xl primaryOp dark:primary">...Disconnected</div>
 </template>
 
 <script setup>
-import {
-  useSupabaseClient,
-  ref,
-  onMounted,
-  computed,
-  onBeforeUnmount,
-  useToggle,
-} from "#imports";
+import { useSupabaseClient, ref, onMounted, onBeforeUnmount } from "#imports";
 import { useUser } from "../../../composables/states";
 import { useUserProfile } from "../../../composables/useUserProfile";
 

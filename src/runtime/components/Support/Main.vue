@@ -2,7 +2,6 @@
   <!-- Application -->
   <div h="full" flex="~ col" ref="windowRef">
     <div m="4" h="full" flex="~ col">
-      <span un-text="white">{{size}}</span>
       <!-- <div w="5" h="5" rounded="full" :class="[ isConnected ? 'bg-success' : 'bg-error' ]"></div> -->
       <SupportAssistantMain v-if="userProfile.isSupport" :BreakpointWindow="BreakpointWindow" />
       <SupportUserMain v-else />
