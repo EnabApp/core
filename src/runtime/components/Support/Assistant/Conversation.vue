@@ -38,7 +38,9 @@
         </div>
 
         <!-- //===== User Last Message Here!  =====// -->
-        <span w="80%" truncate="~" un-text="secondaryOp dark:secondary sm">هلو حبيبي ممكن مساعدة ؟</span>
+        <span w="80%" truncate="~" un-text="secondaryOp dark:secondary sm">
+          {{ conversation.support_messages[0]?.message }}
+        </span>
       </div>
     </div>
 

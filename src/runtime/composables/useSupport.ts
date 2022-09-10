@@ -77,7 +77,10 @@ export const useSupport = defineStore("support-store", {
 
             const { data, error } = await supabase
               .from("support_conversations")
-              .select(`id, assistant_id, user_id (id, username)`);
+              .select(`id, assistant_id, user_id (id, username), support_messages(id, message)`)
+              .limit(1, { foreignTable: 'support_messages' })
+              .order('id', { ascending: false, foreignTable: 'support_messages' })
+            //   .order('id', { ascending: false })
             if (data) {
               this.conversations = data;
               this.conversations.isOnline = false;
@@ -112,7 +115,13 @@ export const useSupport = defineStore("support-store", {
                 .eq("conversation_id", this.selectedConversation?.id)
                 .order("created_at", { ascending: false })
                 .limit(100);
-            if (data) this.messages = data;
+            if (error) return error;
+            this.messages = data;
+            
+            // Has message support
+            // if (this.selectedConversation.support_messages[0]) {
+            //     this.selectedConversation.support_messages[0].message = data[0]?.message;
+            // }
         },
 
         // Initiate Conversation Message for Support Assistant
