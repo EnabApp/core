@@ -18,10 +18,8 @@
 </template>
 
 <script setup>
-import { useSupabaseClient, useSupabaseUser, useUser, reactive, useRouter } from '#imports'
+import { useSupabaseClient, reactive } from '#imports'
 
-const user = useUser();
-const router = useRouter();
 const supabase = useSupabaseClient()
 const loading = reactive({
     google: false,
@@ -30,7 +28,7 @@ const loading = reactive({
 
 const googleLogin = async () => {
     loading.google = true
-    const { user, session, error } = await supabase.auth.signInWithOAuth({
+    const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
             redirectTo: import.meta.env.VITE_ENV ? 'https://development.enab.app' : ( import.meta.env.VITE_PRODUCTION ? 'https://enab.app' : 'http://localhost:3000' ),
@@ -38,9 +36,5 @@ const googleLogin = async () => {
     })
 }
 
-user.value = useSupabaseUser()
-supabase.auth.onAuthStateChange((_, session) => {
-    user.value = session?.user
-    if (user.value) router.push('/')
-})
+
 </script>

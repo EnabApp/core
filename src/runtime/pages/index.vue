@@ -1,5 +1,8 @@
 <template>
-  <NuxtLayout name="desktop">
+  <NuxtLayout v-if="loading">
+    <LoadingDesktop />
+  </NuxtLayout>
+  <NuxtLayout v-else name="desktop">
     <div @click="appManager.setFocus('')" flex="~" w="full" h="full" items="start" justify="between">
       <!-- Desktop Applications & Icons -->
       <div min-w="1/4" grid="~ cols-2 sm:cols-3 md:cols-4 auto-rows-min" m="70px">
@@ -60,10 +63,9 @@ import { useAppManager } from '../composables/useAppManager';
 import { useUserProfile } from '../composables/useUserProfile';
 import { useNotifications } from '../composables/useNotifications';
 import { auth } from '../middleware/auth'
-import { useSupabaseClient } from '#imports'
+import { useSupabaseClient, onMounted, ref } from '#imports'
 import { useUser } from '../composables/states'
 import { defineAsyncComponent } from 'vue'
-
 
 
 definePageMeta({
@@ -71,15 +73,24 @@ definePageMeta({
   middleware: auth
 });
 
+const loading = ref(true)
+
 const appManager = useAppManager();
 const userProfile = useUserProfile();
-appManager.fetch()
-userProfile.fetch()
+
 
 const user = useUser()
 const notifications = useNotifications()
-notifications.join()
 
+
+onMounted( async () => {
+  await appManager.fetch()
+  await userProfile.fetch()
+  notifications.join()
+  setTimeout(() => {
+    loading.value = false
+  }, 3000)
+})
 </script>
 
 

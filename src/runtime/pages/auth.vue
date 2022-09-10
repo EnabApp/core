@@ -26,11 +26,20 @@
 
 <script setup>
 import { guest } from '../middleware/guest'
+import { useSupabaseUser, useUser, useRouter, watch } from '#imports'
 
 definePageMeta({
     title: "Auth",
     middleware: guest
 });
+
+const user = useUser();
+const router = useRouter();
+
+user.value = useSupabaseUser()
+watch (() => user.value, (u) => {
+    if (u) router.push('/')
+})
 
 </script>
 
