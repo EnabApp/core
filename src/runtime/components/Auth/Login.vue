@@ -32,8 +32,9 @@ const googleLogin = async () => {
     loading.google = true
     const { user, session, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
-    }, {
-        redirectTo: import.meta.env.VITE_ENV ? 'https://development.enab.app' : ( import.meta.env.VITE_PRODUCTION ? 'https://enab.app' : 'http://localhost:3000' ),
+        options: {
+            redirectTo: import.meta.env.VITE_ENV ? 'https://development.enab.app' : ( import.meta.env.VITE_PRODUCTION ? 'https://enab.app' : 'http://localhost:3000' ),
+        }
     })
 }
 
