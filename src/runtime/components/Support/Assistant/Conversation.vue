@@ -14,7 +14,7 @@
           w="48px" h="48px" rounded="full" />
 
         <!-- //===== State =====// -->
-        <div w="10px" h="10px" right="34px" bottom="2px" position="absolute" border="rounded-full primaryOp 3" :class="
+        <div w="10px" h="10px" right="34px" bottom="2px" position="absolute" border="rounded-full primary dark:primaryOp 3" :class="
           conversation.isOnline
             ? 'bg-success'
             : 'bg-secondaryOp dark:bg-secondary'
@@ -34,11 +34,11 @@
           }}</span>
 
           <!-- //===== Last Message  =====// -->
-          <span right="0" un-text="secondary end xs">1 ساعة</span>
+          <span right="0" un-text="secondaryOp dark:secondary end xs">1 ساعة</span>
         </div>
 
         <!-- //===== User Last Message Here!  =====// -->
-        <span w="80%" truncate="~" un-text="secondary sm">هلو حبيبي ممكن مساعدة ؟</span>
+        <span w="80%" truncate="~" un-text="secondaryOp dark:secondary sm">هلو حبيبي ممكن مساعدة ؟</span>
       </div>
     </div>
 
