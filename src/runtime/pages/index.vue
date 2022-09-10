@@ -89,9 +89,12 @@ onMounted( async () => {
   await appManager.fetch()
   await userProfile.fetch()
   notifications.join()
-  setTimeout(() => {
+  if (import.meta.env.VITE_ENV)
+    setTimeout(() => {
+      loading.value = false
+    }, 3000)
+  else
     loading.value = false
-  }, 3000)
 })
 </script>
 
