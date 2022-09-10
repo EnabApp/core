@@ -17,6 +17,6 @@
 <script setup>
 import { useUser } from "../../composables/states";
 const user = useUser();
-const props = defineProps(["message"]);
+const props = defineProps(["message", "same"]);
 const messageUser = computed(() => props.message.sender_id);
 </script>

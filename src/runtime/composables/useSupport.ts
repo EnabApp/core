@@ -10,6 +10,7 @@ export const useSupport = defineStore("support-store", {
         isConnected: null,
         miniProfileState: false,
         isMessagesLoaded: false,
+        isSendingMessage: false,
 
         // Assistant
         conversations: [],
@@ -140,16 +141,20 @@ export const useSupport = defineStore("support-store", {
 
         // Send Support Assistant Message to User
         async sendMessage(message){
+            this.isSendingMessage = false;
+
             const supabase = useSupabaseClient()
             const user = useUser()
 
             await supabase
                 .from("support_messages")
                 .insert({
-                    conversation_id: this.selectConversation?.id,
-                    message: message.value,
+                    conversation_id: this.selectedConversation?.id,
+                    message: message,
                     sender_id: user.value.id,
             });
+
+            this.isSendingMessage = true;
         },
 
 
