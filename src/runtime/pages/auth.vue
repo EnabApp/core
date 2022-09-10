@@ -2,7 +2,7 @@
     <div class="bg-default" h="screen" w="screen" flex="~ col" items="center" justify="center">
         <div w="xs md:2xl lg:3xl" h="lg md:lg lg:md" border="rounded-t-10px" bg="primary dark:primaryOp" flex="~ col"
             items="center">
-            <IconEnab m="t-50px" w="128px sm:64px md:96px" h="128px sm:64px md:96px" />
+            <IconEnab text="info" m="t-50px" w="128px sm:64px md:96px" h="128px sm:64px md:96px" />
 
             <AuthLogin />
 
