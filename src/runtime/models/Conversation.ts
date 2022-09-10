@@ -4,6 +4,7 @@ export default class Conversation {
     assistant_id: string;
     created_at: string;
     isOnline: boolean;
+    notReadMessages: number;
   
     constructor(args) {
       this.id = args?.id;

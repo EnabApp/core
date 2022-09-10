@@ -26,7 +26,7 @@
 
           <!-- //===== User Name =====// -->
           <span text="primaryOp dark:primary" :class="{'max-w-85%':twoXs,'max-w-100%':xs ||sm||md}" truncate="~"
-            font="semibold">حسن الخالدي حسابي الثاني</span>
+            font="semibold">{{ support.selectedConversation.user_id?.username }}</span>
 
           <!-- //===== User Issue =====// -->
           <span un-text="secondaryOp dark:secondary sm">الفئة : Ui / Bugs</span>

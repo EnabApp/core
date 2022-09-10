@@ -49,6 +49,7 @@
 
 <script setup>
 import { useSupport } from "../../../composables/useSupport";
+import { computed } from '#imports'
 
 const props = defineProps({
   conversation: {
