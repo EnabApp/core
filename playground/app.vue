@@ -12,7 +12,7 @@ appStore.addApp({
   name: "SystemManager",
   title: "مدير النظام",
   minWidth: 370,
-  minHeight: 635,
+  minHeight: 435,
 });
 
 appStore.addApp({

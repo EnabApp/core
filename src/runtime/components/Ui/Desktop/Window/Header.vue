@@ -1,6 +1,6 @@
 <template>
     <!-- Header -->
-    <div @dblclick="app.toggleMaximize()" :class="{ 'border-rounded-t-[10px]': !app.maximized,  'opacity-90': appManager.focused != app.id}" class="backdrop-blur-[5px]" ref="el" bg="primary dark:primaryOp" flex="~ gap-4" place="items-center" justify="between" p="y-4 x-20px" text="lg" font="medium">
+    <div @dblclick="app.toggleMaximize()" :class="{ 'border-rounded-t-[10px]': !(app.maximized || isMobile),  'opacity-90': appManager.focused != app.id}" class="backdrop-blur-[5px]" ref="el" bg="primary dark:primaryOp" flex="~ gap-4" place="items-center" justify="between" p="y-4 x-20px" text="lg" font="medium">
 
         <!-- Title & Icon -->
         <div flex="~ grow gap-14px" items="center" text="primaryOp dark:primary">
@@ -33,6 +33,9 @@ const props = defineProps({
     appManager: {
         type: Object,
         required: true,
+    },
+    isMobile: {
+        type: Boolean,
     },
 })
 

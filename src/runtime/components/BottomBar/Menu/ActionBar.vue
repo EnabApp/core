@@ -24,7 +24,7 @@
           </div>
         </UiToolTip>
 
-        <UiToolTip text="تغيير الوضع">
+        <UiToolTip :text="isDark ? 'الوضع الليلي':'الوضع النهاري' ">
           <div @click="toggleDark()" cursor="pointer" bg="primaryOp dark:primary" border="rounded-5px"
             un-text="primary dark:primaryOp" h="30px sm:35px xl:40px" w="30px sm:35px xl:40px" flex="~" items="center"
             justify="center">

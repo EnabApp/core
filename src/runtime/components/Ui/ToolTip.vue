@@ -7,32 +7,19 @@
       class="absolute flex items-center hidden"
     >
       <div
-        v-if="position === 'top'"
-        id="top"
-        class="relative text-center z-10 w-100px px-3px py-5px pb-5px text-sm font-thin text-white bg-secondaryOp rounded-5px"
+        relative="~"
+        text="sm center white"
+        z="20"
+        w="100px"
+        p="x-3px y-5px b-5px"
+        font="thin"
+        bg="secondaryOp"
+        rounded="5px"
       >
-        {{ text }}
-      </div>
-      <div
-        v-if="position === 'left'"
-        id="left"
-        class="relative text-center z-10 w-100px px-3px py-5px pb-5px text-sm font-thin text-white bg-secondaryOp rounded-5px"
-      >
-        {{ text }}
-      </div>
-      <div
-        v-if="position === 'right'"
-        id="right"
-        class="relative text-center z-10 w-100px px-3px py-5px pb-5px text-sm font-thin text-white bg-secondaryOp rounded-5px"
-      >
-        {{ text }}
-      </div>
-      <div
-        v-if="position === 'bottom'"
-        id="bottom"
-        class="relative text-center z-10 w-100px px-3px py-5px pb-5px text-sm font-thin text-white bg-secondaryOp rounded-5px"
-      >
-        {{ text }}
+        <div v-if="position === 'top'" id="top">{{ text }}</div>
+        <div v-if="position === 'bottom'" id="bottom">{{ text }}</div>
+        <div v-if="position === 'right'" id="right">{{ text }}</div>
+        <div v-if="position === 'left'" id="left">{{ text }}</div>
       </div>
     </div>
   </div>
