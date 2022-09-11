@@ -31,7 +31,7 @@
     </div>
 
     <!-- //===== Assistant => User Mini State =====// -->
-    <SupportAssistantMiniState @closeMiniState="support.miniProfileState = false" v-if="support.miniProfileState && (twoXs || xs || sm || md)" :BreakpointWindow="BreakpointWindow" />
+    <SupportAssistantMiniState ref="miniState" @closeMiniState="support.miniProfileState = false" v-if="support.miniProfileState && (twoXs || xs || sm || md)" :BreakpointWindow="BreakpointWindow" />
 
     <!-- //===== Assistant => User State =====// -->
     <div v-if="lg || xl || twoXl" w="20%" border="~ secondary dark:secondaryOp rounded-lg" p="4">
@@ -48,7 +48,7 @@
         'w-100%': xs || twoXs,
       }" overflow-y="auto" text="primary">
 
-    <SupportAssistantConversationSkeleton 
+    <SupportAssistantConversationSkeleton
       v-for="item in 5" :key="'conversation-skeleton-id-' + item"
       :BreakpointWindow="BreakpointWindow"
     />
@@ -58,7 +58,7 @@
 </template>
 
 <script setup>
-import { useSupabaseClient, ref, onMounted, onBeforeUnmount } from "#imports";
+import { useSupabaseClient, ref, onMounted, onBeforeUnmount , onClickOutside } from "#imports";
 import { useSupport } from "../../../composables/useSupport";
 
 const props = defineProps({
@@ -68,6 +68,16 @@ const props = defineProps({
 });
 
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
+
+const miniState = ref(null)
+
+onClickOutside(
+  miniState,
+  (event) => {
+    console.log(event)
+    support.miniProfileState = false
+  },
+)
 
 const support = useSupport()
 
