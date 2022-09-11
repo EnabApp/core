@@ -87,8 +87,8 @@ const sendMessage = useThrottleFn(async () => {
   
   setTimeout(() => {
     sendMessageButtonState.value = true
-  }, 1000)
-}, 1000)
+  }, 150)
+}, 150)
 </script>
 
 <style scoped>

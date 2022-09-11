@@ -40,7 +40,21 @@
   </div>
 
   <!-- //===== Disconnection State =====// -->
-  <div v-else text="center 2xl primaryOp dark:primary">...Disconnected</div>
+  <div v-else flex="~ gap-4 grow" overflow-y="auto" h="100px" w="full">
+    <div flex="~ col " :class="{
+        'w-20%': xl || twoXl,
+        'w-25%': lg,
+        'w-40%': md || sm,
+        'w-100%': xs || twoXs,
+      }" overflow-y="auto" text="primary">
+
+    <SupportAssistantConversationSkeleton 
+      v-for="item in 5" :key="'conversation-skeleton-id-' + item"
+      :BreakpointWindow="BreakpointWindow"
+    />
+    </div>
+  </div>
+
 </template>
 
 <script setup>

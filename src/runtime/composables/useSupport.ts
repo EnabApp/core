@@ -113,7 +113,7 @@ export const useSupport = defineStore("support-store", {
                 .from("support_messages")
                 .select("id, message, sender_id(id, username)")
                 .eq("conversation_id", this.selectedConversation?.id)
-                .order("created_at", { ascending: false })
+                .order("id", { ascending: false })
                 .limit(100);
             if (error) return error;
             this.messages = data;
