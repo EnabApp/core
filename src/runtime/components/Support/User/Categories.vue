@@ -15,6 +15,7 @@
       }"
       items="center"
     >
+    <!-- Case Content -->
       <div
         v-for="item in 6"
         :key="item"
@@ -28,7 +29,7 @@
         :class="{
           'w-120px h-120px': twoXs,
           'w-130px h-130px': xs,
-          'w-180px h-180px': sm || md || lg || xl || twoXl,
+          'w-170px h-170px': sm || md || lg || xl || twoXl,
         }"
         border="2 secondary dark:secondaryOp rounded-10px"
       >
