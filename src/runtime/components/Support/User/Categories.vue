@@ -28,7 +28,7 @@
         :class="{
           'w-120px h-120px': twoXs,
           'w-130px h-130px': xs,
-          'w-188px h-188px': sm || md || lg || xl || twoXl,
+          'w-180px h-180px': sm || md || lg || xl || twoXl,
         }"
         border="2 secondary dark:secondaryOp rounded-10px"
       >
@@ -38,8 +38,10 @@
           justify="center"
           items="center"
           bg="secondary group-hover:primary"
-          w="55px"
-          h="55px"
+          :class="{
+            'w-60px h-60px': twoXs||xs,
+            'w-75px h-75px': sm || md || lg || xl || twoXl,
+          }"
           rounded="full"
         >
           <IconEmail
