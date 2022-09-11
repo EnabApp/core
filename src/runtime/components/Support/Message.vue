@@ -4,7 +4,10 @@
     <span v-if="user.id !== messageUser?.id" text="xs secondaryOp dark:secondary">{{
     messageUser?.username
     }}</span>
-    <div  max-w="70%" w="auto" :class="[
+    <div v-if="styleEmoji" text="36px">
+      <span>{{ message.message }}</span>
+    </div>
+    <div v-else max-w="70%" w="auto" :class="[
       user.id == messageUser?.id
         ? 'bg-secondary dark:text-primaryOp dark:text-primary self-start'
         : 'bg-secondaryOp text-secondary self-end',
