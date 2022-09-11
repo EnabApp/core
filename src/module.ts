@@ -87,7 +87,8 @@ export default defineNuxtModule<ModuleOptions>({
               "BottomBar/**",
               "Auth/**",
               "*.vue",
-              "SystemManager/**"
+              "SystemManager/**",
+              "Support/**"
           ]
         });
       });
