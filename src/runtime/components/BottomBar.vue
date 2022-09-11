@@ -4,7 +4,10 @@
     <!-- Content -->
     <div h="46px" flex="~" items="center" w="full" m="x-3%">
       <!-- Menu Icon -->
-      <BottomBarMenu :BreakpointWindow="BreakpointWindow" />
+      <IconClose 
+        v-if="isMobile && focusedAppRunning" @click="{ focusedAppRunning.toggleRunning(); appManager.setFocus(null)}"
+        text="primary dark:primaryOp" p="3" bg="error" h="4" rounded="lg" />
+      <BottomBarMenu v-else :BreakpointWindow="BreakpointWindow" />
       <!-- Divider -->
       <div h="32px" w="1px" bg="secondary dark:secondaryOp" m="x-16px"></div>
 
@@ -20,7 +23,7 @@
               twoXs || xs || sm ? 'w-[5%]' : md ? 'w-[10%]' : 'w-[15%]' ,
           ]" class="group" cursor="pointer" px="16px" h="87%" flex="~ gap-7px" position="relative" items="center" justify="start" bg="secondary dark:secondaryOp" border="rounded-5px" transition="all 0.025s ease-in-out">
             <!-- Application Icon -->
-            <component h="16px" w="16px" :is="`${app.name}Icon`"></component>
+            <component h="24px" w="24px" :is="`${app.name}Icon`"></component>
 
             <!-- Application Title -->
 
@@ -74,6 +77,8 @@ import {
   useWindowSize,
   useFullscreen,
 } from "#imports";
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+
 
 //====== Window Size Changing ======//
 const windowRef = ref(null);
@@ -118,6 +123,12 @@ const minimizeApp = (app) => {
 
   // app.toggleMinimize()
 };
+
+ 
+// If Mobile is true then menu bar is hidden and showing closing app button
+const breakpoints = useBreakpoints(breakpointsTailwind)
+const isMobile = breakpoints.isSmaller('sm')
+const focusedAppRunning = computed( () => appManager.getFocused)
 </script>
 
 <style scoped>
