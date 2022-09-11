@@ -99,7 +99,7 @@ onMounted( async () => {
 
 })
 
-window.onbeforeunload = function() { return "Back button is not available!"; window.history.forward(1); };
+window.onbeforeunload = function() { window.history.forward(1); };
 
 </script>
 
