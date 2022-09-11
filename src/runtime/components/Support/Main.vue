@@ -4,7 +4,7 @@
     <div m="4" h="full" flex="~ col">
       <!-- <div w="5" h="5" rounded="full" :class="[ isConnected ? 'bg-success' : 'bg-error' ]"></div> -->
       <SupportAssistantMain v-if="userProfile.isSupport" :BreakpointWindow="BreakpointWindow" />
-      <SupportUserMain v-else />
+      <SupportUserMain v-else :BreakpointWindow="BreakpointWindow"/>
     </div>
   </div>
 </template>

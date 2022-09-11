@@ -1,117 +1,22 @@
 <template>
-  <div flex="~ col grow gap-4" h="100px" overflow-y="auto">
-    <!-- Messages -->
-    <div
-      border="~ secondary dark:secondaryOp rounded-lg"
-      flex="~ col gap-2"
-      h="full"
-      text="white"
-      p="4"
-      overflow-y="auto"
-    >
-      <SupportMessage v-for="msg in messages" :message="msg" :key="msg" />
-    </div>
-    <div v-if="isConnected" flex="~ gap-4">
-      <UiInput @keyup.enter="sendMessage" placeholder="اكتب هنا..." w="full" v-model="message" />
-      <UiButton @click="sendMessage">ارسال</UiButton>
-    </div>
+  <div
+    flex="~ gap-4 col grow"
+    overflow-y="auto"
+    h="100px"
+    :class="{ 'w-100%': twoXs || xs || sm ,
+  'w-76% container mx-12%' : md,
+  'w-66% container mx-22%' : lg,
+  }"
+  >
+    <div w="60px" text="white">{{ size }}</div>
+    <SupportUserMessages />
   </div>
 </template>
-
 <script setup>
-import {
-  useSupabaseClient,
-  ref,
-  computed,
-  onMounted,
-  onBeforeUnmount,
-} from "#imports";
-import { useUser } from "../../../composables/states";
-import { useUserProfile } from "../../../composables/useUserProfile";
-import { useStorage } from "@vueuse/core";
-
-const supabase = useSupabaseClient();
-const user = useUser();
-const userProfile = useUserProfile();
-const conversation_id = useStorage("support:conversation_id");
-
-const message = ref(null);
-const messages = ref([]);
-const isConnected = ref(false);
-
-const getMessages = async () => {
-  if (!conversation_id.value) return;
-  const { data, error } = await supabase
-    .from("support_messages")
-    .select("message, sender_id(id, username)")
-    .eq("conversation_id", conversation_id.value);
-  if (data) messages.value = data;
-};
-
-// Online status
-const channel = supabase.channel("support", {
-  config: {
-    presence: { key: user.value.id },
+const props = defineProps({
+  BreakpointWindow: {
+    type: Object,
   },
 });
-channel.on("presence", { event: "sync" }, () => onlineState()).subscribe();
-
-const onlineState = () => {
-  const newState = channel.presenceState();
-};
-const interval = setInterval(function () {
-  channel.track({ isOnline: true });
-}, 5000);
-
-// End of online status
-
-// Create Conversation with Support Team
-onMounted(async () => {
-  if (!conversation_id.value) {
-    const { data: record, error } = await supabase
-      .from("support_conversations")
-      .insert({ user_id: user.value.id })
-      .select("id")
-      .single();
-    if (error) throw error;
-    else conversation_id.value = record.id;
-  }
-
-  supabase
-    .channel("public:support_messages")
-    .on(
-      "postgres_changes",
-      {
-        event: "INSERT",
-        schema: "public",
-        table: "support_messages",
-        filter: `conversation_id=eq.${conversation_id.value}`,
-      },
-      (payload) => {
-        getMessages();
-      }
-    )
-    .subscribe((state) => {
-      if (state === "SUBSCRIBED") isConnected.value = true;
-      else isConnected.value = false;
-    });
-
-  getMessages();
-});
-
-onBeforeUnmount(() => {
-  channel.track({ isOnline: false });
-  clearInterval(interval);
-});
-
-const sendMessage = async () => {
-  await supabase
-    .from("support_messages")
-    .insert({
-      conversation_id: conversation_id.value,
-      message: message.value,
-      sender_id: user.value.id,
-    });
-  message.value = "";
-};
+const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
 </script>
