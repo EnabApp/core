@@ -13,7 +13,7 @@
       bg="w-20 dark:b-20"
       backdrop="~ blur-sm"
     >
-      <div flex="~ col " max-w="70%" min-w="25%" max-h="70%" min-h="25%">
+      <div ref="modalState" flex="~ col " max-w="70%" min-w="25%" max-h="70%" min-h="25%">
         <!-- Header -->
         <div
           flex="~ gap-4"
@@ -64,21 +64,28 @@
 </template>
 
 <script setup>
-import { onKeyStroke } from "#imports";
+import { onKeyStroke , onClickOutside , ref } from "#imports";
 
 const props = defineProps({
   modelValue: {
     type: Boolean,
     default: false,
   },
-  confirm: {
-    type: String,
-    default: "",
-  },
 });
 
 // Define Emits
-const emit = defineEmits(["confirm", "cancel"]);
+const emit = defineEmits(["cancel"]);
+
+const modalState = ref(null)
+
+onClickOutside(
+  modalState,
+  (event) => {
+    console.log(event)
+    emit("cancel")
+  },
+)
+
 
 // Close on click ESC
 onKeyStroke(["Escape"], (e) => emit("cancel"));
