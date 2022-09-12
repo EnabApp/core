@@ -10,14 +10,16 @@
       gap="10px"
       :class="{
         'grid grid-cols-3': sm || md || lg || xl || twoXl,
-        'grid grid-cols-2': xs,
-        'grid grid-cols-2 ': twoXs,
+        'grid grid-cols-2': twoXs || xs,
       }"
+      overflow-y="auto"
+      p="4"
       items="center"
+      w="95%"
     >
-    <!-- Case Content -->
+      <!-- Case Content -->
       <div
-        v-for="item in 6"
+        v-for="item in 9"
         :key="item"
         flex="~ col gap-18px"
         cursor="pointer"
@@ -27,9 +29,8 @@
         p="t-3px"
         bg="hover:secondaryOp hover:opacity-30 dark:hover:secondaryOp"
         :class="{
-          'w-120px h-120px': twoXs,
-          'w-130px h-130px': xs,
-          'w-170px h-170px': sm || md || lg || xl || twoXl,
+          'w-95% h-120px': twoXs || xs,
+          'w-95% h-170px': sm || md || lg || xl || twoXl,
         }"
         border="2 secondary dark:secondaryOp rounded-10px"
       >
@@ -40,7 +41,7 @@
           items="center"
           bg="secondary group-hover:primary"
           :class="{
-            'w-60px h-60px': twoXs||xs,
+            'w-60px h-60px': twoXs || xs,
             'w-75px h-75px': sm || md || lg || xl || twoXl,
           }"
           rounded="full"
@@ -59,7 +60,7 @@
         <span
           p="5px"
           text="primaryOp dark:primary"
-          :class="{ 'text-sm': twoXs, 'text-md': xs }"
+          :class="{ 'text-sm': twoXs || xs, 'text-md': sm }"
           font="semibold"
         >
           مشكله المشاكل
@@ -68,9 +69,16 @@
     </div>
 
     <!-- UI Input & Button -->
-    <div flex="~ gap-2" justify="between" w="80%">
-      <UiInput placeholder="وصف السؤال" icon="IconQuestionMark" w="90%" />
-      <UiButton @click="$emit('nextStep')" w="20%">ارسل</UiButton>
+    <div flex="~ gap-2" justify="between" w="95%">
+      <UiInput
+        size="md"
+        placeholder="وصف السؤال"
+        icon="IconQuestionMark"
+        w="90%"
+      />
+      <UiButton size="md" @click="$emit('nextStep')" :class="{ 'w-48%': twoXs , 'w-30%': xs , 'w-23%' : sm , 'w-20%' : md || lg || xl || twoXl}"
+        >بدء المحادثة</UiButton
+      >
     </div>
   </div>
 </template>
