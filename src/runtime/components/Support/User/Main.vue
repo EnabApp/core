@@ -2,12 +2,14 @@
   <div
     flex="~ gap-4 col grow"
     h="100px"
+    class="transition-all duration-300 pop-up delay-75"
     :class="{
       'w-100%': twoXs || xs || sm,
-      'w-85% container mx-7%': md,
+      'w-85% container mx-7% ': md,
       'w-70% container mx-15%': lg,
       'w-55% container mr-22%': xl,
       'w-45% container mx-27%': twoXl,
+
     }"
   >
     <SupportUserCategories
