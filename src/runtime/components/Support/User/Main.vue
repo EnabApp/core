@@ -1,15 +1,24 @@
 <template>
   <div
     flex="~ gap-4 col grow"
-    overflow-y="auto"
     h="100px"
-    :class="{ 'w-100%': twoXs || xs || sm ,
-  'w-76% container mx-12%' : md,
-  'w-66% container mx-22%' : lg,
-  }"
+    class="transition-all duration-300 pop-up delay-75"
+    :class="{
+      'w-100%': twoXs || xs || sm,
+      'w-85% container mx-7% ': md,
+      'w-70% container mx-15%': lg,
+      'w-55% container mr-22%': xl,
+      'w-45% container mx-27%': twoXl,
+
+    }"
   >
-    <div w="60px" text="white">{{ size }}</div>
-    <SupportUserMessages />
+    <SupportUserCategories
+      v-if="step == 1"
+      @nextStep="step = 2"
+      :BreakpointWindow="BreakpointWindow"
+    />
+    <SupportUserWaiting v-if="step == 2" />
+    <SupportUserMessages v-if="step == 3" />
   </div>
 </template>
 <script setup>
@@ -19,4 +28,6 @@ const props = defineProps({
   },
 });
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
+
+const step = ref(1);
 </script>

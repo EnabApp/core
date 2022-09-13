@@ -14,6 +14,9 @@
         'focus-within:border-primaryOp dark:focus-within:border-primary':
           !error,
         'focus-within:border-error-500': error,
+        'h-8': size == 'sm',
+        'h-38px': size == 'md',
+        'h-50px': size == 'lg',
       }"
       flex="~ gap-2"
       font="leading-tight"
@@ -25,7 +28,13 @@
     >
       <div flex="~ gap-2 grow" items="center">
         <!-- Icon -->
-        <component v-if="icon" h="20px" w="20px" text="dark:primary primaryOp" :is="`${icon}`" />
+        <component
+          v-if="icon"
+          h="20px"
+          w="20px"
+          text="dark:primary primaryOp"
+          :is="`${icon}`"
+        />
 
         <!-- Input -->
         <input
@@ -34,7 +43,12 @@
           @input="$emit('update:modelValue', $event.target.value)"
           :placeholder="placeholder"
           :type="type == 'password' ? statePassword : type"
-          class="py-2 text-md text-secondaryOp bg-transparent border-0 outline-none appearance-none dark:text-secondary dark:bg-transparent grow focus:outline-none"
+          :class="{
+            'text-md': size == 'sm',
+            'text-lg': size == 'md',
+            'text-xl': size == 'lg',
+          }"
+          class="py-2 text-secondaryOp bg-transparent border-0 outline-none appearance-none dark:text-secondary dark:bg-transparent grow focus:outline-none"
         />
       </div>
 
@@ -116,6 +130,10 @@ const props = defineProps({
   increment: {
     type: String,
     default: "1",
+  },
+  size: {
+    type: String,
+    default: "sm",
   },
 });
 
