@@ -97,8 +97,8 @@ export const useAppManager = defineStore("app-manager", {
       })
       this.fetch();
       if (error) return error;
-      // if (data) return data;
-      console.log(data)
+      return data;
+
     },
 
     //Buy a plan
@@ -109,8 +109,8 @@ export const useAppManager = defineStore("app-manager", {
       })
       this.fetch();
       if (error) return error;
-      // if (data) return data;
-      console.log(data)
+      return data;
+
     },
 
     // Buy a service
