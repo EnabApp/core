@@ -29,5 +29,5 @@ const props = defineProps({
 });
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
 
-const step = ref(1);
+const step = ref(3);
 </script>
