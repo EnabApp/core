@@ -7,7 +7,7 @@
 const props = defineProps({
     icon: {
         type: String,
-        requierd: true,
+        required: true,
     },
 
 })

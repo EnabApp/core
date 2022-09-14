@@ -76,7 +76,15 @@
         icon="IconQuestionMark"
         w="90%"
       />
-      <UiButton size="md" @click="$emit('nextStep')" :class="{ 'w-48%': twoXs , 'w-30%': xs , 'w-23%' : sm , 'w-20%' : md || lg || xl || twoXl}"
+      <UiButton
+        size="md"
+        @click="$emit('nextStep')"
+        :class="{
+          'w-48%': twoXs,
+          'w-30%': xs,
+          'w-23%': sm,
+          'w-20%': md || lg || xl || twoXl,
+        }"
         >بدء المحادثة</UiButton
       >
     </div>
