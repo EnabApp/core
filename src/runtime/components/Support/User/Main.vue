@@ -29,5 +29,16 @@ const props = defineProps({
 });
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
 
-const step = ref(3);
+const step = ref(1);
+
+watch (
+  () => step.value,
+  (val) => {
+    if (val == 2) {
+      setTimeout(() => {
+        step.value = 3;
+      }, 3000);
+    }
+  }
+);
 </script>
