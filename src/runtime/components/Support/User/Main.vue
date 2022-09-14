@@ -9,7 +9,6 @@
       'w-70% container mx-15%': lg,
       'w-55% container mr-22%': xl,
       'w-45% container mx-27%': twoXl,
-
     }"
   >
     <SupportUserCategories
@@ -31,7 +30,7 @@ const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
 
 const step = ref(1);
 
-watch (
+watch(
   () => step.value,
   (val) => {
     if (val == 2) {

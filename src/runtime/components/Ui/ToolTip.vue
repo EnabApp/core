@@ -1,5 +1,5 @@
 <template>
-  <div ref="myHoverableElement" class="group relative inline-block">
+  <div ref="myHoverableElement" class="group" inline-block="~" relative="~">
     <slot />
     <div
       v-if="isHovered"
@@ -41,7 +41,7 @@ const tooltipPos = {
 const props = defineProps({
   text: {
     type: String,
-    requierd: true,
+    required: true,
   },
   position: {
     type: String,
