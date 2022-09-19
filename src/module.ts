@@ -65,14 +65,6 @@ export default defineNuxtModule<ModuleOptions>({
         pages.push({ path: '/', file: resolve(runtimeDir, 'pages/index.vue')})
         pages.push({ path: '/auth', file: resolve(runtimeDir, 'pages/auth.vue')})
       })
-
-
-      // ColorMode Configuration
-      let colorMode = { classSuffix: "" } as any;
-      nuxt.options["colorMode"] = colorMode;
-
-      // UnoCSS Configurations
-      nuxt.options["unocss"] = uno;
     
         
   
@@ -95,10 +87,18 @@ export default defineNuxtModule<ModuleOptions>({
               "BottomBar/**",
               "Auth/**",
               "*.vue",
-              "SystemManager/**"
+              "SystemManager/**",
+              "Support/**"
           ]
         });
       });
     }
+
+    // ColorMode Configuration
+    let colorMode = { classSuffix: "" } as any;
+    nuxt.options["colorMode"] = colorMode;
+
+    // UnoCSS Configurations
+    nuxt.options["unocss"] = uno;
   }
 })

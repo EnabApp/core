@@ -85,6 +85,7 @@ const user = useUser()
 const notifications = useNotifications()
 
 
+
 onMounted( async () => {
   await appManager.fetch()
   await userProfile.fetch()
@@ -95,7 +96,11 @@ onMounted( async () => {
     }, 3000)
   else
     loading.value = false
+
 })
+
+window.onbeforeunload = function() { window.history.forward(1); };
+
 </script>
 
 

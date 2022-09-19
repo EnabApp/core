@@ -39,7 +39,7 @@
         </div>
 
         <!-- Header -->
-        <div ref="headerEl">
+        <div ref="headerEl" v-if="!isMobile">
           <UiDesktopWindowHeader :isMobile="isMobile" :app="app" :appManager="appManager" @on-move="
             (pos) => {
               x = pos.x;

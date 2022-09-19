@@ -6,7 +6,6 @@ import { safelist } from "./safelist"
 export const uno: UnocssNuxtOptions = {
     autoImport: true,
     uno: true,
-    icons: true,
     attributify: {
       ignoreAttributes: ['label'],
     },
