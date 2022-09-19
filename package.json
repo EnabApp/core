@@ -31,7 +31,7 @@
     "@nuxt/image-edge": "latest",
     "@nuxt/module-builder": "latest",
     "@nuxtjs/color-mode": "^3.1.4",
-    "@nuxtjs/supabase": "^0.2.0-15",
+    "@nuxtjs/supabase": "^0.2.0-16",
     "@pinia/nuxt": "^0.4.1",
     "@tauri-apps/api": "^1.0.2",
     "@unocss/inspector": "^0.45.15",
