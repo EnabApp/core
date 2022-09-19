@@ -105,13 +105,26 @@ export const useAppManager = defineStore("app-manager", {
 
     // Buy an app
     async buyApp(app_id) {
-      const supabase = useSupabaseClient();
-      let { data, error } = await supabase.functions.invoke("core-buy-app", {
-        body: JSON.stringify({ app_id: app_id }),
-      });
+      const supabase = useSupabaseClient()
+      let { data, error } = await supabase.functions.invoke('core-buy-app', {
+        body: JSON.stringify({ app_id: app_id, buy_type: 1 }),
+      })
       this.fetch();
       if (error) return error;
-      if (data) return data;
+      return data;
+
+    },
+
+    //Buy a plan
+    async buyPlan(plan_id) {
+      const supabase = useSupabaseClient()
+      let { data, error } = await supabase.functions.invoke('core-buy-app', {
+        body: JSON.stringify({ plan_id: plan_id, buy_type: 2 }),
+      })
+      this.fetch();
+      if (error) return error;
+      return data;
+
     },
 
     // Buy a service
