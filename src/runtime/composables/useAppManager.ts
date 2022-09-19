@@ -68,12 +68,9 @@ export const useAppManager = defineStore("app-manager", {
                       id, app_id, type, points, description, users_plans(id)
                   )
               `);
-      if (error) {
-        console.log("حدث خطأ اثناء تحميل التطبيقات");
-        return false;
-      }
-      this.apps = apps.map((app) => new App(app));
-      this.apps.push(...this.developmentApps);
+      if (error) return error
+      this.apps = apps.map((app) => new App(app))
+      this.apps.push(...this.developmentApps)
     },
     async fetchPacks() {
       // const { $toast } = useNuxtApp()
