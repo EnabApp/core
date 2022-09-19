@@ -17,8 +17,7 @@
 </template>
 
 <script setup>
-import { watch, ref } from "#imports";
-import { useSupabaseClient } from "#imports";
+import { ref } from "#imports";
 import { useUserProfile } from "../../composables/useUserProfile";
 
 const props = defineProps({
