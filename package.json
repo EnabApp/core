@@ -23,7 +23,7 @@
     "release": "cd scripts && node --loader ts-node/esm release.ts"
   },
   "dependencies": {
-    "@nuxt/kit": "npm:@nuxt/kit-edge@latest"
+    "@nuxt/kit": "^3.0.0-rc.10"
   },
   "devDependencies": {
     "@enab/systemapps": "^1.0.1-beta.3",
