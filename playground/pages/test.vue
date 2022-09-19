@@ -1,6 +1,6 @@
 <template>
 
-<button @click="appManager.buyPack(1)">شراء حزمة</button>
+<button @click="appManager.fetch()">جلب التطبيقات </button>
 
 </template>
 

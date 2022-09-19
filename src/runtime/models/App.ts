@@ -1,5 +1,6 @@
 import Widget from "./Widget";
 import Service from "./Service";
+import Plan from "./Plan";
 
 export default class App {
     id: number;
