@@ -1,5 +1,6 @@
 import Widget from "./Widget";
 import Service from "./Service";
+import Plan from "./Plan";
 
 export default class App {
     id: number;
@@ -8,7 +9,7 @@ export default class App {
 
     title: string;
     icon: string;
-    minimized: boolean; 
+    minimized: boolean;
     maximized: boolean;
     // maximizable: boolean;
     // resizeable: boolean;
@@ -30,6 +31,7 @@ export default class App {
     points: number;
 
     services: Service[];
+    plans: Plan[];
 
 
     constructor(args) {
@@ -54,10 +56,11 @@ export default class App {
         this.points = args.points ?? 0
 
         this.services = args.apps_services?.map(service => new Service(service))
+        this.plans = args.apps_plans?.map(plan => new Plan(plan))
 
     }
-    
-    
+
+
     // Actions - Toggles
     open(){
         if (!this.running) this.booting = true
@@ -71,13 +74,13 @@ export default class App {
             // this.subApps.forEach(app => app.running = false)
     }
 
-    
-    
+
+
     toggleMinimize() {
         this.minimized = !this.minimized
     }
 
-    
+
     toggleMaximize() {
         // if (this.maximizable)
         this.maximized = !this.maximized
@@ -109,4 +112,5 @@ export default class App {
     // isSubAppsRunning(){
     //     return this.subApps.some(app => app.running)
     // }
+
 }

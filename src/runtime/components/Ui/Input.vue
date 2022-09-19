@@ -14,6 +14,9 @@
         'focus-within:border-primaryOp dark:focus-within:border-primary':
           !error,
         'focus-within:border-error-500': error,
+        'h-8': size == 'sm',
+        'h-38px': size == 'md',
+        'h-50px': size == 'lg',
       }"
       flex="~ gap-2"
       font="leading-tight"
@@ -25,16 +28,28 @@
     >
       <div flex="~ gap-2 grow" items="center">
         <!-- Icon -->
-        <component v-if="icon" h="20px" w="20px" text="dark:primary primaryOp" :is="`${icon}`" />
+        <component
+          v-if="icon"
+          h="20px"
+          w="20px"
+          text="dark:primary primaryOp"
+          :is="`${icon}`"
+        />
 
         <!-- Input -->
         <input
+          ref="inputRef"
           :value="modelValue"
           w="20"
           @input="$emit('update:modelValue', $event.target.value)"
           :placeholder="placeholder"
           :type="type == 'password' ? statePassword : type"
-          class="py-2 text-md text-secondaryOp bg-transparent border-0 outline-none appearance-none dark:text-secondary dark:bg-transparent grow focus:outline-none"
+          :class="{
+            'text-md': size == 'sm',
+            'text-lg': size == 'md',
+            'text-xl': size == 'lg',
+          }"
+          class="py-2 text-secondaryOp bg-transparent border-0 outline-none appearance-none dark:text-secondary dark:bg-transparent grow focus:outline-none"
         />
       </div>
 
@@ -48,34 +63,58 @@
         overflow="y-hidden"
       >
         <!-- Type password -->
-        <div class="flex gap-1" v-if="type == 'password'">
+        <div flex="~ gap-1" items="center" v-if="type == 'password'">
+          
+          <!-- Show Password -->
           <button
             v-if="statePassword == 'password'"
             @click="showPassword()"
-            text="xl gray-500 dark:gray-200"
+            flex="~"
+            items="center"
+            bg="transparent"
+            border="transparent"
+            text="xl secondaryOp dark:secondary"
           >
             <IconGridiconsNotVisible w="18px" />
           </button>
+
+          <!-- Hide Password -->
           <button
             v-else
             @click="showPassword()"
-            text="xl gray-700 dark:text-gray-50"
+            flex="~"
+            items="center"
+            bg="transparent"
+            border="transparent"
+            text="xl secondaryOp dark:secondary"
           >
             <IconGridiconsVisible w="18px" />
           </button>
         </div>
 
-        <!-- Incrementals -->
-        <div flex="~ gap-1 col" v-if="type == 'number'">
+        <!-- Incremental -->
+        <div flex="~ gap-1" v-if="type == 'number'">
           <button
             @click="increase()"
+            rounded="5px"
+            bg="transparent hover:secondary dark:hover:secondaryOp"
+            border="transparent"
+            flex="~"
+            items="center"
             text="xl secondaryOp dark:secondary"
             cursor="pointer"
           >
             <IconEpArrowUp w="18px" />
           </button>
+
+          <!-- Decrement -->
           <button
             @click="decrease()"
+            rounded="5px"
+            bg="transparent hover:secondary dark:hover:secondaryOp"
+            border="transparent"
+            flex="~"
+            items="center"
             text="xl secondaryOp dark:secondary"
             cursor="pointer"
           >
@@ -117,8 +156,13 @@ const props = defineProps({
     type: String,
     default: "1",
   },
+  size: {
+    type: String,
+    default: "sm",
+  },
 });
 
+const inputRef = ref(null);
 const emit = defineEmits(["update:modelValue"]);
 
 // Toggling Password View
@@ -127,31 +171,33 @@ const [statePassword, showPassword] = useToggle(props.type, {
   falsyValue: "text",
 });
 
+// Incremental
 const increase = () => {
-  const inputValue = inputRef.value.value;
-  inputRef.value.value = parseFloat(inputValue) + parseFloat(props.increment);
-  emit("update:modelValue", inputRef.value.value);
+  if (inputRef.value.value) {
+    const inputValue = inputRef.value.value;
+    inputRef.value.value = parseFloat(inputValue) + parseFloat(props.increment);
+    emit("update:modelValue", inputRef.value.value);
+  } else {
+    console.log("Input is empty");
+  }
 };
+
+// Decremental
 const decrease = () => {
-  const inputValue = inputRef.value.value;
-  inputRef.value.value = parseFloat(inputValue) - parseFloat(props.increment);
-  emit("update:modelValue", inputRef.value.value);
+  if (inputRef.value.value) {
+    const inputValue = inputRef.value.value;
+    inputRef.value.value = parseFloat(inputValue) - parseFloat(props.increment);
+    emit("update:modelValue", inputRef.value.value);
+  } else {
+    console.log("Input is empty");
+  }
 };
 </script>
 
 <style scoped>
-#buttons::-webkit-scrollbar {
-  width: 3px;
-  height: 3px;
-}
-
-/* #buttons::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-} */
-
-#buttons::-webkit-scrollbar-thumb {
-  background-color: #bbb;
-  /* outline: 1px solid slategrey; */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
 }
 
 input[type="number"]::-webkit-inner-spin-button,

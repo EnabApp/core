@@ -1,19 +1,20 @@
 <template>
   <div items="center" justify="center" flex="~" h="screen" w="screen" bg="primary dark:primaryOp">
-    <div flex="~ col" items="center" justify="center" w="lg sm:3xl" h="lg" border="rounded-lg" text="lg sm:2xl primaryOp dark:primary">
+    <div flex="~ col" items="center" justify="center" w="lg sm:3xl" h="lg" border="rounded-lg"
+      text="lg sm:2xl primaryOp dark:primary">
       <div position="relative">
         <!-- <div position="absolute" top="0" bg="info opacity-50" w="full" h="full"></div> -->
         <IconEnabAnimated text="primaryOp dark:primary" w="xs sm:md" />
       </div>
-      <div animate-pulse>
-        جاري تحميل سطح المكتب
-      </div>
+      <div animate-pulse>جاري تحميل سطح المكتب</div>
     </div>
     <div id="cursor"></div>
     <div id="cursor-border"></div>
   </div>
 </template>
 <script setup>
+import { onMounted } from "#imports";
+
 onMounted(() => {
   const cursor = document.querySelector("#cursor");
   const cursorBorder = document.querySelector("#cursor-border");
@@ -54,8 +55,7 @@ onMounted(() => {
       cursorBorder.style.setProperty("--size", "50px");
     });
   });
-
-})
+});
 </script>
 
 <style scoped>
