@@ -14,6 +14,8 @@
   </div>
 </template>
 <script setup>
+import { onMounted } from '#imports'
+
 onMounted(() => {
   const cursor = document.querySelector("#cursor");
   const cursorBorder = document.querySelector("#cursor-border");
