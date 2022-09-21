@@ -73,17 +73,11 @@ export const useAppManager = defineStore("app-manager", {
       this.apps.push(...this.developmentApps)
     },
     async fetchPacks() {
-      // const { $toast } = useNuxtApp()
       const supabase = useSupabaseClient();
       let { data: packs, error } = await supabase
         .from("packs")
-        .select(
-          "*, packs_apps (id,app:app_id (*,users_apps(id),apps_services(id, app_id, title, points, icon, description, users_services(id))"
-        );
-      if (error) {
-        console.log("حدث خطأ اثناء تحميل الباقات");
-        return false;
-      }
+        .select("*,packs_apps(app:app_id(*))");
+      if (error) error
       this.packs = packs.map((pack) => new Pack(pack));
     },
     // Set Focus to an App
