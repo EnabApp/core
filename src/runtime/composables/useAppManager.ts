@@ -76,8 +76,8 @@ export const useAppManager = defineStore("app-manager", {
       const supabase = useSupabaseClient();
       let { data: packs, error } = await supabase
         .from("packs")
-        .select("*,packs_apps(app:app_id(*))");
-      if (error) error
+        .select("*,packs_apps(app:app_id(*,apps_services(*)))");
+        if (error) return error
       this.packs = packs.map((pack) => new Pack(pack));
     },
     // Set Focus to an App
