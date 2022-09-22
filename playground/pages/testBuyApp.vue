@@ -1,6 +1,6 @@
 <template>
 
-  <button @click="appManager.buyPlan(2)">شراء خطة اقتصادية</button>
+  <button @click="appManager.buyApp(1)">شراء  </button>
 
 </template>
 

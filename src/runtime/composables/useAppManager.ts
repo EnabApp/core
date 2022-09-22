@@ -109,10 +109,9 @@ export const useAppManager = defineStore("app-manager", {
       let { data, error } = await supabase.functions.invoke('core-buy-app', {
         body: JSON.stringify({ app_id: app_id, buy_type: 1 }),
       })
-      this.fetch();
+      this.fetch()
       if (error) return error;
-      return data;
-
+      return data
     },
 
     //Buy a plan
