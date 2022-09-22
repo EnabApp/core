@@ -40,7 +40,6 @@ user.value = useSupabaseUser()
 watch (() => user.value, (u) => {
     if (u) router.push('/')
 })
-
 </script>
 
 <style scoped>

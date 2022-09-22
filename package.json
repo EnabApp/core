@@ -1,7 +1,7 @@
 {
   "name": "@enab/core",
   "type": "module",
-  "version": "1.8.22-beta.22",
+  "version": "1.8.22-beta.23",
   "license": "MIT",
   "exports": {
     ".": {
@@ -23,7 +23,9 @@
     "release": "cd scripts && node --loader ts-node/esm release.ts"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.0.0-rc.10"
+    "@nuxt/kit": "^3.0.0-rc.10",
+    "@vueuse/firebase": "^9.2.0",
+    "firebase": "^9.10.0"
   },
   "devDependencies": {
     "@enab/systemapps": "^1.0.1-beta.3",
