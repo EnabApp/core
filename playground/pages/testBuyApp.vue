@@ -1,6 +1,6 @@
 <template>
 
-  <button @click="appManager.buyApp(1)">شراء  </button>
+  <button @click="appManager.buyApp(5)">شراء  </button>
 
 </template>
 
