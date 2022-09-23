@@ -16,15 +16,29 @@ export const useSupport = defineStore("support-store", {
     // Assistant
     conversations: [],
     selectedConversation: null,
+
+    // conversations
+    unSolvedConversations: [],
+    solvedConversations: [],
+
+    //profile
+    profile: null,
+
+
   }),
 
   getters: {
     getConversations: (state) => state.conversations,
     getSelectedConversation: (state) => state.selectedConversation,
     getSelectedConversationId: (state) => state.selectedConversation?.id,
+    getUnSolvedConversations: (state) => state.unSolvedConversations,
+    getSolvedConversations: (state) => state.solvedConversations,
 
     getMessages: (state) => state.messages.reverse(),
     hasNewMessage: (state) => state.newMessage,
+
+    getProfile: (state) => state.profile,
+
   },
 
   actions: {
@@ -195,7 +209,8 @@ export const useSupport = defineStore("support-store", {
         body: JSON.stringify({ conversations_type: 1, function_number: 1 }),
       })
       if (error) return error;
-      return data;
+      this.unSolvedConversations = data
+      
     },
 
     //fetchSolvedConversations method
@@ -205,8 +220,7 @@ export const useSupport = defineStore("support-store", {
         body: JSON.stringify({ conversations_type: 2, function_number: 1 }),
       })
       if (error) return error;
-            return data;
-
+      this.solvedConversations = data
     },
 
     //fetchProfile by id method
@@ -216,7 +230,7 @@ export const useSupport = defineStore("support-store", {
         body: JSON.stringify({ profile_id: id, function_number: 2 }),
       })
       if (error) return error;
-            return data;
+      this.profile = data
 
     },
 
@@ -227,8 +241,7 @@ export const useSupport = defineStore("support-store", {
         body: JSON.stringify({ conversation_id: id, function_number: 3 }),
       })
       if (error) return error;
-            return data;
-
+      return data;
     },
 
     //setAssistant method
@@ -238,8 +251,7 @@ export const useSupport = defineStore("support-store", {
         body: JSON.stringify({ conversation_id: id, function_number: 4 }),
       })
       if (error) return error;
-            return data;
-
+      return data;
     },
 
     //fetchMessages method
@@ -249,8 +261,7 @@ export const useSupport = defineStore("support-store", {
         body: JSON.stringify({ conversation_id: id, function_number: 5 }),
       })
       if (error) return error;
-            return data;
-
+      this.messages = data;
     },
 
     setNewMessage(state = false) {
