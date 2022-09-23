@@ -76,7 +76,7 @@ export const useAppManager = defineStore("app-manager", {
       const supabase = useSupabaseClient();
       let { data: packs, error } = await supabase
         .from("packs")
-        .select("*,packs_apps(app:app_id(*,apps_services(*,users_services(*)),apps_plans(*,users_plans(*))))");
+        .select("*,packs_apps(app:app_id(*,apps_services(*,users_services(*)),apps_plans(*,users_plans(*))))")
         if (error) return error
       this.packs = packs.map((pack) => new Pack(pack));
     },
