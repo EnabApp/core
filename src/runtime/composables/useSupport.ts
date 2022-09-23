@@ -195,8 +195,7 @@ export const useSupport = defineStore("support-store", {
         body: JSON.stringify({ conversations_type: 1, function_number: 1 }),
       })
       if (error) return error;
-      // return data;
-      console.log(data)
+      return data;
     },
 
     //fetchSolvedConversations method
@@ -206,8 +205,8 @@ export const useSupport = defineStore("support-store", {
         body: JSON.stringify({ conversations_type: 2, function_number: 1 }),
       })
       if (error) return error;
-      // return data;
-      console.log(data)
+            return data;
+
     },
 
     //fetchProfile by id method
@@ -217,8 +216,8 @@ export const useSupport = defineStore("support-store", {
         body: JSON.stringify({ profile_id: id, function_number: 2 }),
       })
       if (error) return error;
-      // return data;
-      console.log(data)
+            return data;
+
     },
 
     //closeConversation method
@@ -228,8 +227,8 @@ export const useSupport = defineStore("support-store", {
         body: JSON.stringify({ conversation_id: id, function_number: 3 }),
       })
       if (error) return error;
-      // return data;
-      console.log(data)
+            return data;
+
     },
 
     //setAssistant method
@@ -239,8 +238,8 @@ export const useSupport = defineStore("support-store", {
         body: JSON.stringify({ conversation_id: id, function_number: 4 }),
       })
       if (error) return error;
-      // return data;
-      console.log(data)
+            return data;
+
     },
 
     //fetchMessages method
@@ -250,8 +249,8 @@ export const useSupport = defineStore("support-store", {
         body: JSON.stringify({ conversation_id: id, function_number: 5 }),
       })
       if (error) return error;
-      // return data;
-      console.log(data)
+            return data;
+
     },
 
     setNewMessage(state = false) {
