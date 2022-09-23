@@ -67,29 +67,29 @@ export const useSupport = defineStore("support-store", {
         });
     },
 
-    // Fetch Support Assistant Conversations
-    async fetchConversations() {
-      const supabase = useSupabaseClient();
+    // // Fetch Support Assistant Conversations
+    // async fetchConversations() {
+    //   const supabase = useSupabaseClient();
 
-      // let { data: conversations, error } = await supabase.functions.invoke('core-get-conversations', {
-      //     body: JSON.stringify({ conversations_type: false }),
-      // })
-      // if (error) return error;
-      // this.conversations = conversations.data?.map(conversation => new Conversation(conversation))
+    //   // let { data: conversations, error } = await supabase.functions.invoke('core-get-conversations', {
+    //   //     body: JSON.stringify({ conversations_type: false }),
+    //   // })
+    //   // if (error) return error;
+    //   // this.conversations = conversations.data?.map(conversation => new Conversation(conversation))
 
-      const { data, error } = await supabase
-        .from("support_conversations")
-        .select(
-          `id, assistant_id, user_id (id, username), support_messages(id, message)`
-        )
-        .limit(1, { foreignTable: "support_messages" })
-        .order("id", { ascending: false, foreignTable: "support_messages" });
-      //   .order('id', { ascending: false })
-      if (data) {
-        this.conversations = data;
-        this.conversations.isOnline = false;
-      }
-    },
+    //   const { data, error } = await supabase
+    //     .from("support_conversations")
+    //     .select(
+    //       `id, assistant_id, user_id (id, username), support_messages(id, message)`
+    //     )
+    //     .limit(1, { foreignTable: "support_messages" })
+    //     .order("id", { ascending: false, foreignTable: "support_messages" });
+    //   //   .order('id', { ascending: false })
+    //   if (data) {
+    //     this.conversations = data;
+    //     this.conversations.isOnline = false;
+    //   }
+    // },
 
     // Select Support Assistant Conversation
     async selectConversation(conversation) {
@@ -110,23 +110,23 @@ export const useSupport = defineStore("support-store", {
       this.messages = [];
     },
 
-    // Fetch Support Assistant Conversation Messages
-    async fetchMessages() {
-      const supabase = useSupabaseClient();
-      const { data, error } = await supabase
-        .from("support_messages")
-        .select("id, message, sender_id(id, username)")
-        .eq("conversation_id", this.selectedConversation?.id)
-        .order("id", { ascending: false })
-        .limit(100);
-      if (error) return error;
-      this.messages = data;
+    // // Fetch Support Assistant Conversation Messages
+    // async fetchMessages() {
+    //   const supabase = useSupabaseClient();
+    //   const { data, error } = await supabase
+    //     .from("support_messages")
+    //     .select("id, message, sender_id(id, username)")
+    //     .eq("conversation_id", this.selectedConversation?.id)
+    //     .order("id", { ascending: false })
+    //     .limit(100);
+    //   if (error) return error;
+    //   this.messages = data;
 
-      // Has message support
-      // if (this.selectedConversation.support_messages[0]) {
-      //     this.selectedConversation.support_messages[0].message = data[0]?.message;
-      // }
-    },
+    //   // Has message support
+    //   // if (this.selectedConversation.support_messages[0]) {
+    //   //     this.selectedConversation.support_messages[0].message = data[0]?.message;
+    //   // }
+    // },
 
     // Initiate Conversation Message for Support Assistant
     async initConversationMessages() {
@@ -186,6 +186,72 @@ export const useSupport = defineStore("support-store", {
           return conversation;
         });
       }
+    },
+
+    //fetchUnSolvedConversations method
+    async fetchUnSolvedConversations() {
+      const supabase = useSupabaseClient()
+      let { data, error } = await supabase.functions.invoke('core-support-app', {
+        body: JSON.stringify({ conversations_type: 1, function_number: 1 }),
+      })
+      if (error) return error;
+      // return data;
+      console.log(data)
+    },
+
+    //fetchSolvedConversations method
+    async fetchSolvedConversations() {
+      const supabase = useSupabaseClient()
+      let { data, error } = await supabase.functions.invoke('core-support-app', {
+        body: JSON.stringify({ conversations_type: 2, function_number: 1 }),
+      })
+      if (error) return error;
+      // return data;
+      console.log(data)
+    },
+
+    //fetchProfile by id method
+    async fetchProfile(id) {
+      const supabase = useSupabaseClient()
+      let { data, error } = await supabase.functions.invoke('core-support-app', {
+        body: JSON.stringify({ profile_id: id, function_number: 2 }),
+      })
+      if (error) return error;
+      // return data;
+      console.log(data)
+    },
+
+    //closeConversation method
+    async closeConversation(id) {
+      const supabase = useSupabaseClient()
+      let { data, error } = await supabase.functions.invoke('core-support-app', {
+        body: JSON.stringify({ conversation_id: id, function_number: 3 }),
+      })
+      if (error) return error;
+      // return data;
+      console.log(data)
+    },
+
+    //setAssistant method
+    async setAssistant(id) {
+      const supabase = useSupabaseClient()
+      let { data, error } = await supabase.functions.invoke('core-support-app', {
+        body: JSON.stringify({ conversation_id: id, function_number: 4 }),
+      })
+      if (error) return error;
+      // return data;
+      console.log(data)
+    },
+
+    //fetchMessages method
+    async fetchMessages(id) {
+      const supabase = useSupabaseClient()
+      let { data, error } = await supabase.functions.invoke('core-support-app', {
+        body: JSON.stringify({ conversation_id: id, function_number: 5 }),
+      })
+      if (error) return error;
+      // return data;
+      console.log(data)
     },
 
     setNewMessage(state = false) {
