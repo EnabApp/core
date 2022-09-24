@@ -8,6 +8,8 @@
   <button @click="support.fetchMessages('a30245bb-e2ba-4102-9691-0629ae9671e4')">الرسايل </button> -->
 
   <button @click="support.fetchUnSolvedConversations()">المحادثات الغير محلوله </button>
+  <button @click="support.startConversation('hi', 1)"> بدء المحادثة </button>
+
   <div>
     {{support.getUnSolvedConversations}}
   </div>
@@ -23,3 +25,5 @@ const support = useSupport()
 // console.log(support.getMessages)
 
 </script>
+
+

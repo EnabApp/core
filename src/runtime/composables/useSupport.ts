@@ -210,7 +210,7 @@ export const useSupport = defineStore("support-store", {
       })
       if (error) return error;
       this.unSolvedConversations = data.data?.map(conversation => new Conversation(conversation))
-      
+
     },
 
     //fetchSolvedConversations method
@@ -262,6 +262,16 @@ export const useSupport = defineStore("support-store", {
       })
       if (error) return error;
       this.messages = data.data;
+    },
+
+       // startConversation method
+    async startConversation(question, section_id) {
+      const supabase = useSupabaseClient()
+      let { data, error } = await supabase.functions.invoke('core-support-app', {
+        body: JSON.stringify({ function_number: 6, question: question, section_id: section_id }),
+      })
+      if (error) return error
+      console.log(data)
     },
 
     setNewMessage(state = false) {
