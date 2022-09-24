@@ -6,7 +6,7 @@ export default class Conversation {
     isOnline: boolean;
     notReadMessages: number;
     support_messages: any;
-  
+
     constructor(args) {
       this.id = args?.id;
       this.user = args?.user;

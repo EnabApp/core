@@ -51,7 +51,7 @@
       <span text="right 16px primaryOp dark:primary">{{ plan.apps_plans?.description ?? 'لايوجد أسم للخطة' }}</span>
 
       <!-- //====== Component =======// -->
-      
+
       <div flex="~ col gap-4px">
         <div
           flex="~"
