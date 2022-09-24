@@ -10,7 +10,7 @@
 
         <!-- //===== Image =====// -->
         <img
-          src="https://d1oqwsnd25kjn6.cloudfront.net/production/curio_primary_images/12566/original/Feb._25_2018-SteveJobs.jpg?1518809726"
+          :src="conversation.user.avatar_url ?? 'https://d1oqwsnd25kjn6.cloudfront.net/production/curio_primary_images/12566/original/Feb._25_2018-SteveJobs.jpg?1518809726'"
           w="48px" h="48px" rounded="full" />
 
         <!-- //===== State =====// -->
@@ -30,7 +30,7 @@
         <div flex="~" items="center" justify="between">
 
           <!-- //===== User Name =====// -->
-          <span text="primaryOp dark:primary" w="70%" truncate="~" font="semibold">{{ conversation.user_id?.username
+          <span text="primaryOp dark:primary" w="70%" truncate="~" font="semibold">{{ conversation.user?.username
           }}</span>
 
           <!-- //===== Last Message  =====// -->
@@ -64,6 +64,5 @@ const props = defineProps({
 
 const support = useSupport();
 const isSelected = computed(() => support.selectedConversation?.id == props.conversation?.id)
-
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
 </script>

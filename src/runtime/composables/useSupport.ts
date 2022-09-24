@@ -34,7 +34,7 @@ export const useSupport = defineStore("support-store", {
     getUnSolvedConversations: (state) => state.unSolvedConversations,
     getSolvedConversations: (state) => state.solvedConversations,
 
-    getMessages: (state) => state.messages.reverse(),
+    getMessages: (state) => state.messages?.reverse(),
     hasNewMessage: (state) => state.newMessage,
 
     getProfile: (state) => state.profile,
@@ -73,7 +73,7 @@ export const useSupport = defineStore("support-store", {
             table: "support_conversations",
             filters: `assistant_id=eq.null,eq.${user.value.id}`,
           },
-          () => this.fetchConversations()
+          () => this.fetchUnSolvedConversations()
         )
         .subscribe((state) => {
           if (state === "SUBSCRIBED") this.isConnected = true;
@@ -155,10 +155,10 @@ export const useSupport = defineStore("support-store", {
             event: "INSERT",
             schema: "public",
             table: "support_messages",
-            filters: `conversation_id=${this.selectConversation?.id}`,
+            filters: `conversation_id=${this.selectedConversation?.id}`,
           },
           () => {
-            this.fetchMessages();
+            this.fetchMessages(this.selectedConversation?.id);
             this.newMessage = true;
           }
         )
@@ -169,7 +169,7 @@ export const useSupport = defineStore("support-store", {
             this.isMessagesLoaded = false;
           }
         });
-      await this.fetchMessages();
+      await this.fetchMessages(this.selectedConversation?.id);
     },
 
     // Send Support Assistant Message to User
@@ -209,7 +209,7 @@ export const useSupport = defineStore("support-store", {
         body: JSON.stringify({ conversations_type: 1, function_number: 1 }),
       })
       if (error) return error;
-      this.unSolvedConversations = data
+      this.unSolvedConversations = data.data?.map(conversation => new Conversation(conversation))
       
     },
 
@@ -230,7 +230,7 @@ export const useSupport = defineStore("support-store", {
         body: JSON.stringify({ profile_id: id, function_number: 2 }),
       })
       if (error) return error;
-      this.profile = data
+      this.profile = data.data.profile
 
     },
 
@@ -261,7 +261,7 @@ export const useSupport = defineStore("support-store", {
         body: JSON.stringify({ conversation_id: id, function_number: 5 }),
       })
       if (error) return error;
-      this.messages = data;
+      this.messages = data.data;
     },
 
     setNewMessage(state = false) {
