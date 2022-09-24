@@ -210,7 +210,7 @@ export const useSupport = defineStore("support-store", {
       })
       if (error) return error;
       this.unSolvedConversations = data.data?.map(conversation => new Conversation(conversation))
-      
+
     },
 
     //fetchSolvedConversations method
