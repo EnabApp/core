@@ -19,22 +19,22 @@ export const useAppManager = defineStore("app-manager", {
     getPacks: (state) => state.packs,
     // Apps
     getApps: (state) => state.apps,
-    getOwned: (state) => state.apps.filter((app) => app.owned && !app.core),
-    getCoreApps: (state) => state.apps.filter((app) => app.core),
+    getOwned: (state) => state.apps.filter((app: App) => app.owned && !app.core),
+    getCoreApps: (state) => state.apps.filter((app: App) => app.core),
     // isRunning: (state) => (app) => state.all.find(a => a.title === app.title).running,
-    getApp: (state) => (id) => state.apps.find((app) => app.id === id),
+    getApp: (state) => (id) => state.apps.find((app: App) => app.id === id),
     getAppByName: (state) => (name: String) =>
-      state.apps.find((app) => app.name === name),
+      state.apps.find((app: App) => app.name === name),
 
-    getRunningApps: (state) => state.apps.filter((app) => app.running),
-    getFocused: (state) => state.apps.find((app) => app.id == state.focused),
+    getRunningApps: (state) => state.apps.filter((app: App) => app.running),
+    getFocused: (state) => state.apps.find((app: App) => app.id.toString() == state.focused),
     getDevelopmentApps: (state) => state.developmentApps,
 
     // Services
     getServices: (state) =>
       state.apps
-        .filter((app) => app.services?.length > 0)
-        .map((app) => app.services)
+        .filter((app: App) => app.services?.length > 0)
+        .map((app: App) => app.services)
         .flat(1),
     getServiceById() {
       return (id: number) =>
@@ -49,7 +49,7 @@ export const useAppManager = defineStore("app-manager", {
 
     // Extra
     anyRunningIsMaximized: (state) =>
-      state.apps.some((app) => app.maximized && app.running && !app.minimized),
+      state.apps.some((app: App) => app.maximized && app.running && !app.minimized),
   },
 
   actions: {
@@ -73,17 +73,11 @@ export const useAppManager = defineStore("app-manager", {
       this.apps.push(...this.developmentApps)
     },
     async fetchPacks() {
-      // const { $toast } = useNuxtApp()
       const supabase = useSupabaseClient();
       let { data: packs, error } = await supabase
         .from("packs")
-        .select(
-          "*, packs_apps (id,app:app_id (*,users_apps(id),apps_services(id, app_id, title, points, icon, description, users_services(id))"
-        );
-      if (error) {
-        console.log("حدث خطأ اثناء تحميل الباقات");
-        return false;
-      }
+        .select("*,packs_apps(app:app_id(*,apps_services(*,users_services(*)),apps_plans(*,users_plans(*))))")
+        if (error) return error
       this.packs = packs.map((pack) => new Pack(pack));
     },
     // Set Focus to an App
@@ -104,10 +98,10 @@ export const useAppManager = defineStore("app-manager", {
     },
 
     // Buy an app
-    async buyApp(app_id) {
+    async buyApp(id: number) {
       const supabase = useSupabaseClient()
       let { data, error } = await supabase.functions.invoke('core-buy-app', {
-        body: JSON.stringify({ app_id: app_id, buy_type: 1 }),
+        body: JSON.stringify({ app_id: id, buy_type: 1 }),
       })
       this.fetch();
       if (error) return error;
@@ -116,10 +110,10 @@ export const useAppManager = defineStore("app-manager", {
     },
 
     //Buy a plan
-    async buyPlan(plan_id) {
+    async buyPlan(id: number) {
       const supabase = useSupabaseClient()
       let { data, error } = await supabase.functions.invoke('core-buy-app', {
-        body: JSON.stringify({ plan_id: plan_id, buy_type: 2 }),
+        body: JSON.stringify({ plan_id: id, buy_type: 2 }),
       })
       this.fetch();
       if (error) return error;
@@ -128,12 +122,12 @@ export const useAppManager = defineStore("app-manager", {
     },
 
     // Buy a service
-    async buyService(service_id) {
+    async buyService(id: number) {
       // const { $toast } = useNuxtApp()
       const supabase = useSupabaseClient();
       const user = useUser();
       let { data, error } = await supabase.rpc("buyService", {
-        _service_id: service_id,
+        _service_id: id,
         _user_id: user.value.id,
       });
       if (error) {
