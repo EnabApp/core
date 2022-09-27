@@ -9,6 +9,8 @@ export default class Pack {
   icon: string;
   points: number;
   discount: number;
+  owned: boolean;
+
   apps: App[];
 
 
@@ -19,6 +21,7 @@ export default class Pack {
     this.icon = args?.icon
     this.points = args?.points
     this.discount = args?.discount
+    this.owned = args.users_packs && args.users_packs.length > 0
     this.apps = args?.packs_apps?.map(pack_app => new App(pack_app.app))
   }
 }

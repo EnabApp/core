@@ -76,7 +76,7 @@ export const useAppManager = defineStore("app-manager", {
       const supabase = useSupabaseClient();
       let { data: packs, error } = await supabase
         .from("packs")
-        .select("*,packs_apps(app:app_id(*,apps_services(*,users_services(*)),apps_plans(*,users_plans(*))))")
+        .select("*, users_packs(id), packs_apps(app:app_id(*,apps_services(*,users_services(*)), apps_plans(*,users_plans(*))))")
         if (error) return error
       this.packs = packs.map((pack) => new Pack(pack));
     },
@@ -148,7 +148,7 @@ export const useAppManager = defineStore("app-manager", {
       let { data, error } = await supabase.functions.invoke("core-buy-pack", {
         body: JSON.stringify({ pack_id: pack_id }),
       });
-      this.fetch();
+      this.fetchPacks();
       if (error) return error;
       else return data;
     },
