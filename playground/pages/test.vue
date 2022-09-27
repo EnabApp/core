@@ -14,5 +14,3 @@ appManager.fetchLastSixApps()
 console.log(appManager.getApps)
 
 </script>
-
-
