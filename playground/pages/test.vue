@@ -1,7 +1,7 @@
 <template>
 
 <div>
-  {{appManager.getPacks()}}
+  {{appManager.getPacks}}
 </div>
 </template>
 
@@ -10,6 +10,10 @@ import { useAppManager } from '#imports'
 const appManager = useAppManager()
 appManager.fetchPacks()
 console.log(appManager.getPacks)
+
 </script>
 
 
+<!-- const appManager = useAppManager();
+appManager.fetchPacks()
+console.log(appManager.getPacks); -->
