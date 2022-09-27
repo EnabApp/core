@@ -21,7 +21,9 @@ export default class Pack {
     this.icon = args?.icon
     this.points = args?.points
     this.discount = args?.discount
-    this.owned = args.users_packs && args.users_packs.length > 0
+    if(args?.users_packs?.length > 0) this.owned = true
+    if(args?.users_packs?.length <= 0) this.owned = false
+
     this.apps = args?.packs_apps?.map(pack_app => new App(pack_app.app))
   }
 }
