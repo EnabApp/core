@@ -10,8 +10,6 @@ import { useAppManager } from '#imports'
 const appManager = useAppManager()
 appManager.fetchPacks()
 console.log(appManager.getPacks)
-
-
 </script>
 
 
