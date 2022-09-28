@@ -13,5 +13,3 @@ appManager.fetchTheSixMostDownloadedApps()
 console.log(appManager.getApps)
 
 </script>
-
-
