@@ -59,7 +59,23 @@
 </template>
 
 <script setup>
+import { ref, watch } from "#imports";
+import { useSupport } from "../../../composables/useSupport";
+
 const props = defineProps(["BreakpointWindow"]);
+
+const support = useSupport();
+
+watch(
+  () => support.getSelectedConversationId,
+  async () => {
+    if (support.getSelectedConversationId){
+      console.log(support.getSelectedConversation)
+      // support.fetchProfile(support.getSelectedConversation.user.id);
+    }
+  },
+  {deep: true}
+);
 
 const { xs, sm, md, lg, xl, twoXs } = props.BreakpointWindow;
 </script>

@@ -11,7 +11,7 @@
       }" overflow-y="auto" text="primary">
 
       <!-- //===== Assistant Conversation =====// -->
-      <SupportAssistantConversation v-for="conversation in support.getConversations" :key="conversation.id" @click="support.selectConversation(conversation)" :BreakpointWindow="BreakpointWindow" :conversation="conversation" />
+      <SupportAssistantConversation v-for="conversation in support.unSolvedConversations" :key="conversation.id" @click="support.selectConversation(conversation)" :BreakpointWindow="BreakpointWindow" :conversation="conversation" />
     </div>
 
     <!-- //===== Message =====// -->
@@ -84,7 +84,8 @@ const support = useSupport()
 onMounted(async () => {
   await support.join()
   await support.initAssistant()
-  await support.fetchConversations()
+  await support.fetchUnSolvedConversations()
+  console.log(support.getUnSolvedConversations)
   support.supportChannel.track({ isOnline: true });
 });
 onBeforeUnmount(() => {

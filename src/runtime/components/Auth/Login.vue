@@ -34,6 +34,12 @@ const googleLogin = async () => {
             redirectTo: import.meta.env.VITE_ENV ? 'https://development.enab.app' : ( import.meta.env.VITE_PRODUCTION ? 'https://enab.app' : 'http://localhost:3000' ),
         }
     })
+
+    if (error) {
+        return alert('Something went wrong !')
+    }
+    
+    router.push('/')
 }
 
 

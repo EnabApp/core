@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-import { useDark, useToggle, useUserProfile } from "#imports";
+import { useDark, useToggle, useUserProfile, computed } from "#imports";
 import { useAppManager } from '../../../composables/useAppManager'
 const appManager = useAppManager()
 

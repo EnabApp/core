@@ -16,15 +16,29 @@ export const useSupport = defineStore("support-store", {
     // Assistant
     conversations: [],
     selectedConversation: null,
+
+    // conversations
+    unSolvedConversations: [],
+    solvedConversations: [],
+
+    //profile
+    profile: null,
+
+
   }),
 
   getters: {
     getConversations: (state) => state.conversations,
     getSelectedConversation: (state) => state.selectedConversation,
     getSelectedConversationId: (state) => state.selectedConversation?.id,
+    getUnSolvedConversations: (state) => state.unSolvedConversations,
+    getSolvedConversations: (state) => state.solvedConversations,
 
-    getMessages: (state) => state.messages.reverse(),
+    getMessages: (state) => state.messages?.reverse(),
     hasNewMessage: (state) => state.newMessage,
+
+    getProfile: (state) => state.profile,
+
   },
 
   actions: {
@@ -59,7 +73,7 @@ export const useSupport = defineStore("support-store", {
             table: "support_conversations",
             filters: `assistant_id=eq.null,eq.${user.value.id}`,
           },
-          () => this.fetchConversations()
+          () => this.fetchUnSolvedConversations()
         )
         .subscribe((state) => {
           if (state === "SUBSCRIBED") this.isConnected = true;
@@ -67,29 +81,29 @@ export const useSupport = defineStore("support-store", {
         });
     },
 
-    // Fetch Support Assistant Conversations
-    async fetchConversations() {
-      const supabase = useSupabaseClient();
+    // // Fetch Support Assistant Conversations
+    // async fetchConversations() {
+    //   const supabase = useSupabaseClient();
 
-      // let { data: conversations, error } = await supabase.functions.invoke('core-get-conversations', {
-      //     body: JSON.stringify({ conversations_type: false }),
-      // })
-      // if (error) return error;
-      // this.conversations = conversations.data?.map(conversation => new Conversation(conversation))
+    //   // let { data: conversations, error } = await supabase.functions.invoke('core-get-conversations', {
+    //   //     body: JSON.stringify({ conversations_type: false }),
+    //   // })
+    //   // if (error) return error;
+    //   // this.conversations = conversations.data?.map(conversation => new Conversation(conversation))
 
-      const { data, error } = await supabase
-        .from("support_conversations")
-        .select(
-          `id, assistant_id, user_id (id, username), support_messages(id, message)`
-        )
-        .limit(1, { foreignTable: "support_messages" })
-        .order("id", { ascending: false, foreignTable: "support_messages" });
-      //   .order('id', { ascending: false })
-      if (data) {
-        this.conversations = data;
-        this.conversations.isOnline = false;
-      }
-    },
+    //   const { data, error } = await supabase
+    //     .from("support_conversations")
+    //     .select(
+    //       `id, assistant_id, user_id (id, username), support_messages(id, message)`
+    //     )
+    //     .limit(1, { foreignTable: "support_messages" })
+    //     .order("id", { ascending: false, foreignTable: "support_messages" });
+    //   //   .order('id', { ascending: false })
+    //   if (data) {
+    //     this.conversations = data;
+    //     this.conversations.isOnline = false;
+    //   }
+    // },
 
     // Select Support Assistant Conversation
     async selectConversation(conversation) {
@@ -110,23 +124,23 @@ export const useSupport = defineStore("support-store", {
       this.messages = [];
     },
 
-    // Fetch Support Assistant Conversation Messages
-    async fetchMessages() {
-      const supabase = useSupabaseClient();
-      const { data, error } = await supabase
-        .from("support_messages")
-        .select("id, message, sender_id(id, username)")
-        .eq("conversation_id", this.selectedConversation?.id)
-        .order("id", { ascending: false })
-        .limit(100);
-      if (error) return error;
-      this.messages = data;
+    // // Fetch Support Assistant Conversation Messages
+    // async fetchMessages() {
+    //   const supabase = useSupabaseClient();
+    //   const { data, error } = await supabase
+    //     .from("support_messages")
+    //     .select("id, message, sender_id(id, username)")
+    //     .eq("conversation_id", this.selectedConversation?.id)
+    //     .order("id", { ascending: false })
+    //     .limit(100);
+    //   if (error) return error;
+    //   this.messages = data;
 
-      // Has message support
-      // if (this.selectedConversation.support_messages[0]) {
-      //     this.selectedConversation.support_messages[0].message = data[0]?.message;
-      // }
-    },
+    //   // Has message support
+    //   // if (this.selectedConversation.support_messages[0]) {
+    //   //     this.selectedConversation.support_messages[0].message = data[0]?.message;
+    //   // }
+    // },
 
     // Initiate Conversation Message for Support Assistant
     async initConversationMessages() {
@@ -141,10 +155,10 @@ export const useSupport = defineStore("support-store", {
             event: "INSERT",
             schema: "public",
             table: "support_messages",
-            filters: `conversation_id=${this.selectConversation?.id}`,
+            filters: `conversation_id=${this.selectedConversation?.id}`,
           },
           () => {
-            this.fetchMessages();
+            this.fetchMessages(this.selectedConversation?.id);
             this.newMessage = true;
           }
         )
@@ -155,7 +169,7 @@ export const useSupport = defineStore("support-store", {
             this.isMessagesLoaded = false;
           }
         });
-      await this.fetchMessages();
+      await this.fetchMessages(this.selectedConversation?.id);
     },
 
     // Send Support Assistant Message to User
@@ -186,6 +200,78 @@ export const useSupport = defineStore("support-store", {
           return conversation;
         });
       }
+    },
+
+    //fetchUnSolvedConversations method
+    async fetchUnSolvedConversations() {
+      const supabase = useSupabaseClient()
+      let { data, error } = await supabase.functions.invoke('core-support-app', {
+        body: JSON.stringify({ conversations_type: 1, function_number: 1 }),
+      })
+      if (error) return error;
+      this.unSolvedConversations = data.data?.map(conversation => new Conversation(conversation))
+
+    },
+
+    //fetchSolvedConversations method
+    async fetchSolvedConversations() {
+      const supabase = useSupabaseClient()
+      let { data, error } = await supabase.functions.invoke('core-support-app', {
+        body: JSON.stringify({ conversations_type: 2, function_number: 1 }),
+      })
+      if (error) return error;
+      this.solvedConversations = data
+    },
+
+    //fetchProfile by id method
+    async fetchProfile(id) {
+      const supabase = useSupabaseClient()
+      let { data, error } = await supabase.functions.invoke('core-support-app', {
+        body: JSON.stringify({ profile_id: id, function_number: 2 }),
+      })
+      if (error) return error;
+      this.profile = data.data.profile
+
+    },
+
+    //closeConversation method
+    async closeConversation(id) {
+      const supabase = useSupabaseClient()
+      let { data, error } = await supabase.functions.invoke('core-support-app', {
+        body: JSON.stringify({ conversation_id: id, function_number: 3 }),
+      })
+      if (error) return error;
+      return data;
+    },
+
+    //setAssistant method
+    async setAssistant(id) {
+      const supabase = useSupabaseClient()
+      let { data, error } = await supabase.functions.invoke('core-support-app', {
+        body: JSON.stringify({ conversation_id: id, function_number: 4 }),
+      })
+      if (error) return error;
+      return data;
+    },
+
+    //fetchMessages method
+    async fetchMessages(id) {
+      const supabase = useSupabaseClient()
+      let { data, error } = await supabase.functions.invoke('core-support-app', {
+        body: JSON.stringify({ conversation_id: id, function_number: 5 }),
+      })
+      if (error) return error;
+      this.messages = data.data;
+    },
+
+       // startConversation method
+    async startConversation(question, section_id) {
+      const supabase = useSupabaseClient()
+      let { data, error } = await supabase.functions.invoke('core-support-app', {
+        body: JSON.stringify({ function_number: 6, question: question, section_id: section_id }),
+      })
+      if (error) return error
+      console.log(data)
     },
 
     setNewMessage(state = false) {

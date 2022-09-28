@@ -1,7 +1,7 @@
 {
   "name": "@enab/core",
   "type": "module",
-  "version": "1.8.22-beta.21",
+  "version": "1.9.2-beta.1",
   "license": "MIT",
   "exports": {
     ".": {
@@ -23,7 +23,9 @@
     "release": "cd scripts && node --loader ts-node/esm release.ts"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.0.0-rc.10"
+    "@nuxt/kit": "^3.0.0-rc.10",
+    "@vueuse/firebase": "^9.2.0",
+    "firebase": "^9.10.0"
   },
   "devDependencies": {
     "@enab/systemapps": "^1.0.1-beta.3",
@@ -31,7 +33,7 @@
     "@nuxt/image-edge": "latest",
     "@nuxt/module-builder": "latest",
     "@nuxtjs/color-mode": "^3.1.4",
-    "@nuxtjs/supabase": "^0.2.0-15",
+    "@nuxtjs/supabase": "^0.2.0-16",
     "@pinia/nuxt": "^0.4.1",
     "@tauri-apps/api": "^1.0.2",
     "@unocss/inspector": "^0.45.15",
