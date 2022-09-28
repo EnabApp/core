@@ -55,7 +55,6 @@ export const useAppManager = defineStore("app-manager", {
   actions: {
     // Fetching Data
     async fetch() {
-      // const { $toast } = useNuxtApp()
       const supabase = useSupabaseClient();
       let { data: apps, error } = await supabase.from("apps")
         .select(`
@@ -72,12 +71,33 @@ export const useAppManager = defineStore("app-manager", {
       this.apps = apps.map((app) => new App(app))
       this.apps.push(...this.developmentApps)
     },
+    // fetchTheSixMostDownloadedApps method
+    async fetchTheSixMostDownloadedApps() {
+      const supabase = useSupabaseClient();
+      let { data: apps, error } = await supabase.from("apps")
+        .select(`
+                  *,
+                  users_apps(id),
+                  apps_services(
+                      id, app_id, title, points, icon, description, users_services(id)
+                  ),
+                  apps_plans(
+                      id, app_id, type, points, description, users_plans(id)
+                  )
+              `)
+        .order("downloads", { ascending: false })
+        .limit(6);
+      if (error) return error
+      this.apps = apps.map((app) => new App(app))
+      this.apps.push(...this.developmentApps)
+    },
+
     async fetchPacks() {
       const supabase = useSupabaseClient();
       let { data: packs, error } = await supabase
         .from("packs")
         .select("*,packs_apps(app:app_id(*,apps_services(*,users_services(*)),apps_plans(*,users_plans(*))))")
-        if (error) return error
+      if (error) return error
       this.packs = packs.map((pack) => new Pack(pack));
     },
     // Set Focus to an App
