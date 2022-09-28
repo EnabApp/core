@@ -71,6 +71,7 @@ export const useAppManager = defineStore("app-manager", {
       this.apps = apps.map((app) => new App(app))
       this.apps.push(...this.developmentApps)
     },
+
     // fetchTheSixMostDownloadedApps method
     async fetchTheSixMostDownloadedApps() {
       const supabase = useSupabaseClient();
