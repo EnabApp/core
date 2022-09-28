@@ -53,7 +53,7 @@
         >
           <span>{{ item.value }}</span>
           <span v-if="selectedIdRef == item.id">
-            <div class="i-humbleicons-times"></div>
+            <IconClose w="10px"/>
           </span>
         </div>
       </div>
@@ -62,7 +62,7 @@
 </template>
 
 <script setup>
-import { onClickOutside, ref, computed } from '#imports'
+import { onClickOutside, ref, computed } from "#imports";
 
 const props = defineProps({
   modelValue: {
