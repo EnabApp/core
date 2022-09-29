@@ -1,57 +1,63 @@
 <template>
-  <!-- //===== here is the Conversation case  ======// -->
+  <!-- here is the Conversation case   -->
   <div w="98%">
     <div cursor="pointer" transition="~ duration-200 ease-in-out" :class="{
       'bg-secondary dark:bg-secondaryOp': isSelected,
     }" bg="hover:secondary dark:hover:secondaryOp" p="2%" rounded="10px" flex="~ gap-3" items="center" h="60px">
-
-      <!-- //===== User Image and Online State =====// -->
+    
+      <!-- User Image and Online State -->
       <div relative="~">
 
-        <!-- //===== Image =====// -->
-        <img
-          :src="conversation.user.avatar_url ?? 'https://d1oqwsnd25kjn6.cloudfront.net/production/curio_primary_images/12566/original/Feb._25_2018-SteveJobs.jpg?1518809726'"
-          w="48px" h="48px" rounded="full" />
+        <!-- User Image -->
+        <div v-if="conversation.user.avatar_url">
+          <img :src="conversation.user.avatar_url" w="48px" h="48px" rounded="full" />
+        </div>
+        <div v-else>
+          <IconPerson bg="secondary dark:secondaryOp" w="48px" h="48px" rounded="full" />
+        </div>
 
-        <!-- //===== State =====// -->
-        <div w="10px" h="10px" right="34px" bottom="2px" position="absolute" border="rounded-full primary dark:primaryOp 3" :class="
-          conversation.isOnline
-            ? 'bg-success'
-            : 'bg-secondaryOp dark:bg-secondary'
-        "></div>
+        <!-- State -->
+        <div w="10px" h="10px" right="34px" bottom="2px" position="absolute"
+          border="rounded-full primary dark:primaryOp 3" :class="
+            conversation.isOnline
+              ? 'bg-success'
+              : 'bg-secondaryOp dark:bg-secondary'
+          "></div>
       </div>
 
-      <!-- //===== User Name & Last Message is below me!  =====// -->
+      <!-- User Name & Last Message is below me!  -->
       <div flex="~ col" :class="{
         'w-90%': twoXl || md,
         'w-70%': xl || lg || sm,
         'w-100%': xs || twoXs,
       }">
         <div flex="~" items="center" justify="between">
+          <!--  User Name -->
+          <span text="primaryOp dark:primary" w="70%" truncate="~" font="semibold">
+            <span v-if="conversation.user?.username">
+              {{ conversation.user?.username }}</span>
+            <span v-else>لا يوجد اسم</span>
+          </span>
 
-          <!-- //===== User Name =====// -->
-          <span text="primaryOp dark:primary" w="70%" truncate="~" font="semibold">{{ conversation.user?.username
-          }}</span>
-
-          <!-- //===== Last Message  =====// -->
+          <!-- Last Message -->
           <span right="0" un-text="secondaryOp dark:secondary end xs">1 ساعة</span>
         </div>
 
-        <!-- //===== User Last Message Here!  =====// -->
+        <!-- User Last Message Here -->
         <span w="80%" truncate="~" un-text="secondaryOp dark:secondary sm">
           {{ conversation.support_messages[0]?.message }}
         </span>
       </div>
     </div>
 
-    <!-- //===== Divider =====// -->
+    <!-- Divider -->
     <div h="0.5px" w="full" bg="secondary dark:secondaryOp" m="y-5px"></div>
   </div>
 </template>
 
 <script setup>
 import { useSupport } from "../../../composables/useSupport";
-import { computed } from '#imports'
+import { computed } from "#imports";
 
 const props = defineProps({
   conversation: {
@@ -63,6 +69,8 @@ const props = defineProps({
 });
 
 const support = useSupport();
-const isSelected = computed(() => support.selectedConversation?.id == props.conversation?.id)
+const isSelected = computed(
+  () => support.selectedConversation?.id == props.conversation?.id
+);
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
 </script>
