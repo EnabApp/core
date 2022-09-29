@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { onMounted, useMouseInElement, ref, useTimeoutFn } from '#imports'
+import { watch, useMouseInElement, ref, useTimeoutFn } from '#imports'
 import { useToasts } from '../../../composables/useToasts'
 import { resolveDynamicComponent } from 'vue';
 
