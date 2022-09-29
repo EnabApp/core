@@ -12,8 +12,8 @@
 
       <!--  Assistant Conversation  -->
       <SupportAssistantConversation v-for="conversation in support.unSolvedConversations" :key="conversation.id"
-        @click="support.selectConversation(conversation)" :BreakpointWindow="BreakpointWindow"
-        :conversation="conversation" />
+        @click="support.selectConversation(conversation)" :conversation="conversation"
+        :BreakpointWindow="BreakpointWindow" />
     </div>
 
     <!--  Message  -->
@@ -26,7 +26,7 @@
 
       <!--  Mini Profile  -->
       <SupportAssistantMiniProfile v-if="!(lg || xl || twoXl) && support.selectedConversation?.id"
-      :conversation="conversation" :BreakpointWindow="BreakpointWindow" h="60px" />
+        :conversation="conversation" :BreakpointWindow="BreakpointWindow" h="60px" />
 
       <!--  Assistant Messages  -->
       <SupportAssistantMessages />
