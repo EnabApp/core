@@ -2,7 +2,7 @@
   <div flex="~ col gap-42px">
     <div flex="~ col gap-42px" justify="center" items="center">
 
-      <!-- //====== User Picture/Name =======// -->
+      <!-- = User Picture/Name == -->
       <div flex="~ col gap-15px" p="t-20px" items="center">
         <img
         :src="support.profile?.avatar_url ?? 'https://d1oqwsnd25kjn6.cloudfront.net/production/curio_primary_images/12566/original/Feb._25_2018-SteveJobs.jpg?1518809726'"
@@ -13,10 +13,10 @@
         <span text="24px primaryOp dark:primary">{{  }}</span>
       </div>
 
-      <!-- //====== User Stuff =======// -->
+      <!-- = User Stuff == -->
       <div flex="~ col gap-8px" w="74%">
 
-        <!-- //====== User Email =======// -->
+        <!-- = User Email == -->
         <div flex="~" items="center" justify="between">
           <span truncate="~" text="primaryOp dark:primary"
             >gruceing@gmail.com</span
@@ -26,21 +26,21 @@
 
         <div flex="~" items="center" justify="between">
 
-          <!-- //====== User Phone Number =======// -->
+          <!-- = User Phone Number == -->
           <span truncate="~" text="primaryOp dark:primary">07730281556</span>
           <IconPhone text="primaryOp dark:primary" w="18px" h="18px" />
         </div>
 
         <div flex="~" items="center" justify="between">
 
-          <!-- //====== User Business Title =======// -->
+          <!-- = User Business Title == -->
           <span truncate="~" text="primaryOp dark:primary">خل يولن</span>
           <IconBusiness text="primaryOp dark:primary" w="18px" h="18px" />
         </div>
 
         <div flex="~" items="center" justify="between">
 
-          <!-- //====== User Points =======// -->
+          <!-- = User Points == -->
           <span truncate="~" text="primaryOp dark:primary">{{ support.profile?.user_protected[0]?.points }}</span>
           <IconPoints text="primaryOp dark:primary" w="18px" h="18px" />
         </div>
@@ -50,7 +50,7 @@
     <div v-for="plan in support.profile?.users_plans" :key="'plan-id-' + plan.id" flex="~ col gap-5px">
       <span text="right 16px primaryOp dark:primary">{{ plan.apps_plans?.description ?? 'لايوجد أسم للخطة' }}</span>
 
-      <!-- //====== Component =======// -->
+      <!-- = Component == -->
       
       <div flex="~ col gap-4px">
         <div

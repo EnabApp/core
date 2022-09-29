@@ -1,15 +1,16 @@
 <template>
   <div w="full" @click="dropdown = true" position="relative">
     <!-- Showing multiple selects -->
-    <div v-if="multiple">
+    <div v-if="multiple" flex="~ gap-2px">
       <span
         v-for="item in selectedItems"
         @click="selectItem(item)"
         :key="item.id"
         p="x-1"
-        text="xs gray-600"
-        bg="gray-200"
-        border="~ rounded-md gray-100 dark:gray-600"
+        text="xs secondary dark:secondaryOp"
+        bg="secondaryOp dark:secondary"
+        border="~ gray-50 dark:gray-600 rounded-5px"
+        cursor="pointer"
         >{{ item.value }}</span
       >
     </div>
@@ -28,12 +29,12 @@
       v-if="dropdown"
       ref="dropdownRef"
       w="full"
-      bg="white dark:secondary-500"
-      border="~ gray-50 dark:gray-600 rounded-lg"
+      bg="secondaryOp dark:secondary"
+      border="~ gray-50 dark:gray-600 rounded-5px"
       position="absolute"
-      text="secondary-900"
+      text="secondary dark:secondaryOp"
       m="t-1"
-      shadow="~ gray-200 dark:gray-900"
+      shadow="~ gray-200 dark:gray-700"
     >
       <div flex="~ col gap-2" p="2">
         <div
@@ -43,17 +44,18 @@
           :class="{
             'font-medium': item.id == selectedIdRef,
           }"
-          bg="hover:gray-100 dark:hover:secondary-600"
+          bg="hover:secondary dark:hover:secondaryOp"
           p="x-2 y-1"
           flex="~"
           justify="between"
           items="center"
-          text="sm"
-          border="rounded-lg"
+          text="sm hover:secondaryOp dark:hover:secondary"
+          border="rounded-5px"
+          duration="100"
         >
           <span>{{ item.value }}</span>
-          <span v-if="selectedIdRef == item.id">
-            <div class="i-humbleicons-times"></div>
+          <span v-if="item.id == selectedIdRef">
+            <IconLoading w="10px" />
           </span>
         </div>
       </div>
@@ -62,7 +64,7 @@
 </template>
 
 <script setup>
-import { onClickOutside, ref, computed } from '#imports'
+import { onClickOutside, ref, computed } from "#imports";
 
 const props = defineProps({
   modelValue: {

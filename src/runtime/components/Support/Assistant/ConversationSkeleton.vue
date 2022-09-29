@@ -15,19 +15,19 @@
             }">
                 <div flex="~" items="center" justify="between">
 
-                    <!-- //===== User Name =====// -->
+                    <!--  User Name  -->
                     <span bg="secondary dark:secondaryOp" w="30%" truncate="~" h="25px" rounded="lg"></span>
 
-                    <!-- //===== Last Message  =====// -->
+                    <!--  Last Message   -->
                     <div bg="secondary dark:secondaryOp" w="60px" h="16px" rounded="lg"></div>
                 </div>
 
-                <!-- //===== User Last Message Here!  =====// -->
+                <!--  User Last Message Here!   -->
                 <span w="70%" bg="secondary dark:secondaryOp" h="20px" rounded="lg"></span>
             </div>
         </div>
 
-        <!-- //===== Divider =====// -->
+        <!--  Divider  -->
         <div h="0.5px" w="full" bg="secondary dark:secondaryOp" m="y-5px"></div>
     </div>
 </template>

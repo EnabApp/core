@@ -64,14 +64,15 @@
       >
         <!-- Type password -->
         <div flex="~ gap-1" items="center" v-if="type == 'password'">
-          
           <!-- Show Password -->
           <button
             v-if="statePassword == 'password'"
             @click="showPassword()"
+            bg="transparent hover:secondary dark:hover:secondaryOp"
+            cursor="pointer"
+            rounded="5px"
             flex="~"
             items="center"
-            bg="transparent"
             border="transparent"
             text="xl secondaryOp dark:secondary"
           >
@@ -82,9 +83,11 @@
           <button
             v-else
             @click="showPassword()"
+            bg="transparent hover:secondary dark:hover:secondaryOp"
+            cursor="pointer"
+            rounded="5px"
             flex="~"
             items="center"
-            bg="transparent"
             border="transparent"
             text="xl secondaryOp dark:secondary"
           >
@@ -98,11 +101,11 @@
             @click="increase()"
             rounded="5px"
             bg="transparent hover:secondary dark:hover:secondaryOp"
+            cursor="pointer"
             border="transparent"
             flex="~"
             items="center"
             text="xl secondaryOp dark:secondary"
-            cursor="pointer"
           >
             <IconEpArrowUp w="18px" />
           </button>
