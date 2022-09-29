@@ -1,7 +1,7 @@
 <template>
-  <!-- //===== Assistant Messages =====// -->
+  <!--  Assistant Messages  -->
   <div v-if="support.selectedConversation?.id" flex="~ col gap-3 grow" overflow-y="auto" p="2" border="~ secondary dark:secondaryOp rounded-lg" >
-    <!-- //===== Messages =====// -->
+    <!--  Messages  -->
     <div @scroll="scrollingMessages($event)" ref="messagesElement" flex="~ col gap-1 grow" overflow-y="auto" pl="2" overscroll="y-contain" snap="y mandatory" :class="{ 'snapType' : scrollToEnd }">
       <SupportMessage v-for="msg in support.getMessages" :message="msg" :key="msg.id" />
     </div>
@@ -11,7 +11,7 @@
       <div p="0.5">لديك رسائل جديدة</div>
     </div>
     
-    <!-- //===== Input & Send Button =====// -->
+    <!--  Input & Send Button  -->
     <Transition>
       <div v-if="support.isMessagesLoaded" flex="~ gap-4">
         <UiInput @keyup.enter="sendMessage" icon="IconPen" w="full" placeholder="اكتب هنا..." v-model="message" />
@@ -22,7 +22,7 @@
       </div>
     </Transition>
   </div>
-  <!-- //===== Else Statement if no Conversation Selected =====// -->
+  <!--  Else Statement if no Conversation Selected  -->
   <div v-else flex="~" border="~ secondary dark:secondaryOp rounded-lg" h="full" items="center" justify="center">
     <span text="secondary dark:secondaryOp 4xl" opacity="40" font="bold">
       يرجى تحديد محادثة
