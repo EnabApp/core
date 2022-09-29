@@ -1,5 +1,5 @@
 import Widget from "./Widget";
-import Service from "./Service";
+
 import Plan from "./Plan";
 
 export default class App {
@@ -21,19 +21,9 @@ export default class App {
     minWidth: number;
     minHeight: number;
     zIndex: string;
-
-    // utility: boolean;
-
-    // solid: boolean;
-
     core: boolean;
-
     points: number;
-
-    services: Service[];
     plans: Plan[];
-
-
     constructor(args) {
         this.id = args?.id
         this.name = args?.name
@@ -55,7 +45,7 @@ export default class App {
 
         this.points = args.points ?? 0
 
-        this.services = args.apps_services?.map(service => new Service(service))
+  
         this.plans = args.apps_plans?.map(plan => new Plan(plan))
 
     }
@@ -88,18 +78,7 @@ export default class App {
 
 
     // Getters
-    getService(id: number){
-        return this.services.find(widget => widget.id === id)
-    }
-    getOwnedServices(){
-        return this.services.filter(widget => widget.owned)
-    }
-    getUnownedServices(){
-        return this.services.filter(widget => !widget.owned)
-    }
-    getAllServices(){
-        return this.services
-    }
+   
     // getWidget(id: number){
     //     return this.widgets.find(widget => widget.id === id)
     // }
