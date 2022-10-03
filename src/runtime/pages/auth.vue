@@ -1,6 +1,6 @@
 <template>
   <div>
-    businesses
+    auth
   </div>
 </template>
 

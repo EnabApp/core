@@ -62,7 +62,9 @@ export default defineNuxtModule<ModuleOptions>({
       // Pages (Desktop Page)
       nuxt.hook('pages:extend', (pages) => {
         pages.push({ path: '/', file: resolve(runtimeDir, 'pages/index.vue')})
-        // pages.push({ path: '/auth', file: resolve(runtimeDir, 'pages/auth.vue')})
+        pages.push({ path: '/space/', file: resolve(runtimeDir, 'pages/space/index.vue')})
+        pages.push({ path: '/space/:id', file: resolve(runtimeDir, 'pages/space/[id].vue')})
+        pages.push({ path: '/auth', file: resolve(runtimeDir, 'pages/auth.vue')})
       })
   }
 })

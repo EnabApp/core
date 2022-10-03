@@ -5,7 +5,7 @@ import MyModule from '..'
 export default defineNuxtConfig({
     modules: [
         MyModule,
-        './packages/components/src/module.ts',
+        '@enab/components',
         '@nuxt/image-edge',
         '@pinia/nuxt',
         '@vueuse/nuxt',
