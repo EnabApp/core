@@ -1,9 +1,10 @@
 <template>
-    <p>
+    <div>
+        <SpaceHeader />
         {{ id }}
         <br />
         {{ space ? 'found' : 'not found' }}
-    </p>
+    </div>
 </template>
 
 <script setup>
