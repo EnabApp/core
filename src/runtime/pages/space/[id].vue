@@ -1,11 +1,12 @@
 <template>
-    <p>{{ id }}</p>
+    <p>
+        {{ id }}
+        <br />
+        {{ space ? 'found' : 'not found' }}
+    </p>
 </template>
 
 <script setup>
 import { useSpace } from '../../composables/useSpace'
-const spaceStore = useSpace()
-
-// Space id can access from anywhere.
-const id = spaceStore.getSpaceId
+const { getSelectedSpaceId: id, getSelectedSpace: space } = useSpace()
 </script>

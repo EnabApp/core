@@ -3,11 +3,14 @@ import { useNuxtApp, useRoute } from "#imports";
 
 export const useSpace = defineStore("space", {
   state: () => ({
-    
+    spaces: [],
   }),
 
   getters: {
-    getSpaceId: () => useRoute()?.params?.id
+    getSelectedSpaceId: () => useRoute()?.params?.id,
+    getSelectedSpace(){
+        return this.spaces.find((space: any) => space.id == this.getSelectedSpaceId)
+    }
   },
 
   actions: {
