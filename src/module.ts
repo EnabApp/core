@@ -7,7 +7,7 @@ import { uno } from "./runtime/unocss/index";
 
 
 export interface ModuleOptions {
-  isCore: boolean,
+  // isCore: boolean,
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -16,7 +16,7 @@ export default defineNuxtModule<ModuleOptions>({
     configKey: 'core'
   },
   defaults: {
-    isCore: true,
+    // isCore: true,
   },
   setup (options, nuxt) {
     const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
@@ -25,7 +25,6 @@ export default defineNuxtModule<ModuleOptions>({
 
     
 
-    if (options.isCore) {
       // addPlugin(resolve(runtimeDir, 'plugins/addApps'))
 
       // Components Hooks
@@ -63,42 +62,7 @@ export default defineNuxtModule<ModuleOptions>({
       // Pages (Desktop Page)
       nuxt.hook('pages:extend', (pages) => {
         pages.push({ path: '/', file: resolve(runtimeDir, 'pages/index.vue')})
-        pages.push({ path: '/auth', file: resolve(runtimeDir, 'pages/auth.vue')})
+        // pages.push({ path: '/auth', file: resolve(runtimeDir, 'pages/auth.vue')})
       })
-    
-        
-  
-      // Supabase 
-      nuxt.options['supabase'] = {
-        url: 'https://xjrkpvotkmsqephyfmya.supabase.co',
-        key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhqcmtwdm90a21zcWVwaHlmbXlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjAyOTc3MjYsImV4cCI6MTk3NTg3MzcyNn0.3doSjk0JXDL8EtfmNjqz3iUx43NrvWgcLkIRhsyvAnM',
-        serviceKey: ''
-      }
-    } 
-
-    // Not core ( imported in docs, etc...)
-    else {
-      nuxt.hook("components:dirs", (dirs) => {
-        dirs.push({
-          path: resolve(runtimeDir, "components"),
-          global: true,
-          ignore : [
-              "Ui/Desktop/**",
-              "BottomBar/**",
-              "Auth/**",
-              "*.vue",
-              "SystemManager/**",
-              "Support/**"
-          ]
-        });
-      });
-    }
-
-    // ColorMode Configuration
-    let colorMode = { classSuffix: "" } as any;
-    nuxt.options["colorMode"] = colorMode;
-
-    // UnoCSS Configurations
-    nuxt.options["unocss"] = uno;
   }
 })
