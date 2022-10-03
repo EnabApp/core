@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div h="full" w="full" border="~">
     test
     <UiInput label="noice" />
   </div>

@@ -20,8 +20,7 @@ useHead({
   charset: "utf-8",
   meta: [{ name: "description", content: "My amazing site." }],
   bodyAttrs: {
-    // class:
-    // "m-0 p-0 overflow-hidden font-sans h-screen w-screen bg-gray-50 dark:bg-secondary-800",
+    class: "bg-primary dark:bg-primaryOp my-10 mx-15",
     dir: "rtl",
     // oncontextmenu: "return false",
 

@@ -28,6 +28,7 @@
     "firebase": "^9.10.0"
   },
   "devDependencies": {
+    "@enab/components": "^1.0.1-beta.3",
     "@nuxt/image-edge": "latest",
     "@nuxt/module-builder": "latest",
     "@nuxtjs/color-mode": "^3.1.4",

@@ -301,6 +301,13 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
+"@enab/components@^1.0.1-beta.3":
+  version "1.0.1-beta.3"
+  resolved "https://registry.yarnpkg.com/@enab/components/-/components-1.0.1-beta.3.tgz#25018efbd9abd169e1b09cdbc2cc630a41001a61"
+  integrity sha512-ZBiU9fCaRiML55Pk7sRtobm6aGE0oRE3i+p/KGoOnBzDwU84tFT0NkY00FOW5Vrh7m39tm/p3Vm+h18B9BeQdQ==
+  dependencies:
+    "@nuxt/kit" "^3.0.0-rc.10"
+
 "@esbuild/android-arm@0.15.8":
   version "0.15.8"
   resolved "https://registry.yarnpkg.com/@esbuild/android-arm/-/android-arm-0.15.8.tgz#52b094c98e415ec72fab39827c12f2051ac9c550"
