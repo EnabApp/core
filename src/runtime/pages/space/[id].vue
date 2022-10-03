@@ -3,11 +3,11 @@
         <SpaceHeader pt="10" w="full" />
         <div ref="boardsRef" flex="grow" mt="17">
             <div v-if="boards.width > 0 && boards.height > 0" grid="~ gap-2 cols-8" :style="`width:${boards.width}px; height:${boards.height}px`">
-                <SpaceUnit :colSpan="2" :rowSpan="2">x</SpaceUnit>
-                <SpaceUnit :colSpan="2" :rowSpan="2">x</SpaceUnit>
-                <SpaceUnit :colSpan="4" :rowSpan="4">x</SpaceUnit>
-                <SpaceUnit :colSpan="2" :rowSpan="2">x</SpaceUnit>
-                <SpaceUnit :colSpan="2" :rowSpan="2">x</SpaceUnit>
+                <SpaceBoardUnit :colSpan="2" :rowSpan="2">x</SpaceBoardUnit>
+                <SpaceBoardUnit :colSpan="2" :rowSpan="2">x</SpaceBoardUnit>
+                <SpaceBoardUnit :colSpan="4" :rowSpan="4">x</SpaceBoardUnit>
+                <SpaceBoardUnit :colSpan="2" :rowSpan="2">x</SpaceBoardUnit>
+                <SpaceBoardUnit :colSpan="2" :rowSpan="2">x</SpaceBoardUnit>
             </div>
         </div>
         <div flex="~ gap-2" justify="center" pb="8" mt="16">
