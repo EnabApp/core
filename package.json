@@ -23,9 +23,7 @@
     "release": "cd scripts && node --loader ts-node/esm release.ts"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.0.0-rc.10",
-    "@vueuse/firebase": "^9.2.0",
-    "firebase": "^9.10.0"
+    "@nuxt/kit": "^3.0.0-rc.11"
   },
   "devDependencies": {
     "@enab/components": "^1.0.1-beta.3",

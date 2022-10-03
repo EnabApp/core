@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <UiHeader :tabs="tabs" position="absolute" left="0" /> -->
     <slot />
   </div>
 </template>
@@ -8,7 +7,6 @@
 
 <script setup>
 import { useRouter, useRoute, useHead } from '#imports'
-
 
 const route = useRoute();
 
