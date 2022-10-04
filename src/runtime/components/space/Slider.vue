@@ -21,14 +21,23 @@ const props = defineProps({
     height: {
         type: Number || String,
         default: 0
+    },
+    boardsData: {
+        type: Array,
+        required: true
+    },
+    selected: {
+        type: Number
     }
 })
 
 const sliderRef = ref(null)
 let slider = ref(null)
 
+const emit = defineEmits(['selectedIndex'])
+
 const options = {
-    startSlide: spaceStore.getSelectedBoardIndex,
+    startSlide: props.selected,
     speed: 400,
     auto: 0,
     draggable: true,
@@ -41,14 +50,9 @@ const options = {
         history.pushState(
             {},
             null,
-            route.params.boardId = spaceStore.getSelectedSpace?.boards[index]?.id
+            route.params.boardId = props.boardsData[index]?.id
         )
-        spaceStore.setSelectedBoardId(spaceStore.getSelectedSpace?.boards[index]?.id)
-        // router.replace({
-        //     params: {
-        //         boardId: space?.boards[index]?.id
-        //     }
-        // })
+        emit('selectedIndex', index)
     }
 }
 

@@ -1,22 +1,22 @@
 <template>
     <div h="screen" flex="~ col">
         <!-- Space Header : Component -->
-        <SpaceHeader pt="5" />
+        <SpaceHeader pt="5" :boardsData="boardsData" :selected="selectedBoardIndex" />
 
         <!-- Boards Container -->
-        <div ref="boardsRef" w="full" justify="center" flex="~ grow" mt="10">
+        <div ref="boardsRef" h="full" w="full" justify="center" flex="~ grow" mt="10">
             <!-- Slider : Component -->
-            <SpaceSlider v-if="boards.width > 0 && boards.height > 0" :width="boards.width" :height="boards.height" :boardsCount="boardsCount">
-                <div v-for="(b, index) in slotsBoards" :key="'board-index-' + index" float="left" width="100%" position="relative" overflow="hidden">
+            <SpaceSlider v-if="boards.width > 0 && boards.height > 0" :width="boards.width" :height="boards.height" :boardsData="boardsData"  :selected="selectedBoardIndex" @selectedIndex="selectedBoardIndex = $event">
+                <div v-for="(b, index) in boardsData" :key="'board-index-' + index" float="left" width="100%" position="relative" overflow="hidden">
                     <SpaceBoard>
-                        <slot :name="b" />
+                        <SpaceBoardUnit v-for="unit in b.units" :key="unit.id" :unit="unit" />
                     </SpaceBoard>
                 </div>
             </SpaceSlider>
         </div>
 
         <!-- Space Footer : Component -->
-        <SpaceFooter pb="5" mt="10" />
+        <SpaceFooter :selected="selectedBoardIndex" :boardsData="boardsData" pb="5" mt="10" />
     </div>
 </template>
   
@@ -52,8 +52,8 @@ useHead({
 });
 
 const props = defineProps({
-    boardsCount: {
-        default: 1
+    boardsData: {
+        type: Array
     }
 })
 
@@ -71,8 +71,10 @@ const boards = reactive({
 // Watch for changes in the height of the boards container
 watch(() => height.value, (newHeight) => {
     boards.height = newHeight
-    boards.width = newHeight * 2
+    boards.width = (newHeight * 2) - 16
 })
+
+const selectedBoardIndex = ref(props.boardsData?.findIndex(b => b.id == route.params?.boardId))
 </script>
   
 <style>

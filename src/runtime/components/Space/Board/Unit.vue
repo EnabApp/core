@@ -1,20 +1,19 @@
 <template>
-    <div :style="`grid-column: span ${colSpan} / span ${colSpan}; grid-row: span ${rowSpan} / span ${rowSpan}; aspect-ratio: ${colSpan/rowSpan}`" class="" bg="secondary dark:secondaryOp" rounded="6">
-        <div p="4">
-            <slot/>
+    <div h="full" w="full" :style="`grid-column: span ${colSpan} / span ${colSpan}; grid-row: span ${rowSpan} / span ${rowSpan}; aspect-ratio: ${colSpan} / ${rowSpan}; order: ${unit.order}`" bg="secondary dark:secondaryOp" rounded="6">
+        <div>
+            <component v-if="unit.componentName" :is="unit.componentName" />
+            <slot v-else />
         </div>
     </div>
 </template>
 
 <script setup>
 const props = defineProps({
-    colSpan: {
-        type: Number,
-        default: 1
-    },
-    rowSpan: {
-        type: Number,
-        default: 1
-    },
+    unit: {
+        type: Object,
+        required: true
+    }
 })
+const colSpan = props.unit.colSpan ?? 1
+const rowSpan = props.unit.rowSpan ?? 1
 </script>

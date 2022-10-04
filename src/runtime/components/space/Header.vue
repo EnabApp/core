@@ -9,15 +9,15 @@
             
 
             <!-- Business Title -->
-            <NuxtLink to="/" decoration="none" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer" p="2" rounded="2xl" bg="hover:secondary dark:hover:secondaryOp">{{ spaceStore.getSelectedSpace?.business?.name }}</NuxtLink>
+            <NuxtLink v-if="isHasBusiness" to="/" decoration="none" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer" p="2" rounded="2xl" bg="hover:secondary dark:hover:secondaryOp">Business Name</NuxtLink>
+            <IconArrowLeft v-if="isHasBusiness" w="8" />
             
             <!-- Space Title -->
-            <IconArrowLeft v-if="spaceStore.getSelectedSpace?.name" w="8" />
-            <NuxtLink :to="`/space/${spaceStore.getSelectedSpace?.id}`" decoration="none" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer" p="2" rounded="2xl" bg="hover:secondary dark:hover:secondaryOp">{{ spaceStore.getSelectedSpace?.name }}</NuxtLink>
+            <NuxtLink v-if="isHasSpace" :to="`/space/${spaceStore.getSelectedSpace?.id}`" decoration="none" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer" p="2" rounded="2xl" bg="hover:secondary dark:hover:secondaryOp">Space Name</NuxtLink>
+            <IconArrowLeft v-if="isHasSpace" text="primaryOp dark:primary" w="8" />
             
             <!-- Board Title -->
-            <IconArrowLeft v-if="spaceStore.getSelectedBoard?.name" text="primaryOp dark:primary" w="8" />
-            <span p="2" text="primaryOp dark:primary">{{ spaceStore.getSelectedBoard?.name }}</span>
+            <span p="2" text="primaryOp dark:primary">{{ board?.name }}</span>
 
         </div>
 
@@ -34,4 +34,18 @@
 <script setup>
 import { useSpace } from '../../composables/useSpace'
 const spaceStore = useSpace()
+const props = defineProps({
+    boardsData: {
+        type: Array,
+        required: true
+    },
+    selected: {
+        type: Number,
+        required: true
+    }
+})
+const board = computed( () => props.boardsData[props.selected] );
+const isHasBusiness = board?.business
+const isHasSpace = board?.space
+
 </script>
