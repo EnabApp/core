@@ -3,22 +3,22 @@
         <!-- Right Titles -->
         <div flex="~" text="2xl medium">
             <!-- Icon -->
-            <div flex="~" ml="2" items="center" justify="center" text="hover:primaryOp dark:hover:primary" cursor="pointer" p="y-2 x-4" rounded="lg" bg="hover:secondary dark:hover:secondaryOp">
+            <div flex="~" ml="2" items="center" justify="center" text="hover:primaryOp dark:hover:primary" cursor="pointer" p="2" rounded="2xl" bg="hover:secondary dark:hover:secondaryOp">
                 <IconBoards w="8" />
             </div>
             
 
             <!-- Business Title -->
-            <span text="hover:primaryOp dark:hover:primary" cursor="pointer" p="y-2 x-4" rounded="lg" bg="hover:secondary dark:hover:secondaryOp">مطعم ستيف الحزين </span>
+            <span text="hover:primaryOp dark:hover:primary" cursor="pointer" p="2" rounded="2xl" bg="hover:secondary dark:hover:secondaryOp">مطعم ستيف الحزين </span>
             
             <!-- Space Title -->
             <IconArrowLeft w="8" />
-            <span text="hover:primaryOp dark:hover:primary" cursor="pointer" p="y-2 x-4" rounded="lg" bg="hover:secondary dark:hover:secondaryOp">الكاشير حسوني</span>
+            <span text="hover:primaryOp dark:hover:primary" cursor="pointer" p="2" rounded="2xl" bg="hover:secondary dark:hover:secondaryOp">الكاشير حسوني</span>
             
             <!-- Board Title -->
             <IconArrowLeft text="primaryOp dark:primary" w="8" />
             
-            <span p="y-2 x-4" text="primaryOp dark:primary">قائمة الأكل</span>
+            <span p="2" text="primaryOp dark:primary">قائمة الأكل</span>
         </div>
 
         <!-- Left Actions -->
