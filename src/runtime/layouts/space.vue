@@ -6,22 +6,11 @@
         <!-- Boards Container -->
         <div ref="boardsRef" w="full" justify="center" flex="~ grow" mt="10">
             <!-- Slider : Component -->
-            <SpaceSlider 
-                v-if="boards.width > 0 && boards.height > 0"
-                :width="boards.width"
-                :height="boards.height"
-                :boardsCount="boardsCount"
-            >
-                <div
-                v-for="(board, index) in slotsBoards" :key="'board-index-' + index" 
-                float="left"
-                width="100%"
-                position="relative"
-                overflow="hidden"
-                >
-                    <div grid="~ gap-2 cols-8" m="1">
-                        <slot :name="board" />
-                    </div>
+            <SpaceSlider v-if="boards.width > 0 && boards.height > 0" :width="boards.width" :height="boards.height" :boardsCount="boardsCount">
+                <div v-for="(b, index) in slotsBoards" :key="'board-index-' + index" float="left" width="100%" position="relative" overflow="hidden">
+                    <SpaceBoard>
+                        <slot :name="b" />
+                    </SpaceBoard>
                 </div>
             </SpaceSlider>
         </div>
