@@ -9,16 +9,16 @@
             
 
             <!-- Business Title -->
-            <span text="hover:primaryOp dark:hover:primary" cursor="pointer" p="2" rounded="2xl" bg="hover:secondary dark:hover:secondaryOp">مطعم ستيف الحزين </span>
+            <NuxtLink to="/" decoration="none" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer" p="2" rounded="2xl" bg="hover:secondary dark:hover:secondaryOp">{{ spaceStore.getSelectedSpace?.business?.name }}</NuxtLink>
             
             <!-- Space Title -->
-            <IconArrowLeft w="8" />
-            <span text="hover:primaryOp dark:hover:primary" cursor="pointer" p="2" rounded="2xl" bg="hover:secondary dark:hover:secondaryOp">الكاشير حسوني</span>
+            <IconArrowLeft v-if="spaceStore.getSelectedSpace?.name" w="8" />
+            <NuxtLink :to="`/space/${spaceStore.getSelectedSpace?.id}`" decoration="none" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer" p="2" rounded="2xl" bg="hover:secondary dark:hover:secondaryOp">{{ spaceStore.getSelectedSpace?.name }}</NuxtLink>
             
             <!-- Board Title -->
-            <IconArrowLeft text="primaryOp dark:primary" w="8" />
-            
-            <span p="2" text="primaryOp dark:primary">قائمة الأكل</span>
+            <IconArrowLeft v-if="spaceStore.getSelectedBoard?.name" text="primaryOp dark:primary" w="8" />
+            <span p="2" text="primaryOp dark:primary">{{ spaceStore.getSelectedBoard?.name }}</span>
+
         </div>
 
         <!-- Left Actions -->
@@ -32,5 +32,6 @@
 </template>
 
 <script setup>
-
+import { useSpace } from '../../composables/useSpace'
+const spaceStore = useSpace()
 </script>

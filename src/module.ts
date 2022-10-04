@@ -63,7 +63,9 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt.hook('pages:extend', (pages) => {
         pages.push({ path: '/', file: resolve(runtimeDir, 'pages/index.vue')})
         pages.push({ path: '/space/', file: resolve(runtimeDir, 'pages/space/index.vue')})
-        pages.push({ path: '/space/:id', file: resolve(runtimeDir, 'pages/space/[id].vue')})
+        pages.push({ path: '/space/:spaceId', file: resolve(runtimeDir, 'pages/space/[spaceId].vue')})
+        pages.push({ path: '/space/:spaceId/board', file: resolve(runtimeDir, 'pages/space/board/index.vue')})
+        pages.push({ path: '/space/:spaceId/board/:boardId', file: resolve(runtimeDir, 'pages/space/board/[boardId].vue')})
         pages.push({ path: '/auth', file: resolve(runtimeDir, 'pages/auth.vue')})
       })
   }
