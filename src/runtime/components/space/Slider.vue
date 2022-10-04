@@ -1,11 +1,19 @@
 <template>
-    <div ref="sliderRef" class="swipe">
-        <div :style="`width:${width}px; height:${height}px;`" class="swipe-wrap text-primary">
+    <div :style="`width:${width}px; height:${height}px;`" ref="sliderRef" class="swipe">
+        <div class="swipe-wrap text-primary">
             <div>
-                <TestBoard />
+                <div grid="~ gap-2 cols-8" m="1">
+                    <SpaceBoardUnit :colSpan="2" :rowSpan="2">x</SpaceBoardUnit>
+                    <SpaceBoardUnit :colSpan="2" :rowSpan="2">x</SpaceBoardUnit>
+                    <SpaceBoardUnit :colSpan="4" :rowSpan="4">x</SpaceBoardUnit>
+                    <SpaceBoardUnit :colSpan="2" :rowSpan="2">x</SpaceBoardUnit>
+                    <SpaceBoardUnit :colSpan="2" :rowSpan="2">x</SpaceBoardUnit>
+                </div>
             </div>
             <div>
-                <TestBoard />
+                <div grid="~ gap-2 cols-8" m="1">
+                    <SpaceBoardUnit v-for="item in 32" :key="item">x</SpaceBoardUnit>
+                </div>
             </div>
         </div>
     </div>
