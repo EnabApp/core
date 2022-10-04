@@ -1,10 +1,11 @@
 <template>
   <div>
-    businesses
+    Business
   </div>
 </template>
 
 <script setup>
+
 definePageMeta({
   title: "Home",
   // middleware: auth
