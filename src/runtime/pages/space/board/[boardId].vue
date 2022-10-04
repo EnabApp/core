@@ -1,31 +1,21 @@
 <template>
-    <div h="screen" flex="~ col">
-        <SpaceHeader pt="5" />
-        <div ref="boardsRef" w="full" justify="center" flex="~ grow" mt="10">
-            <SpaceSlider :width="boards.width" :height="boards.height" v-if="boards.width > 0 && boards.height > 0" />
-        </div>
-        <SpaceFooter pb="5" mt="10" />
-    </div>
+    <NuxtLayout name="space" boardsCount="2">
+        <template #test>
+            <SpaceBoardUnit :colSpan="2" :rowSpan="2">x</SpaceBoardUnit>
+            <SpaceBoardUnit :colSpan="2" :rowSpan="2">x</SpaceBoardUnit>
+            <SpaceBoardUnit :colSpan="4" :rowSpan="4">x</SpaceBoardUnit>
+            <SpaceBoardUnit :colSpan="2" :rowSpan="2">x</SpaceBoardUnit>
+            <SpaceBoardUnit :colSpan="2" :rowSpan="2">x</SpaceBoardUnit>
+        </template>
+        <template #test2>
+            <SpaceBoardUnit :colSpan="2" :rowSpan="2">x</SpaceBoardUnit>
+            <SpaceBoardUnit :colSpan="2" :rowSpan="2">x</SpaceBoardUnit>
+            <SpaceBoardUnit :colSpan="4" :rowSpan="4">x</SpaceBoardUnit>
+            <SpaceBoardUnit :colSpan="2" :rowSpan="2">x</SpaceBoardUnit>
+            <SpaceBoardUnit :colSpan="2" :rowSpan="2">x</SpaceBoardUnit>
+        </template>
+    </NuxtLayout>
 </template>
 
 <script setup>
-import { ref, onMounted, reactive, watch } from 'vue'
-import { useElementSize } from '@vueuse/core'
-import { useSpace } from '../../../composables/useSpace'
-const { getSelectedSpaceId: id, getSelectedSpace: space } = useSpace()
-
-const boardsRef = ref(null)
-const { width, height } = useElementSize(boardsRef)
-const boards = reactive({
-    width: 0,
-    height: 0
-})
-
-watch(() => height.value, (newHeight) => {
-    boards.height = newHeight
-    boards.width = newHeight * 2
-})
-
-
-
 </script>
