@@ -74,7 +74,9 @@ watch(() => height.value, (newHeight) => {
     boards.width = (newHeight * 2) - 16
 })
 
-const selectedBoardIndex = ref(props.boardsData?.findIndex(b => b.id == route.params?.boardId))
+// Get the selected board index from the route
+const initialIndex = props.boardsData?.findIndex(b => b.id == route.params?.boardId)
+const selectedBoardIndex = ref(initialIndex == -1 ? 0 : initialIndex)
 
 // Slider Object
 const sliderObject = ref(null)

@@ -13,8 +13,8 @@
 </template>
 
 <script setup>
-import { useSpace } from '../../composables/useSpace'
-const spaceStore = useSpace()
+// import { useSpace } from '../../composables/useSpace'
+// const spaceStore = useSpace()
 const props = defineProps({
     boardsData: {
         type: Array,
@@ -22,10 +22,6 @@ const props = defineProps({
     },
     selected: {
         type: Number,
-        required: true
-    },
-    slider: {
-        type: Object,
         required: true
     }
 })

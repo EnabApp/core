@@ -8,8 +8,8 @@
 
 <script setup>
 import Swipe from 'swipejs';
-import { useSpace } from '../../composables/useSpace'
-const spaceStore = useSpace()
+// import { useSpace } from '../../composables/useSpace'
+// const spaceStore = useSpace()
 const router = useRouter()
 const route = useRoute()
 
@@ -35,7 +35,6 @@ const sliderRef = ref(null)
 let slider = ref(null)
 
 const emit = defineEmits(['selectedIndex', 'sliderInit'])
-
 const options = {
     startSlide: props.selected,
     speed: 400,
@@ -47,11 +46,13 @@ const options = {
     ignore: ".scroller",
     callback: function (index, elem, dir) { },
     transitionEnd: function (index, elem) {
-        history.pushState(
-            {},
-            null,
-            route.params.boardId = props.boardsData[index]?.id
-        )
+        if (parseInt(route.params.boardId) == route.params.boardId) {
+            history.pushState(
+                {},
+                null,
+                route.params.boardId = props.boardsData[index]?.id
+            )
+        }
         emit('selectedIndex', index)
     }
 }

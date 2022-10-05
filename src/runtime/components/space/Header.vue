@@ -13,7 +13,7 @@
             <IconArrowLeft v-if="isHasBusiness" w="8" />
             
             <!-- Space Title -->
-            <NuxtLink v-if="isHasSpace" :to="`/space/${spaceStore.getSelectedSpace?.id}`" decoration="none" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer" p="2" rounded="2xl" bg="hover:secondary dark:hover:secondaryOp">Space Name</NuxtLink>
+            <NuxtLink v-if="isHasSpace" :to="`/space/${$route.params.spaceId}`" decoration="none" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer" p="2" rounded="2xl" bg="hover:secondary dark:hover:secondaryOp">Space Name</NuxtLink>
             <IconArrowLeft v-if="isHasSpace" text="primaryOp dark:primary" w="8" />
             
             <!-- Board Title -->
@@ -32,8 +32,8 @@
 </template>
 
 <script setup>
-import { useSpace } from '../../composables/useSpace'
-const spaceStore = useSpace()
+// import { useSpace } from '../../composables/useSpace'
+// const spaceStore = useSpace()
 const props = defineProps({
     boardsData: {
         type: Array,

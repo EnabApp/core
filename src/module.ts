@@ -1,10 +1,9 @@
-import { resolve } from 'path'
 import { fileURLToPath } from 'url'
-import { defineNuxtModule, addPlugin, addAutoImport } from '@nuxt/kit'
+import { defineNuxtModule, addPlugin, addAutoImport, addServerHandler, createResolver } from '@nuxt/kit'
 import path from "path";
 import * as fs from 'fs';
 import { uno } from "./runtime/unocss/index";
-
+import { routes } from './runtime/server/routes/index'
 
 export interface ModuleOptions {
   // isCore: boolean,
@@ -19,6 +18,7 @@ export default defineNuxtModule<ModuleOptions>({
     // isCore: true,
   },
   setup (options, nuxt) {
+    const { resolve } = createResolver(import.meta.url)
     const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
     nuxt.options.build.transpile.push(runtimeDir)
     // nuxt.options.alias.core = (runtimeDir)
@@ -59,14 +59,28 @@ export default defineNuxtModule<ModuleOptions>({
   
   
   
-      // Pages (Desktop Page)
+      // Pages Routes
       nuxt.hook('pages:extend', (pages) => {
         pages.push({ path: '/', file: resolve(runtimeDir, 'pages/index.vue')})
+        
+        // SPACES
         pages.push({ path: '/space/', file: resolve(runtimeDir, 'pages/space/index.vue')})
         pages.push({ path: '/space/:spaceId', file: resolve(runtimeDir, 'pages/space/[spaceId].vue')})
         pages.push({ path: '/space/:spaceId/board', file: resolve(runtimeDir, 'pages/space/board/index.vue')})
         pages.push({ path: '/space/:spaceId/board/:boardId', file: resolve(runtimeDir, 'pages/space/board/[boardId].vue')})
+        
+        // SERVICES
+        pages.push({ path: '/services/addons', file: resolve(runtimeDir, 'pages/services/addons.vue')})
+        
+        // AUTHS
         pages.push({ path: '/auth', file: resolve(runtimeDir, 'pages/auth.vue')})
       })
+
+
+      // Server Routes
+      routes.forEach((route) => {
+        addServerHandler(route)
+      })
+    
   }
 })
