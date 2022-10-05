@@ -1,9 +1,8 @@
 import { fileURLToPath } from 'url'
-import { defineNuxtModule, addPlugin, addAutoImport, addServerHandler, createResolver } from '@nuxt/kit'
+import { defineNuxtModule, createResolver } from '@nuxt/kit'
 import path from "path";
 import * as fs from 'fs';
 import { uno } from "./runtime/unocss/index";
-import { routes } from './runtime/server/routes/index'
 
 export interface ModuleOptions {
   // isCore: boolean,
@@ -75,12 +74,5 @@ export default defineNuxtModule<ModuleOptions>({
         // AUTHS
         pages.push({ path: '/auth', file: resolve(runtimeDir, 'pages/auth.vue')})
       })
-
-
-      // Server Routes
-      routes.forEach((route) => {
-        addServerHandler(route)
-      })
-    
   }
 })
