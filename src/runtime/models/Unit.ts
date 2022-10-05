@@ -3,6 +3,7 @@ export type UnitType = {
     colSpan?: number,
     rowSpan?: number,
     componentName?: string | null,
+    componentData?: any,
     order?: number,
 }
 
@@ -11,6 +12,7 @@ export class Unit {
     colSpan?: number
     rowSpan?: number
     componentName?: string | null
+    componentData?: any
     order?: number
     
     // constructor
@@ -20,5 +22,6 @@ export class Unit {
         this.rowSpan = unit.rowSpan ?? 1
         this.componentName = unit?.componentName
         this.order = unit?.order
+        this.componentData = unit?.componentData
     }
 }

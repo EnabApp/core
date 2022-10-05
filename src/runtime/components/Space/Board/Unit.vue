@@ -1,9 +1,7 @@
 <template>
     <div h="full" w="full" :style="`grid-column: span ${colSpan} / span ${colSpan}; grid-row: span ${rowSpan} / span ${rowSpan}; aspect-ratio: ${colSpan} / ${rowSpan}; order: ${unit.order}`" bg="secondary dark:secondaryOp" rounded="6">
-        <div>
-            <component v-if="unit.componentName" :is="unit.componentName" />
+            <component v-if="unit.componentName" :is="unit.componentName" :componentData="unit.componentData" />
             <slot v-else />
-        </div>
     </div>
 </template>
 

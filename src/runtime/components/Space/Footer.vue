@@ -23,6 +23,9 @@ const props = defineProps({
     selected: {
         type: Number,
         required: true
+    },
+    slider: {
+        required: true
     }
 })
 </script>

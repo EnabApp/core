@@ -11,6 +11,4 @@ definePageMeta({
   // middleware: auth
 });
 
-console.log(await $fetch('/api/hello'))
-
 </script>
