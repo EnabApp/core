@@ -34,7 +34,7 @@ const props = defineProps({
 const sliderRef = ref(null)
 let slider = ref(null)
 
-const emit = defineEmits(['selectedIndex'])
+const emit = defineEmits(['selectedIndex', 'sliderInit'])
 
 const options = {
     startSlide: props.selected,
@@ -58,6 +58,7 @@ const options = {
 
 onMounted(() => {
     slider = new Swipe(sliderRef.value, options);
+    emit('sliderInit', slider)
 })
 </script>
 

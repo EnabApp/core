@@ -6,7 +6,7 @@
         <!-- Boards Container -->
         <div ref="boardsRef" h="full" w="full" justify="center" flex="~ grow" mt="10">
             <!-- Slider : Component -->
-            <SpaceSlider v-if="boards.width > 0 && boards.height > 0" :width="boards.width" :height="boards.height" :boardsData="boardsData"  :selected="selectedBoardIndex" @selectedIndex="selectedBoardIndex = $event">
+            <SpaceSlider v-if="boards.width > 0 && boards.height > 0" :width="boards.width" :height="boards.height" :boardsData="boardsData"  :selected="selectedBoardIndex" @selectedIndex="selectedBoardIndex = $event" @sliderInit="sliderObject = $event">
                 <div v-for="(b, index) in boardsData" :key="'board-index-' + index" float="left" width="100%" position="relative" overflow="hidden">
                     <SpaceBoard>
                         <SpaceBoardUnit v-for="unit in b.units" :key="unit.id" :unit="unit" />
@@ -16,7 +16,7 @@
         </div>
 
         <!-- Space Footer : Component -->
-        <SpaceFooter :selected="selectedBoardIndex" :boardsData="boardsData" pb="5" mt="10" />
+        <SpaceFooter :selected="selectedBoardIndex" :boardsData="boardsData" :slider="sliderObject" pb="5" mt="10" />
     </div>
 </template>
   
@@ -75,6 +75,9 @@ watch(() => height.value, (newHeight) => {
 })
 
 const selectedBoardIndex = ref(props.boardsData?.findIndex(b => b.id == route.params?.boardId))
+
+// Slider Object
+const sliderObject = ref(null)
 </script>
   
 <style>
