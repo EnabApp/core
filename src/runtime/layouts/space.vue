@@ -122,6 +122,31 @@ const selectedBoardIndex = ref(initialIndex == -1 ? 0 : initialIndex)
 // Slider Object
 const sliderObject = ref(null)
 
+
+
+
+
+// Calculate data units of the boards container
+const dataUnitsCount = computed(() => {
+    props.spaceData?.boards.forEach((board, index) => {
+        for (const device of Object.keys(board?.units)){
+            const units = board?.units[device]
+            const totalSpans = units.reduce((a, b) => a + b.colSpan * b.rowSpan, 0)
+            if (mobile.value){
+                console.log(`[INFO][Board ID => ${board.id}][Mobile] Total spans should be 8, and it is`, totalSpans)
+                return totalSpans
+            } else if (tablet.value){
+                console.log(`[INFO][Board ID => ${board.id}][Tablet] Total spans should be 24, and it is`, totalSpans)
+                return totalSpans
+            } else {
+                console.log(`[INFO][Board ID => ${board.id}][Desktop] Total spans should be 28, and it is`, totalSpans)
+                return totalSpans
+            }
+        }
+    })
+})
+dataUnitsCount.value
+
 </script>
   
 <style>
