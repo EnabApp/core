@@ -1,13 +1,13 @@
 <template>
     <div h="screen" flex="~ col">
         <!-- Space Header : Component -->
-        <SpaceHeader pt="5" :boardsData="boardsData" :selected="selectedBoardIndex" />
+        <SpaceHeader pt="5" :spaceData="spaceData" :selected="selectedBoardIndex" />
 
         <!-- Boards Container -->
         <div ref="boardsRef" h="full" w="full" justify="center" flex="~ grow" mt="5 md:10">
             <!-- Slider : Component -->
-            <SpaceSlider v-if="boards.width > 0 && boards.height > 0" :width="boards.width" :height="boards.height" :boardsData="boardsData" :selected="selectedBoardIndex" @selectedIndex="selectedBoardIndex = $event" @sliderInit="sliderObject = $event">
-                <div v-for="(b, index) in boardsData" :key="'board-index-' + index" float="left" width="100%" position="relative" overflow="hidden">
+            <SpaceSlider v-if="boards.width > 0 && boards.height > 0" :width="boards.width" :height="boards.height" :spaceData="spaceData" :selected="selectedBoardIndex" @selectedIndex="selectedBoardIndex = $event" @sliderInit="sliderObject = $event">
+                <div v-for="(b, index) in spaceData?.boards" :key="'board-index-' + index" float="left" width="100%" position="relative" overflow="hidden">
                     <SpaceBoard>
                         <template v-if="mobile">
                             <SpaceBoardUnit v-for="unit in b.units.mobile" :key="unit.id" :unit="unit" />
@@ -24,7 +24,7 @@
         </div>
 
         <!-- Space Footer : Component -->
-        <SpaceFooter :selected="selectedBoardIndex" :boardsData="boardsData" :slider="sliderObject" pb="5" mt="5 md:10" />
+        <SpaceFooter :selected="selectedBoardIndex" :spaceData="spaceData" :slider="sliderObject" pb="5" mt="5 md:10" />
     </div>
 </template>
   
@@ -63,8 +63,8 @@ useHead({
 });
 
 const props = defineProps({
-    boardsData: {
-        type: Array
+    spaceData: {
+        type: Object
     }
 })
 
@@ -117,7 +117,7 @@ watch(() => elementSize, (size) => {
 }, { deep: true })
 
 // Get the selected board index from the route
-const initialIndex = props.boardsData?.findIndex(b => b.id == route.params?.boardId)
+const initialIndex = props.spaceData?.boards?.findIndex(b => b.id == route.params?.boardId)
 const selectedBoardIndex = ref(initialIndex == -1 ? 0 : initialIndex)
 
 // Slider Object

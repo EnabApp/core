@@ -22,8 +22,8 @@ const props = defineProps({
         type: Number || String,
         default: 0
     },
-    boardsData: {
-        type: Array,
+    spaceData: {
+        type: Object,
         required: true
     },
     selected: {
@@ -46,14 +46,14 @@ const options = {
     ignore: ".scroller",
     callback: function (index, elem, dir) { },
     transitionEnd: function (index, elem) {
-        if (parseInt(route.params.boardId) == route.params.boardId) {
+        if (route.params.boardId) {
             history.pushState(
                 {},
                 null,
-                route.params.boardId = props.boardsData[index]?.id
+                route.params.boardId = props.spaceData?.boards[index]?.id
             )
+            emit('selectedIndex', index)
         }
-        emit('selectedIndex', index)
     }
 }
 

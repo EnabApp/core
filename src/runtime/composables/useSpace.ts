@@ -1,60 +1,70 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
 import { useNuxtApp, useRoute } from "#imports";
+import { SpaceTypes } from '../models/Space'
 
 export const useSpace = defineStore("space", {
   state: () => ({
     spaces: [
       {
-        id: 15,
-        name: "الكاشير حسوني",
+        id: "store",
+        name: "المتجر",
+        type: "BUSINESS" as SpaceTypes,
         business: {
-          name: "مطعم ستيف الحزين"
+          id: "1",
+          name: "عنب"
         },
         boards: [
           {
-            id: 5,
-            name: "قائمة الأكل",
-            units: [
-              { colSpan: 2, rowSpan: 2 },
-              { colSpan: 2, rowSpan: 2 },
-              { colSpan: 4, rowSpan: 4 },
-              { colSpan: 2, rowSpan: 2 },
-              { colSpan: 2, rowSpan: 2 },
-            ]
+            id: "apps",
+            name: "التطبيقات",
+            units: {
+              desktop: [
+                { id: '1', colSpan: 2, rowSpan: 4, componentName: 'TestUnitData', componentData: 'tEwtwerwer' },
+                { id: '2', colSpan: 3, rowSpan: 3 },
+                { id: '3', colSpan: 2, rowSpan: 4, componentName: 'TestUnitData', componentData: '2' },
+                { id: '4', colSpan: 3, rowSpan: 1 },
+              ]
+            }
           },
           {
-            id: 10,
-            name: "قائمة المشروبات",
-            units: [
-              {},{},{},{},{},{},{},{},
-              {},{},{},{},{},{},{},{},
-              {},{},{},{},{},{},{},{},
-              {},{},{},{},{},{},{},{},
-            ]
+            id: "packages",
+            name: "الحزم",
+            units: {
+              desktop: [
+                { id: '1', colSpan: 2, rowSpan: 4, componentName: 'TestUnitData', componentData: 'tEwtwerwer' },
+                { id: '2', colSpan: 3, rowSpan: 3 },
+                { id: '3', colSpan: 2, rowSpan: 4, componentName: 'TestUnitData', componentData: '2' },
+                { id: '4', colSpan: 3, rowSpan: 1 },
+              ]
+            }
           },
           {
-            id: 20,
-            name: "قائمة البلع",
-            units: [
-              { colSpan: 2, rowSpan: 2 },
-              { colSpan: 2, rowSpan: 2 },
-              { colSpan: 4, rowSpan: 4 },
-              { colSpan: 2, rowSpan: 2 },
-              { colSpan: 2, rowSpan: 2 },
-            ]
+            id: "20",
+            name: "التخفيضات",
+            units: {
+              desktop: [
+                { id: '1', colSpan: 2, rowSpan: 4, componentName: 'TestUnitData', componentData: 'tEwtwerwer' },
+                { id: '2', colSpan: 3, rowSpan: 3 },
+                { id: '3', colSpan: 2, rowSpan: 4, componentName: 'TestUnitData', componentData: '2' },
+                { id: '4', colSpan: 3, rowSpan: 1 },
+              ]
+            }
           },
         ]
       }
-    ],
+    ].map(s => new Space(s)),
 
     selectedBoardId: useRoute()?.params?.boardId,
     selectedSpaceId: useRoute()?.params?.spaceId
   }),
 
   getters: {
+    getSpaces: (state) => state.spaces,
+
     // Spaces
     getSelectedSpaceId: (state) => state.selectedSpaceId,
     getSelectedSpace(){ return this.spaces.find((space: any) => space.id == this.getSelectedSpaceId) },
+    getSpaceById: (state) => (id: string) => state.spaces.find((space: any) => space.id == id),
 
     // Boards
     getSelectedBoardId: (state) => state.selectedBoardId,
@@ -65,6 +75,9 @@ export const useSpace = defineStore("space", {
   actions: {
     setSelectedBoardId(id: number){
       this.selectedBoardId = id
+    },
+    setSelectedSpaceId(id: number){
+      this.selectedSpaceId = id
     }
     
   }

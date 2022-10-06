@@ -1,5 +1,5 @@
 export type UnitType = {
-    id: string,
+    id?: string,
     colSpan?: number,
     rowSpan?: number,
     componentName?: string | null,

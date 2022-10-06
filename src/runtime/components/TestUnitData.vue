@@ -1,13 +1,14 @@
 <template>
     <div>
-        Test Unit Data
+        SAME COMPONENT
         <br />
         {{componentData}}
         <br />
-        test
+        Cols: {{unit.colSpan}} <br />
+        Rows: {{unit.rowSpan}}
     </div>
 </template>
 
 <script setup>
-const props = defineProps(['componentData'])
+const props = defineProps(['componentData', 'unit'])
 </script>

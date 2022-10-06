@@ -1,8 +1,8 @@
 import { Unit, UnitType } from './Unit'
 
 export type ResposnivesType = {
-    mobile: UnitType[],
-    tablet: UnitType[],
+    mobile?: UnitType[],
+    tablet?: UnitType[],
     desktop: UnitType[],
 }
 
@@ -16,7 +16,7 @@ export class Board {
     id: string
     name: string
     units: ResposnivesType
-    
+
     // constructor
     constructor(board: BoardType) {
         this.id = board.id

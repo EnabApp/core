@@ -1,6 +1,6 @@
 <template>
     <div  flex="~ gap-2 row-reverse" justify="center">
-        <div v-for="(board, index) in boardsData" :key="board.id" @click="slider.slide(index, 500)" w="4" h="4" :class="[
+        <div v-for="(board, index) in spaceData?.boards" :key="board.id" @click="slider.slide(index, 500)" w="4" h="4" :class="[
             index == selected
             ? 'bg-primaryOp dark:bg-primary'
             : 'bg-secondary dark:bg-tertiary'
@@ -16,8 +16,8 @@
 // import { useSpace } from '../../composables/useSpace'
 // const spaceStore = useSpace()
 const props = defineProps({
-    boardsData: {
-        type: Array,
+    spaceData: {
+        type: Object,
         required: true
     },
     selected: {
