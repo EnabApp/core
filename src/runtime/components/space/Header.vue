@@ -3,7 +3,7 @@
         <!-- Right Titles -->
         <div flex="~" text="2xl medium">
             <!-- Icon -->
-            <NuxtLink :to="$route.path == '/space' ? '/' : '/space'" flex="~" ml="2" items="center" justify="center" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer" p="2">
+            <NuxtLink :to="homeRedirectionRoute()" flex="~" ml="2" items="center" justify="center" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer" p="2">
                 <IconBoards w="8" />
             </NuxtLink>
             
@@ -42,6 +42,7 @@
 <script setup>
 import { useSpace } from '../../composables/useSpace'
 const spaceStore = useSpace()
+const route = useRoute()
 const props = defineProps({
     spaceData: {
         type: Object,
@@ -56,5 +57,12 @@ const space = computed(() => props.spaceData)
 const board = computed( () => space.value?.boards[props.selected] );
 const isHasBusiness = space.value?.business
 const isHasSpace = space.value
+
+const homeRedirectionRoute = () => {
+    const path = route.path
+    if (path == '/') return ''
+    if (path == '/space/') return '/'
+    else return '/space/'
+}
 
 </script>

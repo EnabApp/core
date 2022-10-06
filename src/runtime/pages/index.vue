@@ -11,13 +11,21 @@ const boards = [
   new Board({
     id: '1',
     units: {
-      desktop: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1].map(id => {
-        return {
-          id: id,
-          colSpan: 1,
-          rowSpan: 1,
-        }
-      })
+      desktop: [
+          {
+            id: '1',
+            colSpan: 1,
+            rowSpan: 1,
+            componentName: 'BusinessUnitData',
+        },
+        ...[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1].map(id => {
+          return {
+            id: id,
+            colSpan: 1,
+            rowSpan: 1,
+          }
+        })
+      ]
     }
   })
 ]
