@@ -18,12 +18,12 @@ const boards = [
             rowSpan: 1,
             componentName: 'BusinessUnitData',
         },
-        ...[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1].map(id => {
-          return {
-            id: id,
-            colSpan: 1,
-            rowSpan: 1,
-          }
+        ...[...Array(27)].map((_, index) => {
+            return {
+                id: index,
+                colSpan: 1,
+                rowSpan: 1,
+            }
         })
       ]
     }

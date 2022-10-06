@@ -14,15 +14,24 @@ const boards = [
     new Board({
         id: '1',
         units: {
-            desktop: spaces.map(space => {
-                return {
-                    id: space.id,
-                    colSpan: 1,
-                    rowSpan: 1,
-                    componentData: space,
-                    componentName: 'SpaceUnitData'
-                }
-            })
+            desktop: [
+                ...spaces.map(space => {
+                    return {
+                        id: space.id,
+                        colSpan: 1,
+                        rowSpan: 1,
+                        componentData: space,
+                        componentName: 'SpaceUnitData'
+                    }
+                }),
+                ...[...Array(28 - (spaces.length ?? 0))].map((_, index) => {
+                    return {
+                        id: index,
+                        colSpan: 1,
+                        rowSpan: 1,
+                    }
+                })
+            ]
         }
     })
 ]
