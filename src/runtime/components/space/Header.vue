@@ -3,21 +3,21 @@
         <!-- Right Titles -->
         <div flex="~" text="2xl medium">
             <!-- Icon -->
-            <div flex="~" ml="2" items="center" justify="center" text="hover:primaryOp dark:hover:primary" cursor="pointer" p="2" rounded="2xl" bg="hover:secondary dark:hover:secondaryOp">
+            <NuxtLink :to="$route.path == '/space' ? '/' : '/space'" flex="~" ml="2" items="center" justify="center" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer" p="2">
                 <IconBoards w="8" />
-            </div>
+            </NuxtLink>
             
 
             <!-- Business Title -->
-            <a v-if="isHasBusiness" href="/" decoration="none" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer" p="2" rounded="2xl" bg="hover:secondary dark:hover:secondaryOp">
+            <div v-if="isHasBusiness" decoration="none" p="2">
                 {{ space?.business?.name }}
-            </a>
+            </div>
             <IconArrowLeft v-if="isHasBusiness" w="8" />
             
             <!-- Space Title -->
-            <NuxtLink v-if="isHasSpace" :to="`/space/${$route.params.spaceId}`" decoration="none" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer" p="2" rounded="2xl" bg="hover:secondary dark:hover:secondaryOp">
+            <div v-if="isHasSpace" decoration="none" p="2">
                 {{ space.name }}
-            </NuxtLink>
+            </div>
             <IconArrowLeft v-if="isHasSpace && board?.name" text="primaryOp dark:primary" w="8" />
             
             <!-- Board Title -->
