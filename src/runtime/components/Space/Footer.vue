@@ -1,5 +1,5 @@
 <template>
-    <div  flex="~ gap-2 row-reverse" justify="center">
+    <div :class="{ 'invisible' : spaceData?.boards.length <= 1}" flex="~ gap-2 row-reverse" justify="center">
         <div v-for="(board, index) in spaceData?.boards" :key="board.id" @click="slider.slide(index, 500)" w="4" h="4" :class="[
             index == selected
             ? 'bg-primaryOp dark:bg-primary'

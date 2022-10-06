@@ -39,12 +39,14 @@ const options = {
     startSlide: props.selected,
     speed: 400,
     auto: 0,
-    draggable: true,
+    draggable: props.spaceData?.boards?.length > 1,
     continuous: false,
     disableScroll: false,
     stopPropagation: true,
     ignore: ".scroller",
-    callback: function (index, elem, dir) { },
+    callback: function (index, elem, dir) { 
+        emit('selectedIndex', index)
+    },
     transitionEnd: function (index, elem) {
         if (route.params.boardId) {
             history.pushState(
@@ -52,7 +54,6 @@ const options = {
                 null,
                 route.params.boardId = props.spaceData?.boards[index]?.id
             )
-            emit('selectedIndex', index)
         }
     }
 }
