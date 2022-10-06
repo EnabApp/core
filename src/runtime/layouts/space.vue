@@ -113,7 +113,7 @@ watch(() => elementSize, (size) => {
     const { height, width } = size
     const { columns, rows } = responsive.value
     boards.height = height.value
-    boards.width = (height.value / columns) * rows
+    boards.width = (height.value / rows) * columns -32
 }, { deep: true })
 
 // Get the selected board index from the route
