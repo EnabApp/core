@@ -3,22 +3,22 @@
         <!-- Right Titles -->
         <div flex="~" text="2xl medium">
             <!-- Icon -->
-            <NuxtLink :to="homeRedirectionRoute()" flex="~" ml="2" items="center" justify="center" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer" p="2">
+            <NuxtLink :to="homeRedirectionRoute()" ml="2" items="center" justify="center" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer" p="2">
                 <IconBoards w="8" />
             </NuxtLink>
             
 
             <!-- Business Title -->
-            <div v-if="isHasBusiness" decoration="none" p="2">
+            <div v-if="isHasBusiness" decoration="none" p="2" class="hidden lg:flex">
                 {{ space?.business?.name }}
             </div>
-            <IconArrowLeft v-if="isHasBusiness" w="8" />
+            <IconArrowLeft v-if="isHasBusiness" w="8" class="hidden lg:flex" />
             
             <!-- Space Title -->
-            <div v-if="isHasSpace" decoration="none" p="2">
+            <div v-if="isHasSpace" decoration="none" class="hidden md:flex" p="2">
                 {{ space.name }}
             </div>
-            <IconArrowLeft v-if="isHasSpace && board?.name" text="primaryOp dark:primary" w="8" />
+            <IconArrowLeft v-if="isHasSpace && board?.name" text="primaryOp dark:primary" w="8" class="hidden md:flex" />
             
             <!-- Board Title -->
             <span p="2" text="primaryOp dark:primary">{{ board?.name }}</span>
@@ -28,7 +28,7 @@
         <!-- Left Actions -->
         <div flex="~ gap-3" items="center">
             <!-- Code Preview "Text" -->
-            <UiToolTip  v-for="action in actions" :key="action.icon" position="bottom" :text="action.text">
+            <UiToolTip v-for="action in actions" :key="action.icon" position="bottom" :text="action.text" class="hidden md:flex">
                 <NuxtLink @click="spaceStore.setSelectedBoardId(action.board, action.space)" :to="`/space/${action.space}/board/${action.board}`" flex="~" items="center" justify="center" w="10" h="10" rounded="full" cursor="pointer" :class="[
                 $route.path == `/space/${action.space}/board/${action.board}` ? 'bg-info dark:bg-infoOp' : 'bg-secondary dark:bg-secondaryOp'
         ]">

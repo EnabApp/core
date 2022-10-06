@@ -69,7 +69,7 @@ export default defineNuxtModule<ModuleOptions>({
         pages.push({ path: '/space/:spaceId/board/:boardId', file: resolve(runtimeDir, 'pages/space/board/[boardId].vue')})
         
         // SERVICES
-        pages.push({ path: '/services/', file: resolve(runtimeDir, 'pages/services/index.vue')})
+        // pages.push({ path: '/services/', file: resolve(runtimeDir, 'pages/services/index.vue')})
         
         // AUTHS
         pages.push({ path: '/auth', file: resolve(runtimeDir, 'pages/auth.vue')})

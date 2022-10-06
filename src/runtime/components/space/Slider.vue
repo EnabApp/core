@@ -44,10 +44,8 @@ const options = {
     disableScroll: false,
     stopPropagation: true,
     ignore: ".scroller",
-    callback: function (index, elem, dir) { 
+    callback: function (index, elem, dir) {
         emit('selectedIndex', index)
-    },
-    transitionEnd: function (index, elem) {
         if (route.params.boardId) {
             history.pushState(
                 {},
@@ -55,6 +53,8 @@ const options = {
                 route.params.boardId = props.spaceData?.boards[index]?.id
             )
         }
+    },
+    transitionEnd: function (index, elem) {
     }
 }
 
