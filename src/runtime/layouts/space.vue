@@ -4,19 +4,27 @@
         <SpaceHeader pt="5" :boardsData="boardsData" :selected="selectedBoardIndex" />
 
         <!-- Boards Container -->
-        <div ref="boardsRef" h="full" w="full" justify="center" flex="~ grow" mt="10">
+        <div ref="boardsRef" h="full" w="full" justify="center" flex="~ grow" mt="5 md:10">
             <!-- Slider : Component -->
-            <SpaceSlider v-if="boards.width > 0 && boards.height > 0" :width="boards.width" :height="boards.height" :boardsData="boardsData"  :selected="selectedBoardIndex" @selectedIndex="selectedBoardIndex = $event" @sliderInit="sliderObject = $event">
+            <SpaceSlider v-if="boards.width > 0 && boards.height > 0" :width="boards.width" :height="boards.height" :boardsData="boardsData" :selected="selectedBoardIndex" @selectedIndex="selectedBoardIndex = $event" @sliderInit="sliderObject = $event">
                 <div v-for="(b, index) in boardsData" :key="'board-index-' + index" float="left" width="100%" position="relative" overflow="hidden">
                     <SpaceBoard>
-                        <SpaceBoardUnit v-for="unit in b.units" :key="unit.id" :unit="unit" />
+                        <template v-if="mobile">
+                            <SpaceBoardUnit v-for="unit in b.units.mobile" :key="unit.id" :unit="unit" />
+                        </template>
+                        <template v-if="tablet">
+                            <SpaceBoardUnit v-for="unit in b.units.tablet" :key="unit.id" :unit="unit" />
+                        </template>
+                        <template v-if="desktop">
+                            <SpaceBoardUnit v-for="unit in b.units.desktop" :key="unit.id" :unit="unit" />
+                        </template>
                     </SpaceBoard>
                 </div>
             </SpaceSlider>
         </div>
 
         <!-- Space Footer : Component -->
-        <SpaceFooter :selected="selectedBoardIndex" :boardsData="boardsData" :slider="sliderObject" pb="5" mt="10" />
+        <SpaceFooter :selected="selectedBoardIndex" :boardsData="boardsData" :slider="sliderObject" pb="5" mt="5 md:10" />
     </div>
 </template>
   
@@ -26,6 +34,9 @@ import { useRouter, useRoute, useHead } from '#imports'
 import { ref, onMounted, reactive, watch } from 'vue'
 import { useElementSize } from '@vueuse/core'
 import { useSpace } from '../composables/useSpace'
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+import { useScreenOrientation } from '@vueuse/core'
+
 
 const route = useRoute();
 
@@ -41,7 +52,7 @@ useHead({
     charset: "utf-8",
     meta: [{ name: "description", content: "My amazing site." }],
     bodyAttrs: {
-        class: "bg-primary dark:bg-primaryOp text-tertiary dark:text-tertiaryOp mx-15",
+        class: "bg-primary dark:bg-primaryOp text-tertiary dark:text-tertiaryOp mx-5 md:mx-15",
         dir: "rtl",
         // oncontextmenu: "return false",
 
@@ -60,7 +71,36 @@ const props = defineProps({
 // Boards Container Reference
 const boardsRef = ref(null)
 // Get the size of the boards container
-const { width, height } = useElementSize(boardsRef)
+const elementSize = useElementSize(boardsRef)
+
+// Responsive units
+const breakpoints = useBreakpoints({
+    tablet: 640,
+    laptop: 1024,
+    desktop: 1280,
+})
+
+const mobile = breakpoints.smaller('tablet')
+const tablet = breakpoints.between('tablet', 'laptop')
+const desktop = breakpoints.greaterOrEqual('laptop')
+
+const {
+    orientation,
+} = useScreenOrientation()
+
+const responsive = computed( () => {
+    if (orientation.value.includes("portrait")) {
+        return {
+            columns: mobile.value ? 2 : tablet.value ? 4 : 7,
+            rows: mobile.value ? 4 : tablet.value ? 6 : 4,
+        }
+    } else {
+        return {
+            columns: mobile.value ? 4 : tablet.value ? 6 : 7,
+            rows: mobile.value ? 2 : tablet.value ? 4 : 4,
+        }
+    }
+})
 
 // Reactive object to store the size of the boards container
 const boards = reactive({
@@ -68,11 +108,13 @@ const boards = reactive({
     height: 0
 })
 
-// Watch for changes in the height of the boards container
-watch(() => height.value, (newHeight) => {
-    boards.height = newHeight
-    boards.width = (newHeight * 2) - 16
-})
+// Watch for changes in the size of the boards container
+watch(() => elementSize, (size) => {
+    const { height, width } = size
+    const { columns, rows } = responsive.value
+    boards.height = height.value
+    boards.width = (height.value / columns) * rows
+}, { deep: true })
 
 // Get the selected board index from the route
 const initialIndex = props.boardsData?.findIndex(b => b.id == route.params?.boardId)
@@ -80,6 +122,7 @@ const selectedBoardIndex = ref(initialIndex == -1 ? 0 : initialIndex)
 
 // Slider Object
 const sliderObject = ref(null)
+
 </script>
   
 <style>

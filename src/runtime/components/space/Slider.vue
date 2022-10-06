@@ -1,6 +1,6 @@
 <template>
     <div :style="`width:${width}px; height:${height}px;`" ref="sliderRef" class="swipe">
-        <div class="swipe-wrap">
+        <div class="swipe-wrap" style="width: 100% !important">
             <slot />
         </div>
     </div>
