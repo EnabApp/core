@@ -37,7 +37,6 @@ import { useSpace } from '../composables/useSpace'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import { useScreenOrientation } from '@vueuse/core'
 
-
 const route = useRoute();
 
 const slots = useSlots();

@@ -1,14 +1,2 @@
-<template>
-  <div>
-    Business
-  </div>
-</template>
-
-<script setup>
-
-definePageMeta({
-  title: "Home",
-  // middleware: auth
-});
-
-</script>
+<script setup>navigateTo('/space')</script>
+<template></template>

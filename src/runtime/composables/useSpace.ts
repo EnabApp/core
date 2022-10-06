@@ -8,7 +8,7 @@ export const useSpace = defineStore("space", {
       {
         id: "store",
         name: "المتجر",
-        type: "BUSINESS" as SpaceTypes,
+        type: "CORE" as SpaceTypes,
         business: {
           id: "1",
           name: "عنب"
@@ -51,6 +51,41 @@ export const useSpace = defineStore("space", {
             }
           },
         ]
+      },
+      {
+        id: "1",
+        name: "الموارد البشرية",
+        type: "BUSINESS" as SpaceTypes,
+        business: {
+          id: "1",
+          name: "مجموعة العبدالله"
+        },
+        boards: [
+          {
+            id: "1",
+            name: "الموظفين",
+            units: {
+              desktop: [
+                { id: '1', colSpan: 2, rowSpan: 4, componentName: 'TestUnitData', componentData: 'tEwtwerwer' },
+                { id: '2', colSpan: 3, rowSpan: 3 },
+                { id: '3', colSpan: 2, rowSpan: 4, componentName: 'TestUnitData', componentData: '2' },
+                { id: '4', colSpan: 3, rowSpan: 1 },
+              ]
+            }
+          },
+          {
+            id: "2",
+            name: "الرواتب",
+            units: {
+              desktop: [
+                { id: '1', colSpan: 2, rowSpan: 4, componentName: 'TestUnitData', componentData: 'tEwtwerwer' },
+                { id: '2', colSpan: 3, rowSpan: 3 },
+                { id: '3', colSpan: 2, rowSpan: 4, componentName: 'TestUnitData', componentData: '2' },
+                { id: '4', colSpan: 3, rowSpan: 1 },
+              ]
+            }
+          },
+        ]
       }
     ].map(s => new Space(s)),
 
@@ -59,7 +94,7 @@ export const useSpace = defineStore("space", {
   }),
 
   getters: {
-    getSpaces: (state) => state.spaces,
+    getSpaces: (state) => state.spaces.filter(s => s.type !== 'CORE'),
 
     // Spaces
     getSelectedSpaceId: (state) => state.selectedSpaceId,
@@ -73,10 +108,11 @@ export const useSpace = defineStore("space", {
   },
 
   actions: {
-    setSelectedBoardId(id: number){
+    setSelectedBoardId(id: string, spaceId: string = null){
       this.selectedBoardId = id
+      if (spaceId) this.selectedSpaceId = spaceId
     },
-    setSelectedSpaceId(id: number){
+    setSelectedSpaceId(id: string){
       this.selectedSpaceId = id
     }
     
