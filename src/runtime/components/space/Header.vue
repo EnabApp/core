@@ -2,23 +2,28 @@
     <div flex="~" justify="between">
         <!-- Right Titles -->
         <div flex="~" text="2xl medium tertiary dark:tertiaryOp">
-            <!-- Icon -->
-            <NuxtLink :to="homeRedirectionRoute()" ml="2" items="center" justify="center" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer" p="2">
+            <div @click="$router.push('/')" flex="~ gap-4" p="y-2 x-4" items="center" rounded="xl" bg="hover:secondary dark:hover:secondaryOp" un-text="tertiary dark:tertiaryOp hover:primaryOp dark:hover:primary" cursor="pointer">
+                <!-- Icon -->
                 <IconBoards w="8" />
-            </NuxtLink>
-            
-
-            <!-- Business Title -->
-            <div v-if="isHasBusiness" decoration="none" p="2" class="hidden lg:flex">
-                {{ space?.business?.name }}
+                
+    
+                <!-- Business Title -->
+                <div v-if="hasBusiness" decoration="none" class="hidden lg:flex">
+                    {{ space?.business?.name }}
+                </div>
             </div>
-            <IconArrowLeft v-if="isHasBusiness" w="8" class="hidden lg:flex" />
+
+            <IconArrowLeft v-if="hasBusiness" w="8" class="hidden lg:flex" />
             
             <!-- Space Title -->
-            <div v-if="isHasSpace" decoration="none" class="hidden md:flex" p="2">
+            <NuxtLink v-if="hasSpace" :to="`/${$route.params.businessId}`" :class="[
+                    hasBusiness && hasSpace 
+                    ? 'text-tertiary dark:text-tertiaryOp hover:text-primaryOp dark:hover:text-primary cursor-pointer'
+                    : 'text-primaryOp dark:text-primary'
+                ]" decoration="none" class="hidden md:flex" p="2">
                 {{ space.name }}
-            </div>
-            <IconArrowLeft v-if="isHasSpace && board?.name" text="primaryOp dark:primary" w="8" class="hidden md:flex" />
+            </NuxtLink>
+            <IconArrowLeft v-if="hasSpace && board?.name" text="primaryOp dark:primary" w="8" class="hidden md:flex" />
             
             <!-- Board Title -->
             <span p="2" text="primaryOp dark:primary">{{ board?.name }}</span>
@@ -66,16 +71,16 @@ const props = defineProps({
 const route = useRoute()
 const space = computed(() => props.spaceData)
 const board = computed( () => space.value?.boards[props.selected] );
-const isHasBusiness = computed(() => route.params.businessId)
-const isHasSpace = computed(() => route.params.spaceId)
+const hasBusiness = computed(() => route.params.businessId)
+const hasSpace = computed(() => route.params.spaceId)
 
 const homeRedirectionRoute = () => {
     // const path = route.path
     // if (path == '/') return ''
     // if (path == '/space/') return '/'
     // else return '/space/'
-    if (isHasSpace.value) return `/${isHasBusiness.value}`
-    else if (isHasBusiness.value) return '/'
+    if (hasSpace.value) return `/${hasBusiness.value}`
+    else if (hasBusiness.value) return '/'
     else return '/'
 }
 
