@@ -36,8 +36,47 @@ import { useElementSize } from '@vueuse/core'
 import { useSpace } from '../composables/useSpace'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import { useScreenOrientation } from '@vueuse/core'
-
 const route = useRoute();
+const spaceStore = useSpace();
+const businessId = ref(route.params.businessId);
+const spaceId = ref(route.params.spaceId);
+
+/** 
+ * CASES:
+ * 1. [NO] PARAMS
+ *    Get Business as space template.
+ * 2. [BUSINESS ID] PARAM
+ *    Get Spaces as space template.
+ * 3. [BUSINESS ID][SPACE ID] PARAM 
+ *    Get Space as original data units.
+ */
+
+
+
+/** [ FIRST - NO PARAMS ] **/
+if (!businessId.value && !spaceId.value) {
+    console.log('NO PARAMS');
+    spaceStore.getBusiness();
+}
+
+
+/** [ SECOND - BUSINESS ID PARAM ] **/
+if (businessId.value && !spaceId.value) {
+    console.log('BUSINESS ID PARAM');
+    spaceStore.getSpaces(businessId.value);
+}
+
+
+/** [ THIRD - BUSINESS ID & SPACE ID PARAM ] **/
+if (businessId.value && spaceId.value) {
+    console.log('BUSINESS ID & SPACE ID PARAM');
+    spaceStore.getSpace(businessId.value, spaceId.value);
+}
+
+
+
+
+
 
 const slots = useSlots();
 const slotsBoards = Object.keys(slots)
@@ -61,11 +100,6 @@ useHead({
     },
 });
 
-const props = defineProps({
-    spaceData: {
-        type: Object
-    }
-})
 
 // Boards Container Reference
 const boardsRef = ref(null)
@@ -87,7 +121,7 @@ const {
     orientation,
 } = useScreenOrientation()
 
-const responsive = computed( () => {
+const responsive = computed(() => {
     if (orientation.value.includes("portrait")) {
         return {
             columns: mobile.value ? 2 : tablet.value ? 4 : 7,
@@ -112,7 +146,7 @@ watch(() => elementSize, (size) => {
     const { height, width } = size
     const { columns, rows } = responsive.value
     boards.height = height.value
-    boards.width = (height.value / rows) * columns - 32 *2
+    boards.width = (height.value / rows) * columns - 32 * 2
 }, { deep: true })
 
 // Get the selected board index from the route
@@ -127,25 +161,25 @@ const sliderObject = ref(null)
 
 
 // Calculate data units of the boards container
-const dataUnitsCount = computed(() => {
-    props.spaceData?.boards.forEach((board, index) => {
-        for (const device of Object.keys(board?.units)){
-            const units = board?.units[device]
-            const totalSpans = units.reduce((a, b) => a + b.colSpan * b.rowSpan, 0)
-            if (mobile.value){
-                console.log(`[INFO][Board ID => ${board.id}][Mobile] Total spans should be 8, and it is`, totalSpans)
-                return totalSpans
-            } else if (tablet.value){
-                console.log(`[INFO][Board ID => ${board.id}][Tablet] Total spans should be 24, and it is`, totalSpans)
-                return totalSpans
-            } else {
-                console.log(`[INFO][Board ID => ${board.id}][Desktop] Total spans should be 28, and it is`, totalSpans)
-                return totalSpans
-            }
-        }
-    })
-})
-dataUnitsCount.value
+// const dataUnitsCount = computed(() => {
+//     props.spaceData?.boards.forEach((board, index) => {
+//         for (const device of Object.keys(board?.units)){
+//             const units = board?.units[device]
+//             const totalSpans = units.reduce((a, b) => a + b.colSpan * b.rowSpan, 0)
+//             if (mobile.value){
+//                 console.log(`[INFO][Board ID => ${board.id}][Mobile] Total spans should be 8, and it is`, totalSpans)
+//                 return totalSpans
+//             } else if (tablet.value){
+//                 console.log(`[INFO][Board ID => ${board.id}][Tablet] Total spans should be 24, and it is`, totalSpans)
+//                 return totalSpans
+//             } else {
+//                 console.log(`[INFO][Board ID => ${board.id}][Desktop] Total spans should be 28, and it is`, totalSpans)
+//                 return totalSpans
+//             }
+//         }
+//     })
+// })
+// dataUnitsCount.value
 
 </script>
   

@@ -1,6 +1,5 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
 import { useNuxtApp, useRoute } from "#imports";
-import { SpaceTypes } from '../models/Space'
 
 export const useSpace = defineStore("space", {
   state: () => ({
@@ -8,7 +7,6 @@ export const useSpace = defineStore("space", {
       {
         id: "store",
         name: "المتجر",
-        type: "CORE" as SpaceTypes,
         business: {
           id: "1",
           name: "عنب"
@@ -79,7 +77,6 @@ export const useSpace = defineStore("space", {
       {
         id: "1",
         name: "الموارد البشرية",
-        type: "BUSINESS" as SpaceTypes,
         business: {
           id: "1",
           name: "مجموعة العبدالله"
@@ -114,11 +111,12 @@ export const useSpace = defineStore("space", {
     ].map(s => new Space(s)),
 
     selectedBoardId: useRoute()?.params?.boardId,
-    selectedSpaceId: useRoute()?.params?.spaceId
+    selectedSpaceId: useRoute()?.params?.spaceId,
+    selectedBusinessId: useRoute()?.params?.businessId,
   }),
 
   getters: {
-    getSpaces: (state) => state.spaces.filter(s => s.type !== 'CORE'),
+    getSpaces: (state) => state.spaces,
 
     // Spaces
     getSelectedSpaceId: (state) => state.selectedSpaceId,
