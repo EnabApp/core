@@ -11,7 +11,7 @@ export type UnitType = {
 }
 
 export class Unit {
-    id: string
+    id?: string
     colSpan?: number
     rowSpan?: number
     componentName?: string | null
@@ -25,7 +25,7 @@ export class Unit {
     
     // constructor
     constructor(unit: UnitType) {
-        this.id = unit.id
+        this.id = unit?.id
         this.colSpan = unit.colSpan ?? 1
         this.rowSpan = unit.rowSpan ?? 1
         this.componentName = unit?.componentName

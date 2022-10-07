@@ -61,19 +61,19 @@ export default defineNuxtModule<ModuleOptions>({
   
       // Pages Routes
       nuxt.hook('pages:extend', (pages) => {
+        // Businesses
         pages.push({ path: '/', file: resolve(runtimeDir, 'pages/index.vue')})
         
         // SPACES
-        pages.push({ path: '/space/', file: resolve(runtimeDir, 'pages/space/index.vue')})
-        pages.push({ path: '/space/:spaceId', file: resolve(runtimeDir, 'pages/space/[spaceId].vue')})
-        pages.push({ path: '/space/:spaceId/board', file: resolve(runtimeDir, 'pages/space/board/index.vue')})
-        pages.push({ path: '/space/:spaceId/board/:boardId', file: resolve(runtimeDir, 'pages/space/board/[boardId].vue')})
+        pages.push({ path: '/:businessId', file: resolve(runtimeDir, 'pages/business.vue')})
+        pages.push({ path: '/:businessId/:spaceId', file: resolve(runtimeDir, 'pages/space.vue')})
         
         // SERVICES
         // pages.push({ path: '/services/', file: resolve(runtimeDir, 'pages/services/index.vue')})
         
         // AUTHS
-        pages.push({ path: '/auth', file: resolve(runtimeDir, 'pages/auth.vue')})
+        pages.push({ path: '/auth/login', file: resolve(runtimeDir, 'pages/auth/login.vue')})
+        pages.push({ path: '/auth/register', file: resolve(runtimeDir, 'pages/auth/register.vue')})
       })
   }
 })
