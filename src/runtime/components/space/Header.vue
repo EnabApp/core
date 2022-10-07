@@ -36,7 +36,7 @@
 
 
             <UiToolTip v-for="action in actions" :key="action.icon" position="bottom" :text="action.text" class="hidden md:flex">
-                <NuxtLink @click="spaceStore.setSelectedBoardId(action.board, action.space)" :to="`/space/${action.space}/board/${action.board}`" flex="~" items="center" justify="center" w="10" h="10" rounded="full" cursor="pointer" :class="[
+                <NuxtLink :to="`/space/${action.space}/board/${action.board}`" flex="~" items="center" justify="center" w="10" h="10" rounded="full" cursor="pointer" :class="[
                 $route.path == `/space/${action.space}/board/${action.board}` ? 'bg-info dark:bg-infoOp' : 'bg-secondary dark:bg-secondaryOp'
         ]">
                 <component :is="action.icon" text="primaryOp dark:primary" w="5" h="5" />
@@ -50,12 +50,8 @@
 </template>
 
 <script setup>
-import { useSpace } from '../../composables/useSpace'
-import { useDark, useToggle } from '@vueuse/core'
 const colorMode = useColorMode()
 
-const spaceStore = useSpace()
-const route = useRoute()
 const props = defineProps({
     spaceData: {
         type: Object,
@@ -66,16 +62,21 @@ const props = defineProps({
         required: true
     }
 })
+
+const route = useRoute()
 const space = computed(() => props.spaceData)
 const board = computed( () => space.value?.boards[props.selected] );
-const isHasBusiness = space.value?.business
-const isHasSpace = space.value
+const isHasBusiness = computed(() => route.params.businessId)
+const isHasSpace = computed(() => route.params.spaceId)
 
 const homeRedirectionRoute = () => {
-    const path = route.path
-    if (path == '/') return ''
-    if (path == '/space/') return '/'
-    else return '/space/'
+    // const path = route.path
+    // if (path == '/') return ''
+    // if (path == '/space/') return '/'
+    // else return '/space/'
+    if (isHasSpace.value) return `/${isHasBusiness.value}`
+    else if (isHasBusiness.value) return '/'
+    else return '/'
 }
 
 const actions = [
